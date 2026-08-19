@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#22c55e">
+<title>Softoy Ranking</title>
+<style>
+:root{--text:#0f172a;--green:#22c55e;--blue:#3b82f6}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
+body{padding:20px 12px;background:radial-gradient(circle at 50% 20%,#f0fdf4,#e0f2fe)}
+.container{width:100%;max-width:650px;margin:0 auto}
+header,.form-card{background:rgba(255,255,255,.97);box-shadow:0 10px 25px -5px rgba(0,0,0,.1);border-radius:20px}
+header{text-align:center;padding:28px 20px;margin-bottom:18px;border:3px solid var(--green)}
+h1{margin:0;font-size:clamp(32px,8vw,40px);font-weight:900;background:linear-gradient(90deg,#0284c7,#16a34a);color:transparent;background-clip:text;-webkit-background-clip:text}
+header p{margin:5px 0 0;color:#475569;font-weight:600}
+.form-card{padding:20px;margin-bottom:18px}
+.input-group{display:flex;gap:8px}
+#itemName{flex:1;min-width:0;padding:13px 15px;border:2px solid #cbd5e1;border-radius:12px;font-size:16px;outline:0}
+#itemName:focus{border-color:var(--green)}
+.add-btn{padding:13px 20px;background:var(--green);color:#fff;border:0;border-radius:12px;font-weight:800;cursor:pointer}
+.leaderboard{display:flex;flex-direction:column;gap:12px}
+.item-card{width:100%;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.97);border:2px solid #cbd5e1;box-shadow:0 4px 8px rgba(0,0,0,.07)}
+.tier-platinum{background:linear-gradient(135deg,#f1f5f9,#cbd5e1);border-color:#94a3b8}
+.tier-gold{background:linear-gradient(135deg,#fef08a,#fde047);border-color:#ca8a04}
+.tier-silver{background:linear-gradient(135deg,#e2e8f0,#94a3b8);border-color:#64748b}
+.tier-bronze{background:linear-gradient(135deg,#ffedd5,#b45309);border-color:#7c2d12}
+.left{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.rank{font-size:19px;font-weight:900;min-width:34px}
+.photo{width:55px;height:55px;flex:0 0 55px;border-radius:10px;background:#e2e8f0;border:2px dashed #94a3b8;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo-placeholder{font-size:10px;text-align:center;color:#64748b;font-weight:700}
+.name-area{min-width:0;display:flex;align-items:center;gap:5px}
+.item-name{font-size:17px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.edit-btn{border:0;background:transparent;cursor:pointer;padding:4px}
+.right{display:flex;align-items:center;gap:9px}
+.points{font-size:24px;font-weight:900;min-width:38px;text-align:right}
+.actions{display:flex;gap:5px}
+.action-btn{width:36px;height:36px;border:0;border-radius:10px;color:#fff;font-size:21px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.plus{background:#3b82f6}.minus{background:#ef4444}.delete{background:#e5e7eb;color:#64748b;font-size:16px}
+.empty{padding:30px;text-align:center;background:rgba(255,255,255,.8);border-radius:16px;color:#475569;font-weight:600}
+@media(max-width:520px){
+ body{padding:12px 8px}.input-group{flex-direction:column}.add-btn{width:100%}
+ .item-card{padding:9px}.rank{min-width:25px;font-size:16px}.photo{width:48px;height:48px;flex-basis:48px}
+ .item-name{font-size:15px}.right{gap:4px}.points{font-size:20px;min-width:28px}.action-btn{width:32px;height:32px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>Softoy Ranking</h1>
+<p id="itemCount">0 / 150 items tracked</p>
+</header>
+
+<div class="form-card">
+<form id="itemForm" novalidate>
+<div class="input-group">
+<input id="itemName" type="text" maxlength="30" placeholder="Enter new item name..." autocomplete="off">
+<button class="add-btn" type="submit">Add Item</button>
+</div>
+</form>
+</div>
+
+<!-- Every newly added item is inserted into this rectangle-card list. -->
+<div id="leaderboard" class="leaderboard"></div>
+</div>
+
+<input id="photoInput" type="file" accept="image/*" hidden>
+
+<script>
+(function(){
+"use strict";
+
+var STORAGE="softoy_ranking_rebuilt";
+var items=[];
+var photoItemId=null;
+
+var form=document.getElementById("itemForm");
+var input=document.getElementById("itemName");
+var leaderboard=document.getElementById("leaderboard");
+var count=document.getElementById("itemCount");
+var photoInput=document.getElementById("photoInput");
+
+function createId(){
+ return "softoy_"+Date.now()+"_"+Math.floor(Math.random()*1000000);
+}
+
+function loadItems(){
+ try{
+  var saved=localStorage.getItem(STORAGE);
+  if(saved){
+   var parsed=JSON.parse(saved);
+   if(Array.isArray(parsed)) items=parsed;
+  }
+ }catch(error){
+  items=[];
+ }
+}
+
+function saveItems(){
+ try{
+  localStorage.setItem(STORAGE,JSON.stringify(items));
+ }catch(error){
+  console.log("Storage unavailable; items remain visible for this session.");
+ }
+}
+
+function getSortedItems(){
+ return items.slice().sort(function(a,b){
+  var difference=(Number(b.points)||0)-(Number(a.points)||0);
+  if(difference!==0)return difference;
+  return String(a.name).localeCompare(String(b.name),undefined,{sensitivity:"base"});
+ });
+}
+
+function getTier(rank){
+ if(rank<=3)return "tier-platinum";
+ if(rank<=10)return "tier-gold";
+ if(rank<=25)return "tier-silver";
+ if(rank<=50)return "tier-bronze";
+ return "";
+}
+
+function button(text,className,title,action){
+ var b=document.createElement("button");
+ b.type="button";
+ b.className="action-btn "+className;
+ b.textContent=text;
+ b.title=title;
+ b.addEventListener("click",action);
+ return b;
+}
+
+function render(){
+ var sorted=getSortedItems();
+
+ count.textContent=items.length+" / 150 items tracked";
+
+ /* Important: rebuild the rectangle boxes every time, including immediately after Add Item. */
+ leaderboard.replaceChildren();
+
+ if(sorted.length===0){
+  var empty=document.createElement("div");
+  empty.className="empty";
+  empty.textContent="Your leaderboard is empty. Add your first Softoy above!";
+  leaderboard.appendChild(empty);
+  return;
+ }
+
+ sorted.forEach(function(item,index){
+  var rank=index+1;
+
+  /* RECTANGLE BOX */
+  var card=document.createElement("div");
+  card.className="item-card "+getTier(rank);
+
+  var left=document.createElement("div");
+  left.className="left";
+
+  var rankEl=document.createElement("span");
+  rankEl.className="rank";
+  rankEl.textContent="#"+rank;
+
+  var photo=document.createElement("div");
+  photo.className="photo";
+  photo.title="Add/change photo";
+
+  if(item.photo){
+   var image=document.createElement("img");
+   image.src=item.photo;
+   image.alt="";
+   photo.appendChild(image);
+  }else{
+   var placeholder=document.createElement("span");
+   placeholder.className="photo-placeholder";
+   placeholder.innerHTML="Add<br>Photo";
+   photo.appendChild(placeholder);
+  }
+
+  photo.addEventListener("click",function(){
+   photoItemId=item.id;
+   photoInput.click();
+  });
+
+  var nameArea=document.createElement("div");
+  nameArea.className="name-area";
+
+  var name=document.createElement("span");
+  name.className="item-name";
+  name.textContent=item.name;
+
+  var edit=document.createElement("button");
+  edit.type="button";
+  edit.className="edit-btn";
+  edit.textContent="✏️";
+  edit.title="Rename";
+  edit.addEventListener("click",function(){
+   var newName=prompt("Enter a new name:",item.name);
+   if(newName&&newName.trim()){
+    item.name=newName.trim().slice(0,30);
+    saveItems();
+    render();
+   }
+  });
+
+  nameArea.appendChild(name);
+  nameArea.appendChild(edit);
+
+  left.appendChild(rankEl);
+  left.appendChild(photo);
+  left.appendChild(nameArea);
+
+  var right=document.createElement("div");
+  right.className="right";
+
+  var points=document.createElement("span");
+  points.className="points";
+  points.textContent=Number(item.points)||0;
+
+  var actions=document.createElement("div");
+  actions.className="actions";
+
+  actions.appendChild(button("+","plus","Add point",function(){
+   item.points=(Number(item.points)||0)+1;
+   saveItems();
+   render();
+  }));
+
+  actions.appendChild(button("−","minus","Remove point",function(){
+   item.points=Math.max(0,(Number(item.points)||0)-1);
+   saveItems();
+   render();
+  }));
+
+  actions.appendChild(button("🗑","delete","Delete",function(){
+   if(confirm('Delete "'+item.name+'"?')){
+    items=items.filter(function(x){return x.id!==item.id;});
+    saveItems();
+    render();
+   }
+  }));
+
+  right.appendChild(points);
+  right.appendChild(actions);
+
+  card.appendChild(left);
+  card.appendChild(right);
+
+  /* The card is explicitly appended below the form. */
+  leaderboard.appendChild(card);
+ });
+}
+
+/* ADD ITEM */
+form.addEventListener("submit",function(event){
+ event.preventDefault();
+
+ var name=input.value.trim();
+ if(!name)return;
+
+ if(items.length>=150){
+  alert("You can track up to 150 items.");
+  return;
+ }
+
+ var newItem={
+  id:createId(),
+  name:name.slice(0,30),
+  points:0,
+  photo:null
+ };
+
+ items.push(newItem);
+
+ /* Save and immediately create the rectangle box. */
+ saveItems();
+ render();
+
+ input.value="";
+ input.focus();
+});
+
+photoInput.addEventListener("change",function(){
+ var file=photoInput.files&&photoInput.files[0];
+ if(!file||!photoItemId)return;
+
+ if(file.size>5*1024*1024){
+  alert("Please choose an image under 5 MB.");
+  photoInput.value="";
+  return;
+ }
+
+ var reader=new FileReader();
+ reader.onload=function(){
+  var item=items.find(function(x){return x.id===photoItemId;});
+  if(item){
+   item.photo=reader.result;
+   saveItems();
+   render();
+  }
+  photoItemId=null;
+  photoInput.value="";
+ };
+ reader.readAsDataURL(file);
+});
+
+loadItems();
+render();
+})();
+</script>
+</body>
+</html>
