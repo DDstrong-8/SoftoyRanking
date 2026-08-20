@@ -2,313 +2,1600 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#22c55e">
-<title>Softoy Ranking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16a34a">
+<title>Softoy Ranking Prototype</title>
+
 <style>
-:root{--text:#0f172a;--green:#22c55e;--blue:#3b82f6}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
-body{padding:20px 12px;background:radial-gradient(circle at 50% 20%,#f0fdf4,#e0f2fe)}
-.container{width:100%;max-width:650px;margin:0 auto}
-header,.form-card{background:rgba(255,255,255,.97);box-shadow:0 10px 25px -5px rgba(0,0,0,.1);border-radius:20px}
-header{text-align:center;padding:28px 20px;margin-bottom:18px;border:3px solid var(--green)}
-h1{margin:0;font-size:clamp(32px,8vw,40px);font-weight:900;background:linear-gradient(90deg,#0284c7,#16a34a);color:transparent;background-clip:text;-webkit-background-clip:text}
-header p{margin:5px 0 0;color:#475569;font-weight:600}
-.form-card{padding:20px;margin-bottom:18px}
-.input-group{display:flex;gap:8px}
-#itemName{flex:1;min-width:0;padding:13px 15px;border:2px solid #cbd5e1;border-radius:12px;font-size:16px;outline:0}
-#itemName:focus{border-color:var(--green)}
-.add-btn{padding:13px 20px;background:var(--green);color:#fff;border:0;border-radius:12px;font-weight:800;cursor:pointer}
-.leaderboard{display:flex;flex-direction:column;gap:12px}
-.item-card{width:100%;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.97);border:2px solid #cbd5e1;box-shadow:0 4px 8px rgba(0,0,0,.07)}
-.tier-platinum{background:linear-gradient(135deg,#f1f5f9,#cbd5e1);border-color:#94a3b8}
-.tier-gold{background:linear-gradient(135deg,#fef08a,#fde047);border-color:#ca8a04}
-.tier-silver{background:linear-gradient(135deg,#e2e8f0,#94a3b8);border-color:#64748b}
-.tier-bronze{background:linear-gradient(135deg,#ffedd5,#b45309);border-color:#7c2d12}
-.left{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
-.rank{font-size:19px;font-weight:900;min-width:34px}
-.photo{width:55px;height:55px;flex:0 0 55px;border-radius:10px;background:#e2e8f0;border:2px dashed #94a3b8;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
-.photo img{width:100%;height:100%;object-fit:cover}
-.photo-placeholder{font-size:10px;text-align:center;color:#64748b;font-weight:700}
-.name-area{min-width:0;display:flex;align-items:center;gap:5px}
-.item-name{font-size:17px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.edit-btn{border:0;background:transparent;cursor:pointer;padding:4px}
-.right{display:flex;align-items:center;gap:9px}
-.points{font-size:24px;font-weight:900;min-width:38px;text-align:right}
-.actions{display:flex;gap:5px}
-.action-btn{width:36px;height:36px;border:0;border-radius:10px;color:#fff;font-size:21px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.plus{background:#3b82f6}.minus{background:#ef4444}.delete{background:#e5e7eb;color:#64748b;font-size:16px}
-.empty{padding:30px;text-align:center;background:rgba(255,255,255,.8);border-radius:16px;color:#475569;font-weight:600}
-@media(max-width:520px){
- body{padding:12px 8px}.input-group{flex-direction:column}.add-btn{width:100%}
- .item-card{padding:9px}.rank{min-width:25px;font-size:16px}.photo{width:48px;height:48px;flex-basis:48px}
- .item-name{font-size:15px}.right{gap:4px}.points{font-size:20px;min-width:28px}.action-btn{width:32px;height:32px}
+:root {
+  --green:#22c55e;
+  --blue:#3b82f6;
+  --purple:#7c3aed;
+  --red:#ef4444;
+  --text:#0f172a;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  padding:14px;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:radial-gradient(circle at 50% 15%,#f0fdf4,#e0f2fe);
+}
+
+.app {
+  width:100%;
+  max-width:680px;
+  margin:auto;
+}
+
+header,
+.card,
+.modal {
+  background:rgba(255,255,255,.97);
+  border-radius:20px;
+  box-shadow:0 10px 25px -5px rgba(0,0,0,.12);
+}
+
+header {
+  text-align:center;
+  padding:24px 16px;
+  margin-bottom:14px;
+  border:3px solid var(--green);
+}
+
+h1 {
+  margin:0;
+  font-size:38px;
+  font-weight:900;
+  background:linear-gradient(90deg,#0284c7,#16a34a);
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+}
+
+header p {
+  margin:5px 0 0;
+  color:#475569;
+  font-weight:700;
+}
+
+.card {
+  padding:16px;
+  margin-bottom:14px;
+}
+
+.row {
+  display:flex;
+  gap:8px;
+}
+
+input {
+  min-width:0;
+  flex:1;
+  padding:13px;
+  border:2px solid #cbd5e1;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus {
+  border-color:var(--green);
+}
+
+button {
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.add {
+  background:var(--green);
+  color:white;
+}
+
+.colosseum-button {
+  width:100%;
+  margin-top:10px;
+  padding:20px;
+  color:white;
+  font-size:18px;
+
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
+    linear-gradient(135deg,#a78b6b,#5b4636,#c8b18c);
+
+  border:3px solid #d6c0a1;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.colosseum-button:hover {
+  transform:scale(1.02);
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.item {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+
+  padding:11px;
+  margin:8px 0;
+
+  border:2px solid #cbd5e1;
+  border-radius:15px;
+
+  background:white;
+}
+
+.name {
+  font-weight:900;
+}
+
+.points {
+  font-size:21px;
+  font-weight:900;
+}
+
+.small-button {
+  width:34px;
+  height:34px;
+  padding:0;
+  margin-left:4px;
+
+  color:white;
+  background:var(--blue);
+}
+
+.minus {
+  background:var(--red);
+}
+
+.settings {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+/* OVERLAYS */
+
+.overlay {
+  display:none;
+
+  position:fixed;
+  inset:0;
+
+  padding:14px;
+
+  background:rgba(15,23,42,.75);
+
+  backdrop-filter:blur(6px);
+
+  align-items:center;
+  justify-content:center;
+
+  z-index:10;
+}
+
+.overlay.show {
+  display:flex;
+}
+
+.modal {
+  width:100%;
+  max-width:650px;
+
+  padding:20px;
+
+  max-height:92vh;
+  overflow:auto;
+
+  animation:modalIn .35s ease;
+}
+
+@keyframes modalIn {
+  from {
+    transform:scale(.92);
+    opacity:0;
+  }
+
+  to {
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.title {
+  text-align:center;
+  font-size:28px;
+  font-weight:1000;
+  color:var(--purple);
+}
+
+.subtitle {
+  text-align:center;
+  color:#64748b;
+  font-weight:700;
+  margin:5px 0 18px;
+}
+
+/* PLAYERS */
+
+.players {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.player {
+  padding:12px;
+
+  background:#f8fafc;
+
+  border:3px solid #cbd5e1;
+  border-radius:16px;
+}
+
+.player h3 {
+  margin:0 0 8px;
+  color:var(--purple);
+}
+
+.selected {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:9px;
+
+  background:white;
+
+  border-radius:10px;
+  border:2px solid #cbd5e1;
+
+  font-weight:900;
+}
+
+.selected button {
+  padding:5px 8px;
+  background:#e2e8f0;
+}
+
+.results button {
+  display:block;
+  width:100%;
+
+  margin-top:5px;
+
+  text-align:left;
+
+  background:#e0f2fe;
+}
+
+.ready {
+  display:block;
+
+  margin:18px auto 0;
+
+  background:var(--green);
+  color:white;
+
+  font-size:17px;
+}
+
+.ready:disabled {
+  background:#94a3b8;
+}
+
+/* BATTLE */
+
+.battle {
+  display:none;
+  text-align:center;
+}
+
+.battle.show {
+  display:block;
+}
+
+.vs-grid {
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:10px;
+}
+
+.fighter {
+  padding:18px;
+
+  border:3px solid #cbd5e1;
+  border-radius:16px;
+
+  background:#f8fafc;
+
+  font-weight:1000;
+}
+
+.vs {
+  font-size:24px;
+  font-weight:1000;
+  color:var(--red);
+}
+
+.battle-animation {
+  margin:20px 0;
+
+  font-size:45px;
+
+  animation:battlePulse .5s infinite alternate;
+}
+
+@keyframes battlePulse {
+  from {
+    transform:scale(1);
+  }
+
+  to {
+    transform:scale(1.12);
+  }
+}
+
+.result {
+  margin-top:16px;
+  padding:18px;
+
+  background:#dcfce7;
+  color:#166534;
+
+  border-radius:15px;
+
+  font-size:20px;
+  font-weight:1000;
+}
+
+.close {
+  width:100%;
+  margin-top:10px;
+  background:#e2e8f0;
+}
+
+/* ACHIEVEMENTS */
+
+.achievement {
+  padding:12px;
+
+  border:2px solid #cbd5e1;
+  border-radius:13px;
+
+  margin:7px 0;
+}
+
+.bar {
+  height:9px;
+
+  background:#e2e8f0;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  margin-top:7px;
+}
+
+.fill {
+  height:100%;
+  background:var(--green);
+}
+
+/* CONFETTI */
+
+.confetti {
+  position:fixed;
+
+  top:-20px;
+
+  width:9px;
+  height:14px;
+
+  z-index:30;
+
+  animation:fall 2.3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:520px) {
+
+  body {
+    padding:10px 8px;
+  }
+
+  .row {
+    flex-direction:column;
+  }
+
+  .add {
+    width:100%;
+  }
+
+  .players {
+    grid-template-columns:1fr;
+  }
+
+  .vs-grid {
+    grid-template-columns:1fr;
+  }
+
+  .vs {
+    margin:auto;
+  }
+
+  .settings {
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="container">
+
+<div class="app">
+
 <header>
-<h1>Softoy Ranking</h1>
-<p id="itemCount">0 / 150 items tracked</p>
+  <h1>Softoy Ranking</h1>
+  <p id="count">5 / 150 items tracked</p>
 </header>
 
-<div class="form-card">
-<form id="itemForm" novalidate>
-<div class="input-group">
-<input id="itemName" type="text" maxlength="30" placeholder="Enter new item name..." autocomplete="off">
-<button class="add-btn" type="submit">Add Item</button>
-</div>
-</form>
+
+<!-- ADD SOFTOY -->
+
+<div class="card">
+
+  <div class="row">
+
+    <input
+      id="newName"
+      maxlength="30"
+      placeholder="Enter new Softoy..."
+    >
+
+    <button class="add" onclick="addItem()">
+      Add Item
+    </button>
+
+  </div>
+
+
+  <button
+    class="colosseum-button"
+    onclick="openColosseum()"
+  >
+    🏟️ The Colosseum Is Back!
+  </button>
+
 </div>
 
-<!-- Every newly added item is inserted into this rectangle-card list. -->
-<div id="leaderboard" class="leaderboard"></div>
+
+<!-- RANKING -->
+
+<div class="card">
+
+  <div id="list"></div>
+
 </div>
 
-<input id="photoInput" type="file" accept="image/*" hidden>
+
+<!-- OTHER SCREENS -->
+
+<div class="card settings">
+
+  <button onclick="openWeekly()">
+    🏆 Weekly Competition
+  </button>
+
+  <button onclick="openAchievements()">
+    🏆 Achievements
+  </button>
+
+  <button onclick="showAutoSave()">
+    💾 Auto-save
+  </button>
+
+  <button onclick="showBackup()">
+    🔒 Backup
+  </button>
+
+</div>
+
+</div>
+
+
+<!-- COLOSSEUM -->
+
+<div class="overlay" id="colosseumOverlay">
+
+<div class="modal">
+
+
+<!-- SELECTION SCREEN -->
+
+<div id="selectionScreen">
+
+  <div class="title">
+    🏟️ The Colosseum Battle
+  </div>
+
+  <div class="subtitle">
+    Choose two Softoys to battle.
+  </div>
+
+
+  <div class="players">
+
+
+    <!-- PLAYER 1 -->
+
+    <div class="player">
+
+      <h3>P1</h3>
+
+      <div class="selected">
+
+        <span id="p1Name">
+          No Softoy selected
+        </span>
+
+        <button onclick="clearPlayer(1)">
+          ✕
+        </button>
+
+      </div>
+
+
+      <input
+        id="search1"
+        placeholder="🔍 Search Softoy..."
+        oninput="searchSoftoys(1)"
+      >
+
+      <div
+        class="results"
+        id="results1"
+      ></div>
+
+    </div>
+
+
+    <!-- PLAYER 2 -->
+
+    <div class="player">
+
+      <h3>P2</h3>
+
+      <div class="selected">
+
+        <span id="p2Name">
+          No Softoy selected
+        </span>
+
+        <button onclick="clearPlayer(2)">
+          ✕
+        </button>
+
+      </div>
+
+
+      <input
+        id="search2"
+        placeholder="🔍 Search Softoy..."
+        oninput="searchSoftoys(2)"
+      >
+
+      <div
+        class="results"
+        id="results2"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="ready"
+    id="readyButton"
+    disabled
+    onclick="startBattle()"
+  >
+    Ready?
+  </button>
+
+</div>
+
+
+<!-- BATTLE SCREEN -->
+
+<div
+  class="battle"
+  id="battleScreen"
+>
+
+  <div class="title">
+    🏟️ The Colosseum Battle
+  </div>
+
+
+  <div
+    class="vs-grid"
+    id="fighters"
+  ></div>
+
+
+  <div
+    class="battle-animation"
+    id="battleAnimation"
+  >
+    ⚔️
+  </div>
+
+
+  <div
+    id="battleResult"
+  ></div>
+
+</div>
+
+
+<button
+  class="close"
+  onclick="closeColosseum()"
+>
+  Close
+</button>
+
+</div>
+</div>
+
+
+<!-- WEEKLY COMPETITION -->
+
+<div
+  class="overlay"
+  id="weeklyOverlay"
+>
+
+<div class="modal">
+
+  <div class="title">
+    🏆 Weekly Competition
+  </div>
+
+  <div class="subtitle">
+    Current Week
+  </div>
+
+  <div id="weeklyList"></div>
+
+  <button
+    class="close"
+    onclick="closeOverlay('weeklyOverlay')"
+  >
+    Close
+  </button>
+
+</div>
+
+</div>
+
+
+<!-- ACHIEVEMENTS -->
+
+<div
+  class="overlay"
+  id="achievementOverlay"
+>
+
+<div class="modal">
+
+  <div class="title">
+    🏆 Achievements
+  </div>
+
+  <div id="achievementList"></div>
+
+  <button
+    class="close"
+    onclick="closeOverlay('achievementOverlay')"
+  >
+    Close
+  </button>
+
+</div>
+
+</div>
+
 
 <script>
-(function(){
+
 "use strict";
 
-var STORAGE="softoy_ranking_rebuilt";
-var items=[];
-var photoItemId=null;
 
-var form=document.getElementById("itemForm");
-var input=document.getElementById("itemName");
-var leaderboard=document.getElementById("leaderboard");
-var count=document.getElementById("itemCount");
-var photoInput=document.getElementById("photoInput");
+/* --------------------------------------------------
+   PROTOTYPE DATA
+-------------------------------------------------- */
 
-function createId(){
- return "softoy_"+Date.now()+"_"+Math.floor(Math.random()*1000000);
-}
+let items = [
 
-function loadItems(){
- try{
-  var saved=localStorage.getItem(STORAGE);
-  if(saved){
-   var parsed=JSON.parse(saved);
-   if(Array.isArray(parsed)) items=parsed;
-  }
- }catch(error){
-  items=[];
- }
-}
+  {
+    id:1,
+    name:"Paddington",
+    points:42,
+    streak:3
+  },
 
-function saveItems(){
- try{
-  localStorage.setItem(STORAGE,JSON.stringify(items));
- }catch(error){
-  console.log("Storage unavailable; items remain visible for this session.");
- }
-}
+  {
+    id:2,
+    name:"Axol",
+    points:35,
+    streak:1
+  },
 
-function getSortedItems(){
- return items.slice().sort(function(a,b){
-  var difference=(Number(b.points)||0)-(Number(a.points)||0);
-  if(difference!==0)return difference;
-  return String(a.name).localeCompare(String(b.name),undefined,{sensitivity:"base"});
- });
-}
+  {
+    id:3,
+    name:"Roary",
+    points:27,
+    streak:0
+  },
 
-function getTier(rank){
- if(rank<=3)return "tier-platinum";
- if(rank<=10)return "tier-gold";
- if(rank<=25)return "tier-silver";
- if(rank<=50)return "tier-bronze";
- return "";
-}
+  {
+    id:4,
+    name:"Squidy",
+    points:19,
+    streak:2
+  },
 
-function button(text,className,title,action){
- var b=document.createElement("button");
- b.type="button";
- b.className="action-btn "+className;
- b.textContent=text;
- b.title=title;
- b.addEventListener("click",action);
- return b;
-}
-
-function render(){
- var sorted=getSortedItems();
-
- count.textContent=items.length+" / 150 items tracked";
-
- /* Important: rebuild the rectangle boxes every time, including immediately after Add Item. */
- leaderboard.replaceChildren();
-
- if(sorted.length===0){
-  var empty=document.createElement("div");
-  empty.className="empty";
-  empty.textContent="Your leaderboard is empty. Add your first Softoy above!";
-  leaderboard.appendChild(empty);
-  return;
- }
-
- sorted.forEach(function(item,index){
-  var rank=index+1;
-
-  /* RECTANGLE BOX */
-  var card=document.createElement("div");
-  card.className="item-card "+getTier(rank);
-
-  var left=document.createElement("div");
-  left.className="left";
-
-  var rankEl=document.createElement("span");
-  rankEl.className="rank";
-  rankEl.textContent="#"+rank;
-
-  var photo=document.createElement("div");
-  photo.className="photo";
-  photo.title="Add/change photo";
-
-  if(item.photo){
-   var image=document.createElement("img");
-   image.src=item.photo;
-   image.alt="";
-   photo.appendChild(image);
-  }else{
-   var placeholder=document.createElement("span");
-   placeholder.className="photo-placeholder";
-   placeholder.innerHTML="Add<br>Photo";
-   photo.appendChild(placeholder);
+  {
+    id:5,
+    name:"Patagotiny",
+    points:12,
+    streak:0
   }
 
-  photo.addEventListener("click",function(){
-   photoItemId=item.id;
-   photoInput.click();
+];
+
+
+let player1 = null;
+let player2 = null;
+
+
+/* --------------------------------------------------
+   MAIN RANKING
+-------------------------------------------------- */
+
+function render() {
+
+  items.sort(
+    (a,b) =>
+      b.points - a.points ||
+      a.name.localeCompare(b.name)
+  );
+
+
+  document.getElementById(
+    "count"
+  ).textContent =
+    items.length +
+    " / 150 items tracked";
+
+
+  const list =
+    document.getElementById("list");
+
+
+  list.innerHTML = "";
+
+
+  if(items.length === 0) {
+
+    list.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:25px;
+        color:#64748b;
+        font-weight:700;
+      ">
+        Your leaderboard is empty.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  items.forEach(
+    (item,index) => {
+
+      const row =
+        document.createElement("div");
+
+      row.className = "item";
+
+
+      row.innerHTML = `
+
+        <span class="name">
+          #${index + 1} ${escapeHTML(item.name)}
+        </span>
+
+        <span>
+
+          <span class="points">
+            ${item.points}
+          </span>
+
+          <button
+            class="small-button"
+            onclick="changePoints(${item.id},1)"
+          >
+            +
+          </button>
+
+          <button
+            class="small-button minus"
+            onclick="changePoints(${item.id},-1)"
+          >
+            −
+          </button>
+
+        </span>
+
+      `;
+
+
+      list.appendChild(row);
+
+    }
+  );
+
+}
+
+
+function escapeHTML(text) {
+
+  return text
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* --------------------------------------------------
+   ADD SOFTOY
+-------------------------------------------------- */
+
+function addItem() {
+
+  const input =
+    document.getElementById("newName");
+
+
+  const name =
+    input.value.trim();
+
+
+  if(!name)
+    return;
+
+
+  if(items.length >= 150) {
+
+    alert(
+      "You can track up to 150 Softoys."
+    );
+
+    return;
+  }
+
+
+  items.push({
+
+    id:Date.now(),
+
+    name:name.slice(0,30),
+
+    points:0,
+
+    streak:0
+
   });
 
-  var nameArea=document.createElement("div");
-  nameArea.className="name-area";
 
-  var name=document.createElement("span");
-  name.className="item-name";
-  name.textContent=item.name;
+  input.value = "";
 
-  var edit=document.createElement("button");
-  edit.type="button";
-  edit.className="edit-btn";
-  edit.textContent="✏️";
-  edit.title="Rename";
-  edit.addEventListener("click",function(){
-   var newName=prompt("Enter a new name:",item.name);
-   if(newName&&newName.trim()){
-    item.name=newName.trim().slice(0,30);
-    saveItems();
-    render();
-   }
-  });
 
-  nameArea.appendChild(name);
-  nameArea.appendChild(edit);
+  render();
 
-  left.appendChild(rankEl);
-  left.appendChild(photo);
-  left.appendChild(nameArea);
-
-  var right=document.createElement("div");
-  right.className="right";
-
-  var points=document.createElement("span");
-  points.className="points";
-  points.textContent=Number(item.points)||0;
-
-  var actions=document.createElement("div");
-  actions.className="actions";
-
-  actions.appendChild(button("+","plus","Add point",function(){
-   item.points=(Number(item.points)||0)+1;
-   saveItems();
-   render();
-  }));
-
-  actions.appendChild(button("−","minus","Remove point",function(){
-   item.points=Math.max(0,(Number(item.points)||0)-1);
-   saveItems();
-   render();
-  }));
-
-  actions.appendChild(button("🗑","delete","Delete",function(){
-   if(confirm('Delete "'+item.name+'"?')){
-    items=items.filter(function(x){return x.id!==item.id;});
-    saveItems();
-    render();
-   }
-  }));
-
-  right.appendChild(points);
-  right.appendChild(actions);
-
-  card.appendChild(left);
-  card.appendChild(right);
-
-  /* The card is explicitly appended below the form. */
-  leaderboard.appendChild(card);
- });
 }
 
-/* ADD ITEM */
-form.addEventListener("submit",function(event){
- event.preventDefault();
 
- var name=input.value.trim();
- if(!name)return;
+/* --------------------------------------------------
+   POINTS
+-------------------------------------------------- */
 
- if(items.length>=150){
-  alert("You can track up to 150 items.");
-  return;
- }
+function changePoints(id,amount) {
 
- var newItem={
-  id:createId(),
-  name:name.slice(0,30),
-  points:0,
-  photo:null
- };
+  const item =
+    items.find(x => x.id === id);
 
- items.push(newItem);
 
- /* Save and immediately create the rectangle box. */
- saveItems();
- render();
+  if(!item)
+    return;
 
- input.value="";
- input.focus();
-});
 
-photoInput.addEventListener("change",function(){
- var file=photoInput.files&&photoInput.files[0];
- if(!file||!photoItemId)return;
+  item.points =
+    Math.max(
+      0,
+      item.points + amount
+    );
 
- if(file.size>5*1024*1024){
-  alert("Please choose an image under 5 MB.");
-  photoInput.value="";
-  return;
- }
 
- var reader=new FileReader();
- reader.onload=function(){
-  var item=items.find(function(x){return x.id===photoItemId;});
-  if(item){
-   item.photo=reader.result;
-   saveItems();
-   render();
+  render();
+
+}
+
+
+/* --------------------------------------------------
+   COLOSSEUM OPEN
+-------------------------------------------------- */
+
+function openColosseum() {
+
+  if(items.length < 2) {
+
+    alert(
+      "You need at least two Softoys to battle."
+    );
+
+    return;
   }
-  photoItemId=null;
-  photoInput.value="";
- };
- reader.readAsDataURL(file);
-});
 
-loadItems();
+
+  player1 = null;
+  player2 = null;
+
+
+  document
+    .getElementById("colosseumOverlay")
+    .classList.add("show");
+
+
+  document
+    .getElementById("selectionScreen")
+    .style.display = "block";
+
+
+  document
+    .getElementById("battleScreen")
+    .classList.remove("show");
+
+
+  updatePlayers();
+
+}
+
+
+/* --------------------------------------------------
+   CLOSE COLOSSEUM
+-------------------------------------------------- */
+
+function closeColosseum() {
+
+  document
+    .getElementById("colosseumOverlay")
+    .classList.remove("show");
+
+}
+
+
+/* --------------------------------------------------
+   CLEAR P1/P2
+-------------------------------------------------- */
+
+function clearPlayer(number) {
+
+  if(number === 1)
+    player1 = null;
+
+  else
+    player2 = null;
+
+
+  updatePlayers();
+
+}
+
+
+/* --------------------------------------------------
+   SEARCH
+-------------------------------------------------- */
+
+function searchSoftoys(player) {
+
+  const search =
+    document
+      .getElementById(
+        "search" + player
+      )
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const results =
+    document.getElementById(
+      "results" + player
+    );
+
+
+  results.innerHTML = "";
+
+
+  if(!search)
+    return;
+
+
+  items
+    .filter(
+      item =>
+        item.name
+          .toLowerCase()
+          .includes(search)
+    )
+    .slice(0,8)
+    .forEach(item => {
+
+
+      const button =
+        document.createElement("button");
+
+
+      button.textContent =
+        item.name +
+        " • " +
+        item.points +
+        " points";
+
+
+      button.onclick = () => {
+
+        if(
+          (player === 1
+            ? player2
+            : player1
+          )?.id === item.id
+        ) {
+
+          alert(
+            "A Softoy cannot battle itself."
+          );
+
+          return;
+        }
+
+
+        if(player === 1)
+          player1 = item;
+
+        else
+          player2 = item;
+
+
+        updatePlayers();
+
+      };
+
+
+      results.appendChild(button);
+
+    });
+
+}
+
+
+/* --------------------------------------------------
+   UPDATE PLAYERS
+-------------------------------------------------- */
+
+function updatePlayers() {
+
+  document.getElementById(
+    "p1Name"
+  ).textContent =
+    player1
+      ? player1.name
+      : "No Softoy selected";
+
+
+  document.getElementById(
+    "p2Name"
+  ).textContent =
+    player2
+      ? player2.name
+      : "No Softoy selected";
+
+
+  document.getElementById(
+    "readyButton"
+  ).disabled =
+    !(player1 && player2);
+
+
+  document.getElementById(
+    "results1"
+  ).innerHTML = "";
+
+
+  document.getElementById(
+    "results2"
+  ).innerHTML = "";
+
+
+  document.getElementById(
+    "search1"
+  ).value = "";
+
+
+  document.getElementById(
+    "search2"
+  ).value = "";
+
+}
+
+
+/* --------------------------------------------------
+   START BATTLE
+-------------------------------------------------- */
+
+function startBattle() {
+
+  if(!player1 || !player2)
+    return;
+
+
+  document.getElementById(
+    "selectionScreen"
+  ).style.display = "none";
+
+
+  document
+    .getElementById("battleScreen")
+    .classList.add("show");
+
+
+  document.getElementById(
+    "fighters"
+  ).innerHTML = `
+
+    <div class="fighter">
+      P1<br>
+      ${escapeHTML(player1.name)}
+    </div>
+
+    <div class="vs">
+      VS
+    </div>
+
+    <div class="fighter">
+      P2<br>
+      ${escapeHTML(player2.name)}
+    </div>
+
+  `;
+
+
+  document.getElementById(
+    "battleAnimation"
+  ).textContent = "⚔️";
+
+
+  document.getElementById(
+    "battleResult"
+  ).innerHTML = "";
+
+
+  setTimeout(
+    finishBattle,
+    1600
+  );
+
+}
+
+
+/* --------------------------------------------------
+   FINISH BATTLE
+-------------------------------------------------- */
+
+function finishBattle() {
+
+  const winner =
+    Math.random() < 0.5
+      ? player1
+      : player2;
+
+
+  const loser =
+    winner.id === player1.id
+      ? player2
+      : player1;
+
+
+  /*
+    Random reward from 2 to 8.
+  */
+
+  const reward =
+    Math.floor(
+      Math.random() * 7
+    ) + 2;
+
+
+  winner.points += reward;
+
+
+  winner.streak =
+    (winner.streak || 0) + 1;
+
+
+  loser.streak = 0;
+
+
+  document.getElementById(
+    "battleAnimation"
+  ).textContent = "🏆";
+
+
+  document.getElementById(
+    "battleResult"
+  ).className = "result";
+
+
+  document.getElementById(
+    "battleResult"
+  ).innerHTML = `
+
+    🏆 ${escapeHTML(winner.name)}
+    WINS!
+
+    <br><br>
+
+    🎁 +${reward} points
+
+    <br>
+
+    🔥 Colosseum streak:
+    ${winner.streak}
+
+  `;
+
+
+  createConfetti();
+
+
+  render();
+
+}
+
+
+/* --------------------------------------------------
+   CONFETTI
+-------------------------------------------------- */
+
+function createConfetti() {
+
+  const colors = [
+    "#ef4444",
+    "#3b82f6",
+    "#22c55e",
+    "#f59e0b",
+    "#8b5cf6"
+  ];
+
+
+  for(
+    let i = 0;
+    i < 80;
+    i++
+  ) {
+
+    const piece =
+      document.createElement("div");
+
+
+    piece.className =
+      "confetti";
+
+
+    piece.style.left =
+      Math.random() * 100 + "vw";
+
+
+    piece.style.background =
+      colors[
+        Math.floor(
+          Math.random() * colors.length
+        )
+      ];
+
+
+    piece.style.animationDelay =
+      Math.random() * .5 + "s";
+
+
+    document.body.appendChild(piece);
+
+
+    setTimeout(
+      () => piece.remove(),
+      2800
+    );
+
+  }
+
+}
+
+
+/* --------------------------------------------------
+   WEEKLY COMPETITION
+-------------------------------------------------- */
+
+function openWeekly() {
+
+  const sorted =
+    [...items].sort(
+      (a,b) =>
+        b.points - a.points
+    );
+
+
+  const list =
+    document.getElementById(
+      "weeklyList"
+    );
+
+
+  list.innerHTML = `
+
+    <p style="
+      text-align:center;
+      color:#64748b;
+      font-weight:700;
+    ">
+      This is the current week's
+      prototype leaderboard.
+    </p>
+
+  `;
+
+
+  sorted.forEach(
+    (item,index) => {
+
+      const row =
+        document.createElement("div");
+
+
+      row.className =
+        "item";
+
+
+      const medals = [
+        "🥇",
+        "🥈",
+        "🥉"
+      ];
+
+
+      row.innerHTML = `
+
+        <span class="name">
+
+          ${
+            medals[index] ||
+            "#" + (index + 1)
+          }
+
+          ${escapeHTML(item.name)}
+
+        </span>
+
+        <span class="points">
+
+          ${Math.round(
+            item.points * .18
+          )}
+
+        </span>
+
+      `;
+
+
+      list.appendChild(row);
+
+    }
+  );
+
+
+  document
+    .getElementById("weeklyOverlay")
+    .classList.add("show");
+
+}
+
+
+/* --------------------------------------------------
+   ACHIEVEMENTS
+-------------------------------------------------- */
+
+function openAchievements() {
+
+  const list =
+    document.getElementById(
+      "achievementList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  items.forEach(
+    item => {
+
+      const progress =
+        Math.min(
+          item.streak || 0,
+          5
+        );
+
+
+      const achievement =
+        document.createElement("div");
+
+
+      achievement.className =
+        "achievement";
+
+
+      achievement.innerHTML = `
+
+        <b>
+          🏟️ Undefeated
+        </b>
+
+        <br>
+
+        ${escapeHTML(item.name)}
+
+        <br>
+
+        Win 5 Colosseum battles
+        in a row
+
+        <br>
+
+        🔥 ${progress} / 5
+
+        <div class="bar">
+
+          <div
+            class="fill"
+            style="
+              width:${progress * 20}%;
+            "
+          ></div>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(
+        achievement
+      );
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "achievementOverlay"
+    )
+    .classList.add("show");
+
+}
+
+
+/* --------------------------------------------------
+   AUTO SAVE PROTOTYPE
+-------------------------------------------------- */
+
+function showAutoSave() {
+
+  alert(
+    "💾 AUTO-SAVE\n\n" +
+    "The final version will automatically " +
+    "save Softoys, points, photos, achievements, " +
+    "weekly competitions, Colosseum streaks, " +
+    "transactions and settings."
+  );
+
+}
+
+
+/* --------------------------------------------------
+   BACKUP PROTOTYPE
+-------------------------------------------------- */
+
+function showBackup() {
+
+  alert(
+    "🔒 BACKUP & RESTORE\n\n" +
+    "The final version will include:\n\n" +
+    "• Export Backup\n" +
+    "• Import Backup\n" +
+    "• Softoys and points\n" +
+    "• Photos\n" +
+    "• Achievements\n" +
+    "• Weekly archive\n" +
+    "• Colosseum streaks\n" +
+    "• Settings"
+  );
+
+}
+
+
+/* --------------------------------------------------
+   CLOSE OVERLAYS
+-------------------------------------------------- */
+
+function closeOverlay(id) {
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* --------------------------------------------------
+   INITIAL DISPLAY
+-------------------------------------------------- */
+
 render();
-})();
+
 </script>
+
 </body>
 </html>
