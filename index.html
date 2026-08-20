@@ -2,455 +2,833 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#16a34a">
-<title>Softoy Ranking Prototype</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Softoy Ranking">
+<title>Softoy Ranking</title>
 
 <style>
-:root {
-  --green:#22c55e;
-  --blue:#3b82f6;
-  --purple:#7c3aed;
-  --red:#ef4444;
+:root{
   --text:#0f172a;
+  --muted:#64748b;
+  --green:#22c55e;
+  --green-dark:#15803d;
+  --blue:#3b82f6;
+  --red:#ef4444;
+  --purple:#7c3aed;
+  --gold:#eab308;
+  --card:rgba(255,255,255,.97);
 }
 
-* {
+*{
   box-sizing:border-box;
 }
 
-body {
+html,body{
   margin:0;
-  padding:14px;
-  min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
-  background:radial-gradient(circle at 50% 15%,#f0fdf4,#e0f2fe);
 }
 
-.app {
+body{
+  padding:14px 10px 40px;
+  background:
+    radial-gradient(circle at 50% 10%,#f0fdf4 0,#e0f2fe 48%,#dbeafe 100%);
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.container{
   width:100%;
-  max-width:680px;
-  margin:auto;
+  max-width:700px;
+  margin:0 auto;
 }
 
-header,
-.card,
-.modal {
-  background:rgba(255,255,255,.97);
-  border-radius:20px;
-  box-shadow:0 10px 25px -5px rgba(0,0,0,.12);
-}
+/* =========================
+   HEADER
+========================= */
 
-header {
+header{
+  position:relative;
+  overflow:hidden;
   text-align:center;
-  padding:24px 16px;
-  margin-bottom:14px;
+  padding:26px 18px;
+  margin-bottom:15px;
+  background:var(--card);
   border:3px solid var(--green);
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,.11);
 }
 
-h1 {
+header:before{
+  content:"🏆";
+  position:absolute;
+  left:15px;
+  top:13px;
+  font-size:30px;
+  opacity:.75;
+}
+
+header:after{
+  content:"🏆";
+  position:absolute;
+  right:15px;
+  top:13px;
+  font-size:30px;
+  opacity:.75;
+}
+
+h1{
   margin:0;
-  font-size:38px;
-  font-weight:900;
+  font-size:clamp(34px,9vw,46px);
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-1.5px;
   background:linear-gradient(90deg,#0284c7,#16a34a);
   color:transparent;
   background-clip:text;
   -webkit-background-clip:text;
 }
 
-header p {
-  margin:5px 0 0;
+header p{
+  margin:8px 0 0;
+  color:#475569;
+  font-weight:800;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.form-card,
+.menu-card,
+.history-card{
+  background:var(--card);
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.09);
+  margin-bottom:15px;
+}
+
+.form-card{
+  padding:16px;
+}
+
+.input-group{
+  display:flex;
+  gap:8px;
+}
+
+#itemName{
+  flex:1;
+  min-width:0;
+  padding:13px 15px;
+  border:2px solid #cbd5e1;
+  border-radius:12px;
+  outline:none;
+  background:white;
+}
+
+#itemName:focus{
+  border-color:var(--green);
+}
+
+.add-btn{
+  padding:13px 18px;
+  border:0;
+  border-radius:12px;
+  color:white;
+  background:var(--green);
+  font-weight:900;
+  box-shadow:0 4px 10px rgba(34,197,94,.25);
+}
+
+/* =========================
+   COLOSSEUM BUTTON
+========================= */
+
+.colosseum-button{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  min-height:120px;
+  margin-top:12px;
+  padding:20px;
+  border:3px solid #d6c0a1;
+  border-radius:18px;
+  color:white;
+  text-shadow:0 2px 4px #000;
+  font-size:20px;
+  font-weight:950;
+
+  background:
+    linear-gradient(rgba(25,15,8,.42),rgba(25,15,8,.68)),
+    linear-gradient(135deg,#c8b18c,#806b50,#49382c);
+
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,.1),
+    0 8px 18px rgba(0,0,0,.18);
+
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.colosseum-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 25px rgba(0,0,0,.25);
+}
+
+.colosseum-button:active{
+  transform:scale(.98);
+}
+
+.colosseum-button small{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  opacity:.9;
+}
+
+/* =========================
+   LEADERBOARD
+========================= */
+
+.leaderboard{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.item-card{
+  width:100%;
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:9px;
+  padding:11px;
+  border:2px solid #cbd5e1;
+  border-radius:17px;
+  background:var(--card);
+  box-shadow:0 5px 12px rgba(0,0,0,.07);
+  transition:transform .18s ease;
+}
+
+.item-card:active{
+  transform:scale(.99);
+}
+
+.tier-platinum{
+  background:linear-gradient(135deg,#f8fafc,#cbd5e1);
+  border-color:#94a3b8;
+}
+
+.tier-gold{
+  background:linear-gradient(135deg,#fef9c3,#fde047);
+  border-color:#ca8a04;
+}
+
+.tier-silver{
+  background:linear-gradient(135deg,#f1f5f9,#94a3b8);
+  border-color:#64748b;
+}
+
+.tier-bronze{
+  background:linear-gradient(135deg,#ffedd5,#d97706);
+  border-color:#9a3412;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  flex:1;
+}
+
+.rank{
+  min-width:31px;
+  font-weight:950;
+}
+
+.photo{
+  width:55px;
+  height:55px;
+  flex:0 0 55px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border:2px dashed #94a3b8;
+  border-radius:11px;
+  background:#e2e8f0;
+  cursor:pointer;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.photo-placeholder{
+  color:#64748b;
+  font-size:9px;
+  line-height:1.1;
+  text-align:center;
+  font-weight:900;
+}
+
+.name-area{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:3px;
+}
+
+.item-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:17px;
+  font-weight:900;
+}
+
+.edit-btn{
+  padding:3px;
+  border:0;
+  background:transparent;
+}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.points{
+  min-width:38px;
+  text-align:right;
+  font-size:23px;
+  font-weight:950;
+}
+
+.actions{
+  display:flex;
+  gap:4px;
+}
+
+.action-btn{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:0;
+  border-radius:10px;
+  color:white;
+  font-size:20px;
+  font-weight:950;
+}
+
+.plus{
+  background:var(--blue);
+}
+
+.minus{
+  background:var(--red);
+}
+
+.delete{
+  background:#e5e7eb;
+  color:#475569;
+  font-size:15px;
+}
+
+.empty{
+  padding:30px 15px;
+  text-align:center;
+  background:rgba(255,255,255,.85);
+  border-radius:16px;
   color:#475569;
   font-weight:700;
 }
 
-.card {
-  padding:16px;
-  margin-bottom:14px;
+/* =========================
+   MENU
+========================= */
+
+.menu-card{
+  padding:12px;
 }
 
-.row {
-  display:flex;
-  gap:8px;
-}
-
-input {
-  min-width:0;
-  flex:1;
-  padding:13px;
-  border:2px solid #cbd5e1;
-  border-radius:12px;
-  font-size:16px;
-  outline:none;
-}
-
-input:focus {
-  border-color:var(--green);
-}
-
-button {
-  border:0;
-  border-radius:12px;
-  padding:12px 16px;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.add {
-  background:var(--green);
-  color:white;
-}
-
-.colosseum-button {
-  width:100%;
-  margin-top:10px;
-  padding:20px;
-  color:white;
-  font-size:18px;
-
-  background:
-    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
-    linear-gradient(135deg,#a78b6b,#5b4636,#c8b18c);
-
-  border:3px solid #d6c0a1;
-
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease;
-}
-
-.colosseum-button:hover {
-  transform:scale(1.02);
-  box-shadow:0 8px 25px rgba(0,0,0,.25);
-}
-
-.item {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-
-  padding:11px;
-  margin:8px 0;
-
-  border:2px solid #cbd5e1;
-  border-radius:15px;
-
-  background:white;
-}
-
-.name {
-  font-weight:900;
-}
-
-.points {
-  font-size:21px;
-  font-weight:900;
-}
-
-.small-button {
-  width:34px;
-  height:34px;
-  padding:0;
-  margin-left:4px;
-
-  color:white;
-  background:var(--blue);
-}
-
-.minus {
-  background:var(--red);
-}
-
-.settings {
+.menu-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
 }
 
-/* OVERLAYS */
+.menu-button{
+  min-height:50px;
+  border:2px solid #cbd5e1;
+  border-radius:13px;
+  background:white;
+  color:#0f172a;
+  font-weight:900;
+}
 
-.overlay {
+.menu-button:active{
+  transform:scale(.98);
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.overlay{
   display:none;
-
   position:fixed;
   inset:0;
-
-  padding:14px;
-
-  background:rgba(15,23,42,.75);
-
-  backdrop-filter:blur(6px);
-
+  z-index:100;
   align-items:center;
   justify-content:center;
-
-  z-index:10;
+  padding:12px;
+  background:rgba(15,23,42,.72);
+  backdrop-filter:blur(7px);
 }
 
-.overlay.show {
+.overlay.show{
   display:flex;
 }
 
-.modal {
+.modal{
   width:100%;
-  max-width:650px;
-
-  padding:20px;
-
-  max-height:92vh;
+  max-width:700px;
+  max-height:94vh;
   overflow:auto;
-
-  animation:modalIn .35s ease;
+  padding:19px;
+  border-radius:24px;
+  background:white;
+  box-shadow:0 25px 60px rgba(0,0,0,.3);
+  animation:modalIn .3s ease;
 }
 
-@keyframes modalIn {
-  from {
-    transform:scale(.92);
+@keyframes modalIn{
+  from{
     opacity:0;
+    transform:translateY(20px) scale(.96);
   }
-
-  to {
-    transform:scale(1);
+  to{
     opacity:1;
+    transform:none;
   }
 }
 
-.title {
+.modal-title{
   text-align:center;
   font-size:28px;
-  font-weight:1000;
-  color:var(--purple);
+  font-weight:950;
 }
 
-.subtitle {
-  text-align:center;
-  color:#64748b;
-  font-weight:700;
+.modal-subtitle{
   margin:5px 0 18px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:700;
 }
 
-/* PLAYERS */
-
-.players {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.player {
-  padding:12px;
-
-  background:#f8fafc;
-
-  border:3px solid #cbd5e1;
-  border-radius:16px;
-}
-
-.player h3 {
-  margin:0 0 8px;
-  color:var(--purple);
-}
-
-.selected {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:9px;
-
-  background:white;
-
-  border-radius:10px;
-  border:2px solid #cbd5e1;
-
+.close-btn{
+  width:100%;
+  margin-top:12px;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:#e2e8f0;
+  color:#334155;
   font-weight:900;
 }
 
-.selected button {
-  padding:5px 8px;
+/* =========================
+   COLOSSEUM
+========================= */
+
+.arena{
+  position:relative;
+  overflow:hidden;
+  padding:18px 12px;
+  border:3px solid #b99a70;
+  border-radius:20px;
+  background:
+    radial-gradient(ellipse at center,#d5b98d 0,#80694d 55%,#3e3025 100%);
+  box-shadow:inset 0 0 50px rgba(0,0,0,.35);
+}
+
+.arena:before{
+  content:"🏛️";
+  position:absolute;
+  inset:5px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  font-size:70px;
+  opacity:.12;
+  pointer-events:none;
+}
+
+.colosseum-heading{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  color:white;
+  text-shadow:0 2px 5px #000;
+  font-size:28px;
+  font-weight:950;
+}
+
+.players{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.player-box{
+  padding:12px;
+  border:3px solid rgba(255,255,255,.65);
+  border-radius:16px;
+  background:rgba(255,255,255,.92);
+}
+
+.player-label{
+  margin-bottom:7px;
+  color:#6d28d9;
+  font-weight:950;
+}
+
+.selected-player{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:45px;
+  padding:8px;
+  border:2px solid #cbd5e1;
+  border-radius:10px;
+  background:white;
+  font-weight:900;
+}
+
+.remove-selection{
+  padding:4px 8px;
+  border:0;
   background:#e2e8f0;
 }
 
-.results button {
-  display:block;
+.search-input{
   width:100%;
-
-  margin-top:5px;
-
-  text-align:left;
-
-  background:#e0f2fe;
+  margin-top:8px;
+  padding:10px;
+  border:2px solid #cbd5e1;
+  border-radius:10px;
 }
 
-.ready {
+.search-results{
+  margin-top:5px;
+}
+
+.search-results button{
+  width:100%;
+  margin-top:4px;
+  padding:9px;
+  border:1px solid #bae6fd;
+  border-radius:9px;
+  background:#e0f2fe;
+  text-align:left;
+  font-weight:800;
+}
+
+.ready-btn{
+  position:relative;
+  z-index:1;
   display:block;
-
-  margin:18px auto 0;
-
+  margin:17px auto 0;
+  padding:14px 30px;
+  border:0;
+  border-radius:14px;
   background:var(--green);
   color:white;
-
-  font-size:17px;
+  font-size:18px;
+  font-weight:950;
+  box-shadow:0 5px 12px rgba(0,0,0,.2);
 }
 
-.ready:disabled {
+.ready-btn:disabled{
   background:#94a3b8;
+  box-shadow:none;
 }
 
-/* BATTLE */
-
-.battle {
+.battle-screen{
   display:none;
-  text-align:center;
 }
 
-.battle.show {
+.battle-screen.show{
   display:block;
 }
 
-.vs-grid {
+.fighters{
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
-  gap:10px;
+  gap:8px;
+  margin-top:18px;
 }
 
-.fighter {
-  padding:18px;
-
+.fighter{
+  padding:18px 8px;
+  text-align:center;
   border:3px solid #cbd5e1;
-  border-radius:16px;
+  border-radius:17px;
+  background:white;
+  font-weight:950;
+}
 
-  background:#f8fafc;
-
+.vs{
+  color:#ef4444;
+  font-size:25px;
   font-weight:1000;
 }
 
-.vs {
-  font-size:24px;
-  font-weight:1000;
-  color:var(--red);
+.battle-animation{
+  padding:20px;
+  text-align:center;
+  font-size:50px;
+  animation:pulse .45s infinite alternate;
 }
 
-.battle-animation {
-  margin:20px 0;
-
-  font-size:45px;
-
-  animation:battlePulse .5s infinite alternate;
+@keyframes pulse{
+  from{transform:scale(.9)}
+  to{transform:scale(1.12)}
 }
 
-@keyframes battlePulse {
-  from {
-    transform:scale(1);
-  }
-
-  to {
-    transform:scale(1.12);
-  }
-}
-
-.result {
-  margin-top:16px;
-  padding:18px;
-
-  background:#dcfce7;
+.winner-box{
+  padding:20px;
+  text-align:center;
+  border-radius:17px;
+  background:linear-gradient(135deg,#dcfce7,#fef9c3);
+  border:3px solid #86efac;
   color:#166534;
-
-  border-radius:15px;
-
-  font-size:20px;
-  font-weight:1000;
+  font-size:21px;
+  font-weight:950;
 }
 
-.close {
-  width:100%;
-  margin-top:10px;
-  background:#e2e8f0;
-}
+/* =========================
+   WEEKLY
+========================= */
 
-/* ACHIEVEMENTS */
-
-.achievement {
-  padding:12px;
-
+.weekly-card{
+  padding:13px;
+  margin-bottom:8px;
   border:2px solid #cbd5e1;
-  border-radius:13px;
-
-  margin:7px 0;
+  border-radius:15px;
+  background:#f8fafc;
 }
 
-.bar {
+.weekly-card strong{
+  font-size:17px;
+}
+
+.weekly-points{
+  float:right;
+  font-size:20px;
+  font-weight:950;
+}
+
+.archive{
+  margin-top:15px;
+  padding-top:12px;
+  border-top:2px solid #e2e8f0;
+}
+
+.archive-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px;
+  border-radius:8px;
+  background:#f8fafc;
+  margin-top:5px;
+}
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievement{
+  margin:8px 0;
+  padding:13px;
+  border:2px solid #cbd5e1;
+  border-radius:15px;
+  background:#f8fafc;
+}
+
+.achievement-title{
+  font-weight:950;
+  font-size:17px;
+}
+
+.progress{
+  margin-top:8px;
   height:9px;
-
-  background:#e2e8f0;
-
-  border-radius:10px;
-
   overflow:hidden;
-
-  margin-top:7px;
+  border-radius:10px;
+  background:#e2e8f0;
 }
 
-.fill {
+.progress-fill{
   height:100%;
   background:var(--green);
 }
 
-/* CONFETTI */
+/* =========================
+   HISTORY
+========================= */
 
-.confetti {
-  position:fixed;
-
-  top:-20px;
-
-  width:9px;
-  height:14px;
-
-  z-index:30;
-
-  animation:fall 2.3s linear forwards;
+.history-card{
+  padding:14px;
 }
 
-@keyframes fall {
-  to {
+.history-entry{
+  padding:10px;
+  margin:6px 0;
+  border-left:4px solid var(--blue);
+  border-radius:8px;
+  background:#f8fafc;
+  font-size:13px;
+}
+
+.history-entry b{
+  font-size:14px;
+}
+
+.undo-btn{
+  margin-top:5px;
+  padding:5px 8px;
+  background:#fee2e2;
+  color:#991b1b;
+  font-size:12px;
+}
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti{
+  position:fixed;
+  top:-20px;
+  width:9px;
+  height:15px;
+  z-index:500;
+  animation:confettiFall 2.6s linear forwards;
+}
+
+@keyframes confettiFall{
+  to{
     transform:translateY(110vh) rotate(720deg);
     opacity:0;
   }
 }
 
-/* MOBILE */
+/* =========================
+   TOAST
+========================= */
 
-@media(max-width:520px) {
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  z-index:600;
+  transform:translateX(-50%) translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  padding:12px 17px;
+  border-radius:13px;
+  background:#0f172a;
+  color:white;
+  font-weight:800;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  transition:.25s ease;
+}
 
-  body {
-    padding:10px 8px;
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  body{
+    padding:9px 7px 30px;
   }
 
-  .row {
+  .input-group{
     flex-direction:column;
   }
 
-  .add {
+  .add-btn{
     width:100%;
   }
 
-  .players {
+  .players{
     grid-template-columns:1fr;
   }
 
-  .vs-grid {
+  .fighters{
     grid-template-columns:1fr;
   }
 
-  .vs {
+  .vs{
     margin:auto;
   }
 
-  .settings {
+  .menu-grid{
     grid-template-columns:1fr;
+  }
+
+  .item-card{
+    padding:8px;
+  }
+
+  .photo{
+    width:48px;
+    height:48px;
+    flex-basis:48px;
+  }
+
+  .item-name{
+    font-size:15px;
+  }
+
+  .points{
+    font-size:20px;
+    min-width:29px;
+  }
+
+  .action-btn{
+    width:31px;
+    height:31px;
   }
 }
 </style>
@@ -458,246 +836,316 @@ button {
 
 <body>
 
-<div class="app">
+<div class="container">
 
 <header>
   <h1>Softoy Ranking</h1>
-  <p id="count">5 / 150 items tracked</p>
+  <p id="itemCount">0 / 150 items tracked</p>
 </header>
 
 
-<!-- ADD SOFTOY -->
+<!-- ADD ITEM -->
 
-<div class="card">
+<div class="form-card">
 
-  <div class="row">
+  <form id="itemForm" novalidate>
 
-    <input
-      id="newName"
-      maxlength="30"
-      placeholder="Enter new Softoy..."
+    <div class="input-group">
+
+      <input
+        id="itemName"
+        type="text"
+        maxlength="30"
+        autocomplete="off"
+        placeholder="Enter new Softoy..."
+      >
+
+      <button
+        class="add-btn"
+        type="submit"
+      >
+        Add Item
+      </button>
+
+    </div>
+
+  </form>
+
+
+  <button
+    id="colosseumButton"
+    class="colosseum-button"
+    type="button"
+  >
+    🏟️ The Colosseum Is Back!
+    <small id="colosseumStatus">
+      Enter the arena for one match
+    </small>
+  </button>
+
+</div>
+
+
+<!-- LEADERBOARD -->
+
+<div
+  id="leaderboard"
+  class="leaderboard"
+></div>
+
+
+<!-- MENU -->
+
+<div class="menu-card">
+
+  <div class="menu-grid">
+
+    <button
+      class="menu-button"
+      onclick="openWeekly()"
     >
+      🏆 Weekly Competition
+    </button>
 
-    <button class="add" onclick="addItem()">
-      Add Item
+    <button
+      class="menu-button"
+      onclick="openAchievements()"
+    >
+      🏅 Achievements
+    </button>
+
+    <button
+      class="menu-button"
+      onclick="openHistory()"
+    >
+      ↩️ Transaction History
+    </button>
+
+    <button
+      class="menu-button"
+      onclick="openSettings()"
+    >
+      ⚙️ Settings
     </button>
 
   </div>
 
-
-  <button
-    class="colosseum-button"
-    onclick="openColosseum()"
-  >
-    🏟️ The Colosseum Is Back!
-  </button>
-
 </div>
 
 
-<!-- RANKING -->
-
-<div class="card">
-
-  <div id="list"></div>
-
-</div>
-
-
-<!-- OTHER SCREENS -->
-
-<div class="card settings">
-
-  <button onclick="openWeekly()">
-    🏆 Weekly Competition
-  </button>
-
-  <button onclick="openAchievements()">
-    🏆 Achievements
-  </button>
-
-  <button onclick="showAutoSave()">
-    💾 Auto-save
-  </button>
-
-  <button onclick="showBackup()">
-    🔒 Backup
-  </button>
-
-</div>
-
-</div>
-
-
-<!-- COLOSSEUM -->
-
-<div class="overlay" id="colosseumOverlay">
-
-<div class="modal">
-
-
-<!-- SELECTION SCREEN -->
-
-<div id="selectionScreen">
-
-  <div class="title">
-    🏟️ The Colosseum Battle
-  </div>
-
-  <div class="subtitle">
-    Choose two Softoys to battle.
-  </div>
-
-
-  <div class="players">
-
-
-    <!-- PLAYER 1 -->
-
-    <div class="player">
-
-      <h3>P1</h3>
-
-      <div class="selected">
-
-        <span id="p1Name">
-          No Softoy selected
-        </span>
-
-        <button onclick="clearPlayer(1)">
-          ✕
-        </button>
-
-      </div>
-
-
-      <input
-        id="search1"
-        placeholder="🔍 Search Softoy..."
-        oninput="searchSoftoys(1)"
-      >
-
-      <div
-        class="results"
-        id="results1"
-      ></div>
-
-    </div>
-
-
-    <!-- PLAYER 2 -->
-
-    <div class="player">
-
-      <h3>P2</h3>
-
-      <div class="selected">
-
-        <span id="p2Name">
-          No Softoy selected
-        </span>
-
-        <button onclick="clearPlayer(2)">
-          ✕
-        </button>
-
-      </div>
-
-
-      <input
-        id="search2"
-        placeholder="🔍 Search Softoy..."
-        oninput="searchSoftoys(2)"
-      >
-
-      <div
-        class="results"
-        id="results2"
-      ></div>
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="ready"
-    id="readyButton"
-    disabled
-    onclick="startBattle()"
-  >
-    Ready?
-  </button>
-
-</div>
-
-
-<!-- BATTLE SCREEN -->
+<!-- HISTORY -->
 
 <div
-  class="battle"
-  id="battleScreen"
+  id="historyCard"
+  class="history-card"
+  style="display:none"
 >
 
-  <div class="title">
-    🏟️ The Colosseum Battle
-  </div>
+  <h3>↩️ Transaction History</h3>
 
+  <div id="historyList"></div>
 
-  <div
-    class="vs-grid"
-    id="fighters"
-  ></div>
-
-
-  <div
-    class="battle-animation"
-    id="battleAnimation"
-  >
-    ⚔️
-  </div>
-
-
-  <div
-    id="battleResult"
-  ></div>
+</div>
 
 </div>
 
 
-<button
-  class="close"
-  onclick="closeColosseum()"
->
-  Close
-</button>
-
-</div>
-</div>
-
-
-<!-- WEEKLY COMPETITION -->
+<!-- =========================
+     COLOSSEUM MODAL
+========================= -->
 
 <div
+  id="colosseumOverlay"
   class="overlay"
-  id="weeklyOverlay"
 >
 
 <div class="modal">
 
-  <div class="title">
-    🏆 Weekly Competition
+  <div id="colosseumSelection">
+
+    <div class="arena">
+
+      <div class="colosseum-heading">
+        🏟️ The Colosseum Battle
+      </div>
+
+      <div class="modal-subtitle">
+        Select two Softoys for battle
+      </div>
+
+
+      <div class="players">
+
+
+        <!-- P1 -->
+
+        <div class="player-box">
+
+          <div class="player-label">
+            P1
+          </div>
+
+          <div class="selected-player">
+
+            <span id="p1Name">
+              No Softoy selected
+            </span>
+
+            <button
+              class="remove-selection"
+              onclick="clearPlayer(1)"
+            >
+              ✕
+            </button>
+
+          </div>
+
+          <input
+            id="p1Search"
+            class="search-input"
+            placeholder="🔍 Search Softoy..."
+            oninput="searchPlayer(1)"
+          >
+
+          <div
+            id="p1Results"
+            class="search-results"
+          ></div>
+
+        </div>
+
+
+        <!-- P2 -->
+
+        <div class="player-box">
+
+          <div class="player-label">
+            P2
+          </div>
+
+          <div class="selected-player">
+
+            <span id="p2Name">
+              No Softoy selected
+            </span>
+
+            <button
+              class="remove-selection"
+              onclick="clearPlayer(2)"
+            >
+              ✕
+            </button>
+
+          </div>
+
+          <input
+            id="p2Search"
+            class="search-input"
+            placeholder="🔍 Search Softoy..."
+            oninput="searchPlayer(2)"
+          >
+
+          <div
+            id="p2Results"
+            class="search-results"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="readyButton"
+        class="ready-btn"
+        disabled
+        onclick="startBattle()"
+      >
+        Ready?
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="subtitle">
-    Current Week
+
+  <!-- BATTLE -->
+
+  <div
+    id="battleScreen"
+    class="battle-screen"
+  >
+
+    <div class="arena">
+
+      <div class="colosseum-heading">
+        🏟️ THE BATTLE
+      </div>
+
+      <div
+        id="fighters"
+        class="fighters"
+      ></div>
+
+      <div
+        id="battleAnimation"
+        class="battle-animation"
+      >
+        ⚔️
+      </div>
+
+      <div id="battleResult"></div>
+
+    </div>
+
   </div>
+
+
+  <button
+    class="close-btn"
+    onclick="closeColosseum()"
+  >
+    Close
+  </button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     WEEKLY MODAL
+========================= -->
+
+<div
+  id="weeklyOverlay"
+  class="overlay"
+>
+
+<div class="modal">
+
+  <div class="modal-title">
+    🏆 Current Weekly Competition
+  </div>
+
+  <div
+    id="weeklyPeriod"
+    class="modal-subtitle"
+  ></div>
 
   <div id="weeklyList"></div>
 
+  <div class="archive">
+
+    <h3>📅 Weekly Archive</h3>
+
+    <div id="archiveList"></div>
+
+  </div>
+
   <button
-    class="close"
-    onclick="closeOverlay('weeklyOverlay')"
+    class="close-btn"
+    onclick="closeModal('weeklyOverlay')"
   >
     Close
   </button>
@@ -707,24 +1155,28 @@ button {
 </div>
 
 
-<!-- ACHIEVEMENTS -->
+<!-- =========================
+     ACHIEVEMENTS MODAL
+========================= -->
 
 <div
-  class="overlay"
   id="achievementOverlay"
+  class="overlay"
 >
 
 <div class="modal">
 
-  <div class="title">
-    🏆 Achievements
+  <div class="modal-title">
+    🏅 Achievements
   </div>
 
-  <div id="achievementList"></div>
+  <div
+    id="achievementList"
+  ></div>
 
   <button
-    class="close"
-    onclick="closeOverlay('achievementOverlay')"
+    class="close-btn"
+    onclick="closeModal('achievementOverlay')"
   >
     Close
   </button>
@@ -734,154 +1186,169 @@ button {
 </div>
 
 
-<script>
+<!-- =========================
+     SETTINGS MODAL
+========================= -->
 
+<div
+  id="settingsOverlay"
+  class="overlay"
+>
+
+<div class="modal">
+
+  <div class="modal-title">
+    ⚙️ Settings
+  </div>
+
+  <div class="menu-grid">
+
+    <button
+      class="menu-button"
+      onclick="exportBackup()"
+    >
+      🔒 Export Backup
+    </button>
+
+    <button
+      class="menu-button"
+      onclick="document.getElementById('importFile').click()"
+    >
+      📥 Import Backup
+    </button>
+
+    <button
+      class="menu-button"
+      onclick="showAutoSaveInfo()"
+    >
+      💾 Auto-save Status
+    </button>
+
+    <button
+      class="menu-button"
+      onclick="confirmReset()"
+    >
+      ⚠️ Reset All Data
+    </button>
+
+  </div>
+
+  <input
+    id="importFile"
+    type="file"
+    accept=".json,application/json"
+    hidden
+    onchange="importBackup(event)"
+  >
+
+  <button
+    class="close-btn"
+    onclick="closeModal('settingsOverlay')"
+  >
+    Close
+  </button>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<script>
 "use strict";
 
+/* =========================================================
+   SOFTOY RANKING — FINAL APP CORE
+========================================================= */
 
-/* --------------------------------------------------
-   PROTOTYPE DATA
--------------------------------------------------- */
+const STORAGE_KEY = "softoy_ranking_final_v1";
 
-let items = [
+const MAX_ITEMS = 150;
 
-  {
-    id:1,
-    name:"Paddington",
-    points:42,
-    streak:3
+const COLOSSEUM_COOLDOWN =
+  6 * 60 * 60 * 1000;
+
+
+/* =========================================================
+   DEFAULT DATABASE
+========================================================= */
+
+let db = {
+
+  version:1,
+
+  items:[],
+
+  transactions:[],
+
+  weekly:{
+    weekKey:"",
+    points:{},
+    archive:[]
   },
 
-  {
-    id:2,
-    name:"Axol",
-    points:35,
-    streak:1
+  achievements:{
+
+    undefeated:{}
+
   },
 
-  {
-    id:3,
-    name:"Roary",
-    points:27,
-    streak:0
+  colosseum:{
+
+    eventDate:null,
+
+    eventCompleted:false,
+
+    summonActive:false,
+
+    summonSource:null,
+
+    cooldownUntil:0,
+
+    currentBattle:null
+
   },
 
-  {
-    id:4,
-    name:"Squidy",
-    points:19,
-    streak:2
-  },
+  settings:{
 
-  {
-    id:5,
-    name:"Patagotiny",
-    points:12,
-    streak:0
+    autoSave:true
+
   }
 
-];
+};
 
 
-let player1 = null;
-let player2 = null;
+/* =========================================================
+   ID
+========================================================= */
 
+function createId(){
 
-/* --------------------------------------------------
-   MAIN RANKING
--------------------------------------------------- */
-
-function render() {
-
-  items.sort(
-    (a,b) =>
-      b.points - a.points ||
-      a.name.localeCompare(b.name)
-  );
-
-
-  document.getElementById(
-    "count"
-  ).textContent =
-    items.length +
-    " / 150 items tracked";
-
-
-  const list =
-    document.getElementById("list");
-
-
-  list.innerHTML = "";
-
-
-  if(items.length === 0) {
-
-    list.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:25px;
-        color:#64748b;
-        font-weight:700;
-      ">
-        Your leaderboard is empty.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  items.forEach(
-    (item,index) => {
-
-      const row =
-        document.createElement("div");
-
-      row.className = "item";
-
-
-      row.innerHTML = `
-
-        <span class="name">
-          #${index + 1} ${escapeHTML(item.name)}
-        </span>
-
-        <span>
-
-          <span class="points">
-            ${item.points}
-          </span>
-
-          <button
-            class="small-button"
-            onclick="changePoints(${item.id},1)"
-          >
-            +
-          </button>
-
-          <button
-            class="small-button minus"
-            onclick="changePoints(${item.id},-1)"
-          >
-            −
-          </button>
-
-        </span>
-
-      `;
-
-
-      list.appendChild(row);
-
-    }
+  return (
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random()*1000000
+    )
   );
 
 }
 
 
-function escapeHTML(text) {
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
-  return text
+function escapeHTML(value){
+
+  return String(value)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -891,113 +1358,1352 @@ function escapeHTML(text) {
 }
 
 
-/* --------------------------------------------------
-   ADD SOFTOY
--------------------------------------------------- */
+/* =========================================================
+   LOAD DATABASE
+========================================================= */
 
-function addItem() {
+function loadDatabase(){
 
-  const input =
-    document.getElementById("newName");
+  try{
 
+    const saved =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
-  const name =
-    input.value.trim();
+    if(saved){
 
+      const parsed =
+        JSON.parse(saved);
 
-  if(!name)
-    return;
+      if(parsed &&
+         typeof parsed === "object"){
 
+        db = {
 
-  if(items.length >= 150) {
+          ...db,
 
-    alert(
-      "You can track up to 150 Softoys."
+          ...parsed,
+
+          weekly:{
+            ...db.weekly,
+            ...(parsed.weekly || {})
+          },
+
+          achievements:{
+            ...db.achievements,
+            ...(parsed.achievements || {})
+          },
+
+          colosseum:{
+            ...db.colosseum,
+            ...(parsed.colosseum || {})
+          },
+
+          settings:{
+            ...db.settings,
+            ...(parsed.settings || {})
+          }
+
+        };
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Could not load saved database.",
+      error
     );
 
-    return;
   }
 
+  if(!Array.isArray(db.items))
+    db.items=[];
 
-  items.push({
+  if(!Array.isArray(db.transactions))
+    db.transactions=[];
 
-    id:Date.now(),
+  if(!Array.isArray(db.weekly.archive))
+    db.weekly.archive=[];
 
-    name:name.slice(0,30),
+  performWeeklyRollover();
 
-    points:0,
-
-    streak:0
-
-  });
-
-
-  input.value = "";
-
-
-  render();
+  saveDatabase();
 
 }
 
 
-/* --------------------------------------------------
-   POINTS
--------------------------------------------------- */
+/* =========================================================
+   AUTO SAVE
+========================================================= */
 
-function changePoints(id,amount) {
+function saveDatabase(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(db)
+    );
+
+  }catch(error){
+
+    showToast(
+      "⚠️ Browser storage is full."
+    );
+
+    console.warn(error);
+
+  }
+
+}
+
+
+/* =========================================================
+   TRANSACTION SYSTEM
+========================================================= */
+
+function addTransaction(data){
+
+  const transaction = {
+
+    id:createId(),
+
+    timestamp:new Date().toISOString(),
+
+    reversed:false,
+
+    ...data
+
+  };
+
+  db.transactions.unshift(
+    transaction
+  );
+
+
+  if(db.transactions.length > 200){
+
+    db.transactions =
+      db.transactions.slice(0,200);
+
+  }
+
+  saveDatabase();
+
+}
+
+
+/* =========================================================
+   WEEK HELPERS
+========================================================= */
+
+function getWeekStart(date){
+
+  const d = new Date(date);
+
+  const day = d.getDay();
+
+  const difference =
+    day === 0 ? -6 : 1 - day;
+
+  d.setDate(
+    d.getDate()+difference
+  );
+
+  d.setHours(0,0,0,0);
+
+  return d;
+
+}
+
+
+function getWeekKey(date){
+
+  return getWeekStart(date)
+    .toISOString()
+    .slice(0,10);
+
+}
+
+
+function getWeekEnd(date){
+
+  const start =
+    getWeekStart(date);
+
+  const end =
+    new Date(start);
+
+  end.setDate(
+    end.getDate()+7
+  );
+
+  end.setMilliseconds(-1);
+
+  return end;
+
+}
+
+
+/* =========================================================
+   WEEKLY ROLLOVER
+========================================================= */
+
+function performWeeklyRollover(){
+
+  const now = new Date();
+
+  const currentKey =
+    getWeekKey(now);
+
+
+  if(!db.weekly.weekKey){
+
+    db.weekly.weekKey =
+      currentKey;
+
+    db.weekly.points = {};
+
+    db.items.forEach(item => {
+
+      db.weekly.points[item.id]=0;
+
+    });
+
+    return;
+
+  }
+
+
+  if(db.weekly.weekKey === currentKey)
+    return;
+
+
+  /*
+    Finish previous week.
+  */
+
+  const previousScores =
+    Object.entries(
+      db.weekly.points || {}
+    );
+
+
+  if(previousScores.length){
+
+    previousScores.sort(
+      (a,b)=>b[1]-a[1]
+    );
+
+
+    const winnerId =
+      previousScores[0]?.[0];
+
+
+    const winner =
+      db.items.find(
+        item =>
+          String(item.id) ===
+          String(winnerId)
+      );
+
+
+    if(winner){
+
+      db.weekly.archive.unshift({
+
+        weekKey:db.weekly.weekKey,
+
+        winnerId:winner.id,
+
+        winnerName:winner.name,
+
+        points:
+          previousScores[0][1],
+
+        completedAt:
+          now.toISOString()
+
+      });
+
+
+      /*
+        The Podium Will Be Mine!
+      */
+
+      if(!winner.achievements)
+        winner.achievements={};
+
+
+      winner.achievements.podiumWillBeMine=true;
+
+    }
+
+  }
+
+
+  /*
+    Start new week.
+  */
+
+  db.weekly.weekKey =
+    currentKey;
+
+  db.weekly.points={};
+
+
+  db.items.forEach(item => {
+
+    db.weekly.points[item.id]=0;
+
+  });
+
+}
+
+
+/* =========================================================
+   ADD ITEM
+========================================================= */
+
+document
+  .getElementById("itemForm")
+  .addEventListener(
+    "submit",
+    function(event){
+
+      event.preventDefault();
+
+      const input =
+        document.getElementById(
+          "itemName"
+        );
+
+      const name =
+        input.value.trim();
+
+
+      if(!name)
+        return;
+
+
+      if(db.items.length >= MAX_ITEMS){
+
+        alert(
+          "You can track up to 150 Softoys."
+        );
+
+        return;
+
+      }
+
+
+      const item={
+
+        id:createId(),
+
+        name:name.slice(0,30),
+
+        points:0,
+
+        photo:null,
+
+        colosseumWins:0,
+
+        colosseumLosses:0,
+
+        colosseumStreak:0,
+
+        achievements:{
+
+          undefeated:false,
+
+          podiumWillBeMine:false
+
+        }
+
+      };
+
+
+      db.items.push(item);
+
+      db.weekly.points[item.id]=0;
+
+
+      addTransaction({
+
+        type:"add",
+
+        itemId:item.id,
+
+        itemName:item.name,
+
+        amount:0,
+
+        description:
+          "Added " + item.name
+
+      });
+
+
+      saveDatabase();
+
+      render();
+
+      input.value="";
+
+      input.focus();
+
+      showToast(
+        "✅ " + item.name + " added"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   GET SORTED ITEMS
+========================================================= */
+
+function getSortedItems(){
+
+  return db.items
+    .slice()
+    .sort(
+      (a,b)=>{
+
+        const difference =
+          (Number(b.points)||0) -
+          (Number(a.points)||0);
+
+        if(difference !== 0)
+          return difference;
+
+        return String(a.name)
+          .localeCompare(
+            String(b.name),
+            undefined,
+            {sensitivity:"base"}
+          );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   TIER
+========================================================= */
+
+function getTier(rank){
+
+  if(rank<=3)
+    return "tier-platinum";
+
+  if(rank<=10)
+    return "tier-gold";
+
+  if(rank<=25)
+    return "tier-silver";
+
+  if(rank<=50)
+    return "tier-bronze";
+
+  return "";
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+  performWeeklyRollover();
+
+  const sorted =
+    getSortedItems();
+
+
+  document.getElementById(
+    "itemCount"
+  ).textContent =
+    db.items.length +
+    " / " +
+    MAX_ITEMS +
+    " items tracked";
+
+
+  const leaderboard =
+    document.getElementById(
+      "leaderboard"
+    );
+
+
+  leaderboard.replaceChildren();
+
+
+  if(sorted.length===0){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className="empty";
+
+    empty.textContent =
+      "Your leaderboard is empty. Add your first Softoy above!";
+
+    leaderboard.appendChild(empty);
+
+  }
+
+
+  sorted.forEach(
+    (item,index)=>{
+
+      const rank =
+        index+1;
+
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "item-card " +
+        getTier(rank);
+
+
+      const left =
+        document.createElement("div");
+
+      left.className="left";
+
+
+      const rankEl =
+        document.createElement("span");
+
+      rankEl.className="rank";
+
+      rankEl.textContent =
+        "#" + rank;
+
+
+      const photo =
+        document.createElement("div");
+
+      photo.className="photo";
+
+      photo.title=
+        "Add/change photo";
+
+
+      if(item.photo){
+
+        const img =
+          document.createElement("img");
+
+        img.src=item.photo;
+
+        img.alt="";
+
+        photo.appendChild(img);
+
+      }else{
+
+        const placeholder =
+          document.createElement("span");
+
+        placeholder.className=
+          "photo-placeholder";
+
+        placeholder.innerHTML=
+          "ADD<br>PHOTO";
+
+        photo.appendChild(
+          placeholder
+        );
+
+      }
+
+
+      photo.addEventListener(
+        "click",
+        ()=>choosePhoto(item.id)
+      );
+
+
+      const nameArea =
+        document.createElement("div");
+
+      nameArea.className=
+        "name-area";
+
+
+      const name =
+        document.createElement("span");
+
+      name.className="item-name";
+
+      name.textContent=item.name;
+
+
+      const edit =
+        document.createElement("button");
+
+      edit.className="edit-btn";
+
+      edit.type="button";
+
+      edit.textContent="✏️";
+
+      edit.title="Rename";
+
+
+      edit.addEventListener(
+        "click",
+        ()=>renameItem(item.id)
+      );
+
+
+      nameArea.appendChild(name);
+
+      nameArea.appendChild(edit);
+
+
+      left.appendChild(rankEl);
+
+      left.appendChild(photo);
+
+      left.appendChild(nameArea);
+
+
+      const right =
+        document.createElement("div");
+
+      right.className="right";
+
+
+      const points =
+        document.createElement("span");
+
+      points.className="points";
+
+      points.textContent =
+        Number(item.points)||0;
+
+
+      const actions =
+        document.createElement("div");
+
+      actions.className="actions";
+
+
+      actions.appendChild(
+        makeActionButton(
+          "+",
+          "plus",
+          ()=>changePoints(item.id,1)
+        )
+      );
+
+
+      actions.appendChild(
+        makeActionButton(
+          "−",
+          "minus",
+          ()=>changePoints(item.id,-1)
+        )
+      );
+
+
+      actions.appendChild(
+        makeActionButton(
+          "🗑",
+          "delete",
+          ()=>deleteItem(item.id)
+        )
+      );
+
+
+      right.appendChild(points);
+
+      right.appendChild(actions);
+
+
+      card.appendChild(left);
+
+      card.appendChild(right);
+
+
+      leaderboard.appendChild(card);
+
+    }
+  );
+
+
+  updateColosseumButton();
+
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+function makeActionButton(
+  text,
+  className,
+  action
+){
+
+  const button =
+    document.createElement("button");
+
+  button.type="button";
+
+  button.className =
+    "action-btn " +
+    className;
+
+  button.textContent=text;
+
+  button.addEventListener(
+    "click",
+    action
+  );
+
+  return button;
+
+}
+
+
+/* =========================================================
+   CHANGE POINTS
+========================================================= */
+
+function changePoints(
+  itemId,
+  amount,
+  source="Manual"
+){
 
   const item =
-    items.find(x => x.id === id);
+    db.items.find(
+      x=>x.id===itemId
+    );
 
 
   if(!item)
     return;
 
 
-  item.points =
+  const oldPoints =
+    Number(item.points)||0;
+
+
+  const newPoints =
     Math.max(
       0,
-      item.points + amount
+      oldPoints+amount
     );
 
+
+  const actualChange =
+    newPoints-oldPoints;
+
+
+  if(actualChange===0)
+    return;
+
+
+  item.points =
+    newPoints;
+
+
+  const weeklyOld =
+    Number(
+      db.weekly.points[itemId]||0
+    );
+
+
+  /*
+    Manual point changes count toward
+    the current weekly competition.
+  */
+
+  db.weekly.points[itemId] =
+    Math.max(
+      0,
+      weeklyOld+actualChange
+    );
+
+
+  addTransaction({
+
+    type:"points",
+
+    itemId:item.id,
+
+    itemName:item.name,
+
+    amount:actualChange,
+
+    oldPoints,
+
+    newPoints,
+
+    weeklyAmount:actualChange,
+
+    source,
+
+    description:
+      (actualChange>0?"+":"")+
+      actualChange+
+      " "+
+      item.name
+
+  });
+
+
+  checkPointAchievements(item);
+
+  saveDatabase();
 
   render();
 
 }
 
 
-/* --------------------------------------------------
-   COLOSSEUM OPEN
--------------------------------------------------- */
+/* =========================================================
+   RENAME
+========================================================= */
 
-function openColosseum() {
+function renameItem(itemId){
 
-  if(items.length < 2) {
-
-    alert(
-      "You need at least two Softoys to battle."
+  const item =
+    db.items.find(
+      x=>x.id===itemId
     );
 
+
+  if(!item)
     return;
+
+
+  const newName =
+    prompt(
+      "Enter a new name:",
+      item.name
+    );
+
+
+  if(
+    !newName ||
+    !newName.trim()
+  )
+    return;
+
+
+  const oldName =
+    item.name;
+
+
+  item.name =
+    newName
+      .trim()
+      .slice(0,30);
+
+
+  addTransaction({
+
+    type:"rename",
+
+    itemId:item.id,
+
+    itemName:item.name,
+
+    oldName,
+
+    newName:item.name,
+
+    description:
+      "Renamed "+
+      oldName+
+      " to "+
+      item.name
+
+  });
+
+
+  saveDatabase();
+
+  render();
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteItem(itemId){
+
+  const item =
+    db.items.find(
+      x=>x.id===itemId
+    );
+
+
+  if(!item)
+    return;
+
+
+  const confirmed =
+    confirm(
+      "⚠️ Delete "+
+      item.name+
+      "?\n\n"+
+      "This will remove the Softoy and its data."
+    );
+
+
+  if(!confirmed)
+    return;
+
+
+  const snapshot =
+    JSON.parse(
+      JSON.stringify(item)
+    );
+
+
+  db.items =
+    db.items.filter(
+      x=>x.id!==itemId
+    );
+
+
+  delete db.weekly.points[itemId];
+
+
+  addTransaction({
+
+    type:"delete",
+
+    itemId:item.id,
+
+    itemName:item.name,
+
+    snapshot,
+
+    description:
+      "Deleted "+
+      item.name
+
+  });
+
+
+  saveDatabase();
+
+  render();
+
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+let photoItemId=null;
+
+
+function choosePhoto(itemId){
+
+  photoItemId=itemId;
+
+
+  const input =
+    document.createElement("input");
+
+  input.type="file";
+
+  input.accept="image/*";
+
+  input.onchange =
+    event=>{
+
+      const file =
+        event.target.files?.[0];
+
+
+      if(!file)
+        return;
+
+
+      if(
+        file.size >
+        5*1024*1024
+      ){
+
+        alert(
+          "Please choose an image under 5 MB."
+        );
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        ()=>{
+
+          const item =
+            db.items.find(
+              x=>x.id===photoItemId
+            );
+
+
+          if(item){
+
+            item.photo =
+              reader.result;
+
+
+            addTransaction({
+
+              type:"photo",
+
+              itemId:item.id,
+
+              itemName:item.name,
+
+              description:
+                "Changed photo for "+
+                item.name
+
+            });
+
+
+            saveDatabase();
+
+            render();
+
+          }
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    };
+
+
+  input.click();
+
+}
+
+
+/* =========================================================
+   COLOSSEUM STATE
+========================================================= */
+
+let selectedP1=null;
+
+let selectedP2=null;
+
+
+/* =========================================================
+   EVENT DATE
+========================================================= */
+
+function getTodayKey(){
+
+  const now=new Date();
+
+  return (
+    now.getFullYear()+
+    "-" +
+    String(
+      now.getMonth()+1
+    ).padStart(2,"0")+
+    "-" +
+    String(
+      now.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+function isColosseumEventToday(){
+
+  /*
+    The event can happen on ANY date.
+
+    The supplied October dates are examples,
+    not fixed dates.
+
+    This prototype gives the event a randomly
+    selected one-day occurrence.
+  */
+
+  const today =
+    getTodayKey();
+
+
+  if(
+    db.colosseum.eventDate === today
+  )
+    return !db.colosseum.eventCompleted;
+
+
+  if(
+    db.colosseum.eventDate &&
+    db.colosseum.eventDate !== today
+  ){
+
+    db.colosseum.eventDate=null;
+
+    db.colosseum.eventCompleted=false;
+
   }
 
 
-  player1 = null;
-  player2 = null;
+  /*
+    Small occasional probability.
+    The final app can tune this.
+  */
+
+  if(
+    Math.random() < 0.08
+  ){
+
+    db.colosseum.eventDate=today;
+
+    db.colosseum.eventCompleted=false;
+
+    saveDatabase();
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+/* =========================================================
+   COLOSSEUM AVAILABLE
+========================================================= */
+
+function canUseColosseum(){
+
+  const now=Date.now();
+
+
+  if(
+    db.colosseum.summonActive
+  )
+    return true;
+
+
+  if(
+    db.colosseum.cooldownUntil >
+    now
+  )
+    return false;
+
+
+  return (
+    isColosseumEventToday()
+  );
+
+}
+
+
+/* =========================================================
+   CALL THE COLOSSEUM
+========================================================= */
+
+function callTheColosseum(){
+
+  const now=Date.now();
+
+
+  if(
+    db.colosseum.summonActive
+  ){
+
+    openColosseum();
+
+    return;
+
+  }
+
+
+  if(
+    db.colosseum.cooldownUntil >
+    now
+  ){
+
+    const remaining =
+      formatDuration(
+        db.colosseum.cooldownUntil-now
+      );
+
+
+    alert(
+      "🏟️ The Colosseum cannot be summoned yet.\n\n"+
+      "Cooldown remaining: "+
+      remaining
+    );
+
+    return;
+
+  }
+
+
+  /*
+    The summon is NOT consumed here.
+
+    It becomes active and remains active
+    until a battle is completed.
+  */
+
+  db.colosseum.summonActive=true;
+
+  db.colosseum.summonSource="manual";
+
+  db.colosseum.currentBattle=null;
+
+
+  saveDatabase();
+
+  updateColosseumButton();
+
+  showToast(
+    "🏟️ The Colosseum has been summoned!"
+  );
+
+
+  openColosseum();
+
+}
+
+
+/* =========================================================
+   OPEN COLOSSEUM
+========================================================= */
+
+function openColosseum(){
+
+  if(db.items.length<2){
+
+    alert(
+      "You need at least two Softoys."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Event occurrence.
+
+    If today's event occurs, it becomes
+    available for the day.
+  */
+
+  const event =
+    isColosseumEventToday();
+
+
+  if(
+    !event &&
+    !db.colosseum.summonActive
+  ){
+
+    const now=Date.now();
+
+
+    if(
+      db.colosseum.cooldownUntil >
+      now
+    ){
+
+      alert(
+        "🏟️ The Colosseum is cooling down.\n\n"+
+        formatDuration(
+          db.colosseum.cooldownUntil-now
+        )+
+        " remaining."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Give the user the ability to manually
+      summon it.
+    */
+
+    const useCall =
+      confirm(
+        "The Colosseum isn't currently active.\n\n"+
+        "Would you like to Call the Colosseum "+
+        "for one match?"
+      );
+
+
+    if(useCall){
+
+      callTheColosseum();
+
+    }
+
+    return;
+
+  }
+
+
+  selectedP1=null;
+
+  selectedP2=null;
 
 
   document
-    .getElementById("colosseumOverlay")
+    .getElementById(
+      "colosseumOverlay"
+    )
     .classList.add("show");
 
 
   document
-    .getElementById("selectionScreen")
-    .style.display = "block";
+    .getElementById(
+      "colosseumSelection"
+    )
+    .style.display="block";
 
 
   document
-    .getElementById("battleScreen")
+    .getElementById(
+      "battleScreen"
+    )
     .classList.remove("show");
 
 
@@ -1006,201 +2712,371 @@ function openColosseum() {
 }
 
 
-/* --------------------------------------------------
+/* =========================================================
    CLOSE COLOSSEUM
--------------------------------------------------- */
+========================================================= */
 
-function closeColosseum() {
+function closeColosseum(){
+
+  /*
+    Closing does NOT consume a summon.
+  */
 
   document
-    .getElementById("colosseumOverlay")
+    .getElementById(
+      "colosseumOverlay"
+    )
     .classList.remove("show");
 
 }
 
 
-/* --------------------------------------------------
-   CLEAR P1/P2
--------------------------------------------------- */
+/* =========================================================
+   UPDATE COLOSSEUM BUTTON
+========================================================= */
 
-function clearPlayer(number) {
+function updateColosseumButton(){
 
-  if(number === 1)
-    player1 = null;
+  const button =
+    document.getElementById(
+      "colosseumButton"
+    );
 
-  else
-    player2 = null;
+  const status =
+    document.getElementById(
+      "colosseumStatus"
+    );
 
 
-  updatePlayers();
+  const now=Date.now();
+
+
+  if(
+    db.colosseum.summonActive
+  ){
+
+    button.firstChild.textContent =
+      "🏟️ Call the Colosseum ";
+
+    status.textContent =
+      "Your summoned match is waiting";
+
+    return;
+
+  }
+
+
+  if(
+    db.colosseum.cooldownUntil >
+    now
+  ){
+
+    button.firstChild.textContent =
+      "🏟️ Call the Colosseum ";
+
+    status.textContent =
+      "Cooldown: "+
+      formatDuration(
+        db.colosseum.cooldownUntil-now
+      );
+
+    return;
+
+  }
+
+
+  if(
+    isColosseumEventToday()
+  ){
+
+    button.firstChild.textContent =
+      "🏟️ The Colosseum Is Back! ";
+
+    status.textContent =
+      "Today's Colosseum event is active";
+
+    return;
+
+  }
+
+
+  button.firstChild.textContent =
+    "📞 Call the Colosseum ";
+
+  status.textContent =
+    "Summon one match";
+
+
+  button.onclick =
+    callTheColosseum;
 
 }
 
 
-/* --------------------------------------------------
-   SEARCH
--------------------------------------------------- */
+/* =========================================================
+   SELECT PLAYER
+========================================================= */
 
-function searchSoftoys(player) {
+function searchPlayer(playerNumber){
 
-  const search =
-    document
-      .getElementById(
-        "search" + player
-      )
-      .value
-      .toLowerCase()
-      .trim();
+  const input =
+    document.getElementById(
+      "p"+playerNumber+"Search"
+    );
 
 
   const results =
     document.getElementById(
-      "results" + player
+      "p"+playerNumber+"Results"
     );
 
 
-  results.innerHTML = "";
+  const query =
+    input.value
+      .trim()
+      .toLowerCase();
 
 
-  if(!search)
+  results.innerHTML="";
+
+
+  if(!query)
     return;
 
 
-  items
+  db.items
     .filter(
       item =>
         item.name
           .toLowerCase()
-          .includes(search)
+          .includes(query)
     )
-    .slice(0,8)
-    .forEach(item => {
+    .slice(0,10)
+    .forEach(
+      item=>{
+
+        const button =
+          document.createElement("button");
 
 
-      const button =
-        document.createElement("button");
+        button.textContent =
+          item.name+
+          " • "+
+          item.points+
+          " points";
 
 
-      button.textContent =
-        item.name +
-        " • " +
-        item.points +
-        " points";
-
-
-      button.onclick = () => {
-
-        if(
-          (player === 1
-            ? player2
-            : player1
-          )?.id === item.id
-        ) {
-
-          alert(
-            "A Softoy cannot battle itself."
+        button.onclick =
+          ()=>selectPlayer(
+            playerNumber,
+            item.id
           );
 
-          return;
-        }
 
+        results.appendChild(
+          button
+        );
 
-        if(player === 1)
-          player1 = item;
-
-        else
-          player2 = item;
-
-
-        updatePlayers();
-
-      };
-
-
-      results.appendChild(button);
-
-    });
+      }
+    );
 
 }
 
 
-/* --------------------------------------------------
-   UPDATE PLAYERS
--------------------------------------------------- */
+function selectPlayer(
+  playerNumber,
+  itemId
+){
 
-function updatePlayers() {
+  const item =
+    db.items.find(
+      x=>x.id===itemId
+    );
+
+
+  if(!item)
+    return;
+
+
+  if(
+    playerNumber===1 &&
+    selectedP2 &&
+    selectedP2.id===item.id
+  ){
+
+    alert(
+      "A Softoy cannot battle itself."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    playerNumber===2 &&
+    selectedP1 &&
+    selectedP1.id===item.id
+  ){
+
+    alert(
+      "A Softoy cannot battle itself."
+    );
+
+    return;
+
+  }
+
+
+  if(playerNumber===1)
+    selectedP1=item;
+
+  else
+    selectedP2=item;
+
+
+  updatePlayers();
+
+}
+
+
+/* =========================================================
+   UPDATE PLAYERS
+========================================================= */
+
+function updatePlayers(){
 
   document.getElementById(
     "p1Name"
   ).textContent =
-    player1
-      ? player1.name
+    selectedP1
+      ? selectedP1.name
       : "No Softoy selected";
 
 
   document.getElementById(
     "p2Name"
   ).textContent =
-    player2
-      ? player2.name
+    selectedP2
+      ? selectedP2.name
       : "No Softoy selected";
 
 
   document.getElementById(
     "readyButton"
   ).disabled =
-    !(player1 && player2);
+    !(
+      selectedP1 &&
+      selectedP2
+    );
 
 
   document.getElementById(
-    "results1"
-  ).innerHTML = "";
+    "p1Search"
+  ).value="";
 
 
   document.getElementById(
-    "results2"
-  ).innerHTML = "";
+    "p2Search"
+  ).value="";
 
 
   document.getElementById(
-    "search1"
-  ).value = "";
+    "p1Results"
+  ).innerHTML="";
 
 
   document.getElementById(
-    "search2"
-  ).value = "";
+    "p2Results"
+  ).innerHTML="";
 
 }
 
 
-/* --------------------------------------------------
+/* =========================================================
+   CLEAR PLAYER
+========================================================= */
+
+function clearPlayer(number){
+
+  if(number===1)
+    selectedP1=null;
+
+  else
+    selectedP2=null;
+
+
+  updatePlayers();
+
+}
+
+
+/* =========================================================
    START BATTLE
--------------------------------------------------- */
+========================================================= */
 
-function startBattle() {
+function startBattle(){
 
-  if(!player1 || !player2)
+  if(
+    !selectedP1 ||
+    !selectedP2
+  )
     return;
 
 
+  if(
+    selectedP1.id===
+    selectedP2.id
+  ){
+
+    alert(
+      "A Softoy cannot battle itself."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Summon is NOT consumed yet.
+  */
+
+  db.colosseum.currentBattle={
+
+    p1Id:selectedP1.id,
+
+    p2Id:selectedP2.id,
+
+    startedAt:
+      new Date().toISOString()
+
+  };
+
+
+  saveDatabase();
+
+
   document.getElementById(
-    "selectionScreen"
-  ).style.display = "none";
+    "colosseumSelection"
+  ).style.display="none";
 
 
   document
-    .getElementById("battleScreen")
+    .getElementById(
+      "battleScreen"
+    )
     .classList.add("show");
 
 
   document.getElementById(
     "fighters"
-  ).innerHTML = `
+  ).innerHTML=`
 
     <div class="fighter">
-      P1<br>
-      ${escapeHTML(player1.name)}
+      <div>P1</div>
+      <br>
+      ${escapeHTML(selectedP1.name)}
     </div>
 
     <div class="vs">
@@ -1208,8 +3084,9 @@ function startBattle() {
     </div>
 
     <div class="fighter">
-      P2<br>
-      ${escapeHTML(player2.name)}
+      <div>P2</div>
+      <br>
+      ${escapeHTML(selectedP2.name)}
     </div>
 
   `;
@@ -1217,73 +3094,215 @@ function startBattle() {
 
   document.getElementById(
     "battleAnimation"
-  ).textContent = "⚔️";
+  ).textContent="⚔️";
 
 
   document.getElementById(
     "battleResult"
-  ).innerHTML = "";
+  ).innerHTML="";
 
 
   setTimeout(
     finishBattle,
-    1600
+    1700
   );
 
 }
 
 
-/* --------------------------------------------------
+/* =========================================================
    FINISH BATTLE
--------------------------------------------------- */
+========================================================= */
 
-function finishBattle() {
+function finishBattle(){
 
-  const winner =
-    Math.random() < 0.5
-      ? player1
-      : player2;
+  if(
+    !db.colosseum.currentBattle
+  )
+    return;
 
 
-  const loser =
-    winner.id === player1.id
-      ? player2
-      : player1;
+  const p1 =
+    db.items.find(
+      x=>
+        x.id===
+        db.colosseum.currentBattle.p1Id
+    );
+
+
+  const p2 =
+    db.items.find(
+      x=>
+        x.id===
+        db.colosseum.currentBattle.p2Id
+    );
+
+
+  if(!p1 || !p2)
+    return;
 
 
   /*
-    Random reward from 2 to 8.
+    TRUE 50/50.
+  */
+
+  const winner =
+    Math.random()<0.5
+      ? p1
+      : p2;
+
+
+  const loser =
+    winner.id===p1.id
+      ? p2
+      : p1;
+
+
+  /*
+    Reward 2–8 inclusive.
   */
 
   const reward =
     Math.floor(
-      Math.random() * 7
-    ) + 2;
+      Math.random()*7
+    )+2;
+
+
+  const oldWinnerPoints =
+    Number(winner.points)||0;
+
+
+  const oldLoserStreak =
+    Number(loser.colosseumStreak)||0;
 
 
   winner.points += reward;
 
 
-  winner.streak =
-    (winner.streak || 0) + 1;
+  winner.colosseumWins =
+    Number(winner.colosseumWins||0)+1;
 
 
-  loser.streak = 0;
+  winner.colosseumStreak =
+    Number(winner.colosseumStreak||0)+1;
+
+
+  loser.colosseumLosses =
+    Number(loser.colosseumLosses||0)+1;
+
+
+  loser.colosseumStreak=0;
+
+
+  /*
+    Colosseum reward also counts toward
+    the current weekly competition.
+  */
+
+  db.weekly.points[winner.id] =
+    Number(
+      db.weekly.points[winner.id]||0
+    )+reward;
+
+
+  /*
+    Undefeated:
+    5 consecutive Colosseum wins.
+  */
+
+  if(
+    winner.colosseumStreak>=5
+  ){
+
+    winner.achievements.undefeated=true;
+
+  }
+
+
+  /*
+    Colosseum battle is now completed.
+
+    Only NOW is the summon consumed
+    and the 6-hour cooldown started.
+  */
+
+  db.colosseum.summonActive=false;
+
+  db.colosseum.cooldownUntil =
+    Date.now()+
+    COLOSSEUM_COOLDOWN;
+
+
+  db.colosseum.currentBattle=null;
+
+
+  /*
+    Event becomes completed if this
+    was the daily event.
+  */
+
+  if(
+    db.colosseum.eventDate===
+    getTodayKey()
+  ){
+
+    db.colosseum.eventCompleted=true;
+
+  }
+
+
+  addTransaction({
+
+    type:"colosseum",
+
+    itemId:winner.id,
+
+    itemName:winner.name,
+
+    opponentId:loser.id,
+
+    opponentName:loser.name,
+
+    amount:reward,
+
+    oldPoints:oldWinnerPoints,
+
+    newPoints:winner.points,
+
+    previousWinnerStreak:
+      winner.colosseumStreak-1,
+
+    newWinnerStreak:
+      winner.colosseumStreak,
+
+    previousLoserStreak:
+      oldLoserStreak,
+
+    description:
+      winner.name+
+      " defeated "+
+      loser.name+
+      " in the Colosseum"
+
+  });
+
+
+  saveDatabase();
 
 
   document.getElementById(
     "battleAnimation"
-  ).textContent = "🏆";
+  ).textContent="🏆";
 
 
   document.getElementById(
     "battleResult"
-  ).className = "result";
+  ).className="winner-box";
 
 
   document.getElementById(
     "battleResult"
-  ).innerHTML = `
+  ).innerHTML=`
 
     🏆 ${escapeHTML(winner.name)}
     WINS!
@@ -1295,170 +3314,348 @@ function finishBattle() {
     <br>
 
     🔥 Colosseum streak:
-    ${winner.streak}
+    ${winner.colosseumStreak}
+
+    ${
+      winner.colosseumStreak>=5
+        ? "<br><br>🏅 UNDEFEATED!"
+        : ""
+    }
 
   `;
 
 
   createConfetti();
 
-
   render();
 
 }
 
 
-/* --------------------------------------------------
-   CONFETTI
--------------------------------------------------- */
+/* =========================================================
+   UNDO TRANSACTION
+========================================================= */
 
-function createConfetti() {
+function undoTransaction(
+  transactionId
+){
 
-  const colors = [
-    "#ef4444",
-    "#3b82f6",
-    "#22c55e",
-    "#f59e0b",
-    "#8b5cf6"
-  ];
-
-
-  for(
-    let i = 0;
-    i < 80;
-    i++
-  ) {
-
-    const piece =
-      document.createElement("div");
-
-
-    piece.className =
-      "confetti";
-
-
-    piece.style.left =
-      Math.random() * 100 + "vw";
-
-
-    piece.style.background =
-      colors[
-        Math.floor(
-          Math.random() * colors.length
-        )
-      ];
-
-
-    piece.style.animationDelay =
-      Math.random() * .5 + "s";
-
-
-    document.body.appendChild(piece);
-
-
-    setTimeout(
-      () => piece.remove(),
-      2800
+  const transaction =
+    db.transactions.find(
+      x=>x.id===transactionId
     );
+
+
+  if(
+    !transaction ||
+    transaction.reversed
+  )
+    return;
+
+
+  if(
+    !confirm(
+      "↩️ Reverse this transaction?"
+    )
+  )
+    return;
+
+
+  /*
+    Points transaction
+  */
+
+  if(
+    transaction.type==="points"
+  ){
+
+    const item =
+      db.items.find(
+        x=>x.id===transaction.itemId
+      );
+
+
+    if(item){
+
+      item.points =
+        transaction.oldPoints;
+
+
+      db.weekly.points[item.id] =
+        Math.max(
+          0,
+          Number(
+            db.weekly.points[item.id]||0
+          ) -
+          transaction.weeklyAmount
+        );
+
+    }
+
+  }
+
+
+  /*
+    Colosseum transaction
+  */
+
+  if(
+    transaction.type==="colosseum"
+  ){
+
+    const winner =
+      db.items.find(
+        x=>x.id===transaction.itemId
+      );
+
+
+    const loser =
+      db.items.find(
+        x=>x.id===transaction.opponentId
+      );
+
+
+    if(winner){
+
+      winner.points =
+        transaction.oldPoints;
+
+      winner.colosseumWins =
+        Math.max(
+          0,
+          Number(winner.colosseumWins||0)-1
+        );
+
+      winner.colosseumStreak =
+        transaction.previousWinnerStreak;
+
+      winner.achievements.undefeated =
+        winner.colosseumStreak>=5;
+
+    }
+
+
+    if(loser){
+
+      loser.colosseumLosses =
+        Math.max(
+          0,
+          Number(loser.colosseumLosses||0)-1
+        );
+
+      loser.colosseumStreak =
+        transaction.previousLoserStreak;
+
+    }
+
+
+    db.weekly.points[transaction.itemId] =
+      Math.max(
+        0,
+        Number(
+          db.weekly.points[transaction.itemId]||0
+        )-
+        transaction.amount
+      );
+
+
+    /*
+      Allow the summon to be restored
+      after undoing the battle.
+    */
+
+    db.colosseum.summonActive=true;
+
+    db.colosseum.cooldownUntil=0;
+
+  }
+
+
+  transaction.reversed=true;
+
+
+  db.transactions.unshift({
+
+    id:createId(),
+
+    timestamp:
+      new Date().toISOString(),
+
+    reversed:true,
+
+    type:"undo",
+
+    originalTransactionId:
+      transaction.id,
+
+    description:
+      "↩️ Transaction reversed"
+
+  });
+
+
+  saveDatabase();
+
+  render();
+
+  openHistory();
+
+}
+
+
+/* =========================================================
+   HISTORY SCREEN
+========================================================= */
+
+function openHistory(){
+
+  const card =
+    document.getElementById(
+      "historyCard"
+    );
+
+
+  card.style.display =
+    card.style.display==="none"
+      ? "block"
+      : "none";
+
+
+  renderHistory();
+
+
+  if(
+    card.style.display==="block"
+  ){
+
+    card.scrollIntoView({
+      behavior:"smooth"
+    });
 
   }
 
 }
 
 
-/* --------------------------------------------------
-   WEEKLY COMPETITION
--------------------------------------------------- */
-
-function openWeekly() {
-
-  const sorted =
-    [...items].sort(
-      (a,b) =>
-        b.points - a.points
-    );
-
+function renderHistory(){
 
   const list =
     document.getElementById(
-      "weeklyList"
+      "historyList"
     );
 
 
-  list.innerHTML = `
+  if(!db.transactions.length){
 
-    <p style="
-      text-align:center;
-      color:#64748b;
-      font-weight:700;
-    ">
-      This is the current week's
-      prototype leaderboard.
-    </p>
+    list.innerHTML=
+      "<p>No transactions yet.</p>";
 
-  `;
+    return;
+
+  }
 
 
-  sorted.forEach(
-    (item,index) => {
-
-      const row =
-        document.createElement("div");
+  list.innerHTML="";
 
 
-      row.className =
-        "item";
+  db.transactions
+    .slice(0,50)
+    .forEach(
+      transaction=>{
+
+        const div =
+          document.createElement("div");
+
+        div.className=
+          "history-entry";
 
 
-      const medals = [
-        "🥇",
-        "🥈",
-        "🥉"
-      ];
+        const time =
+          new Date(
+            transaction.timestamp
+          ).toLocaleString();
 
 
-      row.innerHTML = `
+        div.innerHTML=`
 
-        <span class="name">
+          <b>
+            ${escapeHTML(
+              transaction.description||"Transaction"
+            )}
+          </b>
+
+          <br>
+
+          ${time}
 
           ${
-            medals[index] ||
-            "#" + (index + 1)
+            transaction.reversed
+              ? "<br>↩️ Reversed"
+              : ""
           }
 
-          ${escapeHTML(item.name)}
-
-        </span>
-
-        <span class="points">
-
-          ${Math.round(
-            item.points * .18
-          )}
-
-        </span>
-
-      `;
+        `;
 
 
-      list.appendChild(row);
+        if(
+          !transaction.reversed &&
+          (
+            transaction.type==="points" ||
+            transaction.type==="colosseum"
+          )
+        ){
 
-    }
-  );
+          const undo =
+            document.createElement("button");
+
+          undo.className=
+            "undo-btn";
+
+          undo.textContent=
+            "↩️ Undo";
+
+          undo.onclick =
+            ()=>undoTransaction(
+              transaction.id
+            );
 
 
-  document
-    .getElementById("weeklyOverlay")
-    .classList.add("show");
+          div.appendChild(undo);
+
+        }
+
+
+        list.appendChild(div);
+
+      }
+    );
 
 }
 
 
-/* --------------------------------------------------
+/* =========================================================
    ACHIEVEMENTS
--------------------------------------------------- */
+========================================================= */
 
-function openAchievements() {
+function checkPointAchievements(item){
+
+  /*
+    This example keeps the achievement
+    structure ready for more achievements.
+  */
+
+  if(
+    Number(item.points)>=1000
+  ){
+
+    item.achievements.fourDigitKing=true;
+
+  }
+
+}
+
+
+function openAchievements(){
 
   const list =
     document.getElementById(
@@ -1466,52 +3663,46 @@ function openAchievements() {
     );
 
 
-  list.innerHTML = "";
+  list.innerHTML="";
 
 
-  items.forEach(
-    item => {
+  db.items.forEach(
+    item=>{
 
-      const progress =
+      const streak =
         Math.min(
-          item.streak || 0,
-          5
+          5,
+          Number(
+            item.colosseumStreak||0
+          )
         );
 
 
-      const achievement =
+      const div =
         document.createElement("div");
 
-
-      achievement.className =
+      div.className=
         "achievement";
 
 
-      achievement.innerHTML = `
+      div.innerHTML=`
 
-        <b>
-          🏟️ Undefeated
-        </b>
+        <div class="achievement-title">
+          🏟️ Undefeated — ${escapeHTML(item.name)}
+        </div>
 
-        <br>
-
-        ${escapeHTML(item.name)}
+        Win 5 Colosseum battles in a row
 
         <br>
 
-        Win 5 Colosseum battles
-        in a row
+        🔥 ${streak} / 5
 
-        <br>
-
-        🔥 ${progress} / 5
-
-        <div class="bar">
+        <div class="progress">
 
           <div
-            class="fill"
+            class="progress-fill"
             style="
-              width:${progress * 20}%;
+              width:${streak*20}%;
             "
           ></div>
 
@@ -1520,13 +3711,56 @@ function openAchievements() {
       `;
 
 
-      list.appendChild(
-        achievement
-      );
+      list.appendChild(div);
+
+
+      const four =
+        Number(item.points)>=1000
+          ? 1000
+          : Number(item.points);
+
+
+      const king =
+        document.createElement("div");
+
+
+      king.className=
+        "achievement";
+
+
+      king.innerHTML=`
+
+        <div class="achievement-title">
+          👑 Four-Digit King — ${escapeHTML(item.name)}
+        </div>
+
+        Reach 1,000 points
+
+        <br>
+
+        ${four} / 1,000
+
+        <div class="progress">
+
+          <div
+            class="progress-fill"
+            style="
+              width:${Math.min(
+                100,
+                four/10
+              )}%;
+            "
+          ></div>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(king);
 
     }
   );
-
 
   document
     .getElementById(
@@ -1537,50 +3771,455 @@ function openAchievements() {
 }
 
 
-/* --------------------------------------------------
-   AUTO SAVE PROTOTYPE
--------------------------------------------------- */
+/* =========================================================
+   WEEKLY SCREEN
+========================================================= */
 
-function showAutoSave() {
+function openWeekly(){
+
+  performWeeklyRollover();
+
+  saveDatabase();
+
+
+  const start =
+    getWeekStart(
+      new Date()
+    );
+
+
+  const end =
+    getWeekEnd(
+      new Date()
+    );
+
+
+  document.getElementById(
+    "weeklyPeriod"
+  ).textContent =
+    formatDate(start)+
+    " – "+
+    formatDate(end);
+
+
+  const list =
+    document.getElementById(
+      "weeklyList"
+    );
+
+
+  const sorted =
+    db.items
+      .slice()
+      .sort(
+        (a,b)=>
+          Number(
+            db.weekly.points[b.id]||0
+          )-
+          Number(
+            db.weekly.points[a.id]||0
+          )
+      );
+
+
+  list.innerHTML="";
+
+
+  if(!sorted.length){
+
+    list.innerHTML=
+      "<div class='empty'>No Softoys yet.</div>";
+
+  }
+
+
+  sorted.forEach(
+    (item,index)=>{
+
+      const points =
+        Number(
+          db.weekly.points[item.id]||0
+        );
+
+
+      const card =
+        document.createElement("div");
+
+      card.className=
+        "weekly-card";
+
+
+      const medal =
+        index===0
+          ? "🥇"
+          : index===1
+            ? "🥈"
+            : index===2
+              ? "🥉"
+              : "#"+(index+1);
+
+
+      card.innerHTML=`
+
+        <strong>
+          ${medal}
+          ${escapeHTML(item.name)}
+        </strong>
+
+        <span class="weekly-points">
+          ${points}
+        </span>
+
+        <br>
+
+        <span style="
+          color:#64748b;
+          font-size:12px;
+        ">
+          Weekly points
+        </span>
+
+      `;
+
+
+      list.appendChild(card);
+
+    }
+  );
+
+
+  const archive =
+    document.getElementById(
+      "archiveList"
+    );
+
+
+  archive.innerHTML="";
+
+
+  if(!db.weekly.archive.length){
+
+    archive.innerHTML=
+      "<p style='color:#64748b'>No previous winners yet.</p>";
+
+  }
+
+
+  db.weekly.archive
+    .slice(0,10)
+    .forEach(
+      entry=>{
+
+        const row =
+          document.createElement("div");
+
+        row.className=
+          "archive-row";
+
+
+        row.innerHTML=`
+
+          <span>
+            ${escapeHTML(
+              entry.weekKey
+            )}
+          </span>
+
+          <strong>
+            🏆 ${escapeHTML(
+              entry.winnerName
+            )}
+          </strong>
+
+        `;
+
+
+        archive.appendChild(row);
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "weeklyOverlay"
+    )
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function openSettings(){
+
+  document
+    .getElementById(
+      "settingsOverlay"
+    )
+    .classList.add("show");
+
+}
+
+
+function showAutoSaveInfo(){
 
   alert(
-    "💾 AUTO-SAVE\n\n" +
-    "The final version will automatically " +
-    "save Softoys, points, photos, achievements, " +
-    "weekly competitions, Colosseum streaks, " +
-    "transactions and settings."
+    "💾 AUTO-SAVE IS ACTIVE\n\n"+
+    "Your Softoy data is saved locally in the browser whenever changes are made.\n\n"+
+    "This includes points, photos, achievements, weekly data, Colosseum data, and transaction history."
   );
 
 }
 
 
-/* --------------------------------------------------
-   BACKUP PROTOTYPE
--------------------------------------------------- */
+/* =========================================================
+   EXPORT BACKUP
+========================================================= */
 
-function showBackup() {
+function exportBackup(){
 
-  alert(
-    "🔒 BACKUP & RESTORE\n\n" +
-    "The final version will include:\n\n" +
-    "• Export Backup\n" +
-    "• Import Backup\n" +
-    "• Softoys and points\n" +
-    "• Photos\n" +
-    "• Achievements\n" +
-    "• Weekly archive\n" +
-    "• Colosseum streaks\n" +
-    "• Settings"
+  saveDatabase();
+
+
+  const backup = {
+
+    app:"Softoy Ranking",
+
+    version:1,
+
+    exportedAt:
+      new Date().toISOString(),
+
+    database:db
+
+  };
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const link =
+    document.createElement("a");
+
+
+  link.href=url;
+
+  link.download=
+    "Softoy-Ranking-Backup-"+
+    getTodayKey()+
+    ".json";
+
+
+  link.click();
+
+
+  URL.revokeObjectURL(url);
+
+
+  showToast(
+    "🔒 Backup exported"
   );
 
 }
 
 
-/* --------------------------------------------------
-   CLOSE OVERLAYS
--------------------------------------------------- */
+/* =========================================================
+   IMPORT BACKUP
+========================================================= */
 
-function closeOverlay(id) {
+function importBackup(event){
+
+  const file =
+    event.target.files?.[0];
+
+
+  if(!file)
+    return;
+
+
+  const confirmed =
+    confirm(
+      "📥 Import this backup?\n\n"+
+      "Your current data will be replaced by the backup."
+    );
+
+
+  if(!confirmed){
+
+    event.target.value="";
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    ()=>{
+
+      try{
+
+        const parsed =
+          JSON.parse(
+            reader.result
+          );
+
+
+        if(
+          !parsed ||
+          parsed.app!=="Softoy Ranking" ||
+          !parsed.database
+        ){
+
+          throw new Error(
+            "Invalid backup"
+          );
+
+        }
+
+
+        db=parsed.database;
+
+
+        /*
+          Repair missing structures
+          if an older backup is imported.
+        */
+
+        if(!Array.isArray(db.items))
+          db.items=[];
+
+        if(!Array.isArray(db.transactions))
+          db.transactions=[];
+
+        if(!db.weekly)
+          db.weekly={
+            weekKey:"",
+            points:{},
+            archive:[]
+          };
+
+        if(!db.weekly.points)
+          db.weekly.points={};
+
+        if(!Array.isArray(db.weekly.archive))
+          db.weekly.archive=[];
+
+        if(!db.colosseum)
+          db.colosseum={
+            eventDate:null,
+            eventCompleted:false,
+            summonActive:false,
+            summonSource:null,
+            cooldownUntil:0,
+            currentBattle:null
+          };
+
+
+        performWeeklyRollover();
+
+        saveDatabase();
+
+        render();
+
+        showToast(
+          "📥 Backup restored"
+        );
+
+
+      }catch(error){
+
+        alert(
+          "❌ That backup could not be imported."
+        );
+
+        console.error(error);
+
+      }
+
+    };
+
+
+  reader.readAsText(file);
+
+  event.target.value="";
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function confirmReset(){
+
+  const first =
+    prompt(
+      "⚠️ RESET ALL DATA\n\n"+
+      "This permanently removes your Softoys, points, photos, achievements, weekly archive, Colosseum data and history.\n\n"+
+      "Type RESET to continue."
+    );
+
+
+  if(first!=="RESET"){
+
+    alert(
+      "Reset cancelled."
+    );
+
+    return;
+
+  }
+
+
+  const second =
+    confirm(
+      "Are you absolutely sure?\n\n"+
+      "This action cannot be undone unless you have an exported backup."
+    );
+
+
+  if(!second)
+    return;
+
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(id){
 
   document
     .getElementById(id)
@@ -1589,11 +4228,212 @@ function closeOverlay(id) {
 }
 
 
-/* --------------------------------------------------
-   INITIAL DISPLAY
--------------------------------------------------- */
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer=null;
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent=message;
+
+  toast.classList.add("show");
+
+
+  clearTimeout(toastTimer);
+
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      2200
+    );
+
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+function createConfetti(){
+
+  const colors=[
+    "#ef4444",
+    "#3b82f6",
+    "#22c55e",
+    "#f59e0b",
+    "#8b5cf6",
+    "#ec4899"
+  ];
+
+
+  for(
+    let i=0;
+    i<100;
+    i++
+  ){
+
+    const piece =
+      document.createElement(
+        "div"
+      );
+
+
+    piece.className=
+      "confetti";
+
+
+    piece.style.left =
+      Math.random()*100+
+      "vw";
+
+
+    piece.style.background =
+      colors[
+        Math.floor(
+          Math.random()*
+          colors.length
+        )
+      ];
+
+
+    piece.style.animationDelay =
+      Math.random()*.7+
+      "s";
+
+
+    document.body.appendChild(
+      piece
+    );
+
+
+    setTimeout(
+      ()=>piece.remove(),
+      3300
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DATE / TIME
+========================================================= */
+
+function formatDate(date){
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function formatDuration(milliseconds){
+
+  let seconds =
+    Math.max(
+      0,
+      Math.floor(
+        milliseconds/1000
+      )
+    );
+
+
+  const hours =
+    Math.floor(
+      seconds/3600
+    );
+
+
+  seconds%=3600;
+
+
+  const minutes =
+    Math.floor(
+      seconds/60
+    );
+
+
+  seconds%=60;
+
+
+  return (
+    hours+"h "+
+    minutes+"m "+
+    seconds+"s"
+  );
+
+}
+
+
+/* =========================================================
+   PAGE START
+========================================================= */
+
+loadDatabase();
 
 render();
+
+
+/* =========================================================
+   PERIODIC SAVE / ROLLOVER CHECK
+========================================================= */
+
+setInterval(
+  ()=>{
+    performWeeklyRollover();
+    saveDatabase();
+    render();
+  },
+  60000
+);
+
+
+/* =========================================================
+   COLOSSEUM BUTTON BEHAVIOUR
+========================================================= */
+
+document
+  .getElementById(
+    "colosseumButton"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+      if(
+        db.colosseum.summonActive ||
+        isColosseumEventToday()
+      ){
+
+        openColosseum();
+
+      }else{
+
+        callTheColosseum();
+
+      }
+    }
+  );
 
 </script>
 
