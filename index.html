@@ -2,84 +2,4756 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#22c55e">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Softoy Ranking">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./Icon.png">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="theme-color" content="#0b1020">
+
+<link rel="manifest" href="manifest.json">
+
 <title>Softoy Ranking</title>
+
 <style>
-:root{--text:#0f172a;--muted:#64748b;--green:#22c55e;--blue:#3b82f6;--red:#ef4444;--card:rgba(255,255,255,.96)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text)}
-body{padding:14px 10px 40px;background:radial-gradient(circle at 50% 10%,#f0fdf4,#e0f2fe 60%,#f8fafc)}
-button,input{font:inherit}button{touch-action:manipulation}.container{width:100%;max-width:760px;margin:auto}
-header,.panel,.item-card,.event-card,.modal-card{background:var(--card);box-shadow:0 10px 25px -8px rgba(0,0,0,.14);border-radius:20px}
-header{text-align:center;padding:24px 18px;margin-bottom:14px;border:3px solid var(--green)}
-h1{margin:0;font-size:clamp(32px,8vw,42px);font-weight:900;background:linear-gradient(90deg,#0284c7,#16a34a);color:transparent;background-clip:text;-webkit-background-clip:text}header p{margin:5px 0 0;color:#475569;font-weight:700}
-.toolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.tool-btn{border:0;border-radius:13px;padding:12px 8px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.09);font-weight:800;cursor:pointer}
-.panel{padding:16px;margin-bottom:14px}.input-group,.search-row{display:flex;gap:8px}#itemName,#searchInput,#battleSearch{width:100%;padding:13px 14px;border:2px solid #cbd5e1;border-radius:12px;outline:0;background:#fff}#itemName:focus,#searchInput:focus,#battleSearch:focus{border-color:var(--green)}
-.primary{padding:13px 18px;background:var(--green);color:#fff;border:0;border-radius:12px;font-weight:900;cursor:pointer}.leaderboard{display:flex;flex-direction:column;gap:10px}
-.item-card{width:100%;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px;border:2px solid #cbd5e1}.tier-platinum{background:linear-gradient(135deg,#f8fafc,#cbd5e1);border-color:#94a3b8}.tier-gold{background:linear-gradient(135deg,#fef9c3,#fde047);border-color:#ca8a04}.tier-silver{background:linear-gradient(135deg,#e2e8f0,#94a3b8);border-color:#64748b}.tier-bronze{background:linear-gradient(135deg,#ffedd5,#d97706);border-color:#92400e}
-.left{display:flex;align-items:center;gap:9px;min-width:0;flex:1}.rank{font-size:18px;font-weight:900;min-width:30px}.photo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;background:#e2e8f0;border:2px dashed #94a3b8;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}.photo img{width:100%;height:100%;object-fit:cover}.photo-placeholder{font-size:9px;text-align:center;color:#64748b;font-weight:800}.name-area{min-width:0}.item-name{font-size:17px;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}.edit-btn{border:0;background:transparent;cursor:pointer;padding:2px;font-size:14px}.right{display:flex;align-items:center;gap:7px}.points{font-size:23px;font-weight:900;min-width:35px;text-align:right}.actions{display:flex;gap:4px}.action-btn{width:35px;height:35px;border:0;border-radius:9px;color:#fff;font-size:20px;font-weight:900;cursor:pointer}.plus{background:#3b82f6}.minus{background:#ef4444}.delete{background:#e5e7eb;color:#64748b;font-size:15px}.empty{padding:28px;text-align:center;color:#475569;font-weight:700;background:rgba(255,255,255,.75);border-radius:16px}
-.section-title{margin:0 0 10px;font-size:20px;font-weight:900}.small{font-size:13px;color:var(--muted);font-weight:650}.hidden{display:none!important}
-.event-card{padding:0;overflow:hidden;margin-bottom:14px}.event-hero{min-height:155px;padding:22px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(rgba(15,23,42,.2),rgba(15,23,42,.88)),url("https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80") center/cover}.event-hero h2{margin:0;font-size:29px}.event-hero p{margin:4px 0 0;font-weight:750}.event-body{padding:16px}.battle-grid{display:grid;grid-template-columns:1fr 40px 1fr;gap:8px;align-items:center}.player-box{min-height:120px;border:2px dashed #94a3b8;border-radius:16px;padding:10px;text-align:center;background:#f8fafc}.player-label{font-size:13px;font-weight:900;color:#64748b}.player-name{font-size:19px;font-weight:900;margin-top:8px;min-height:26px;overflow:hidden;text-overflow:ellipsis}.player-remove{margin-top:8px;border:0;border-radius:8px;background:#fee2e2;color:#b91c1c;font-weight:900;padding:5px 9px}.vs{font-weight:1000;font-size:18px;text-align:center}.search-results{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow:auto;margin:8px 0}.search-chip{border:1px solid #cbd5e1;background:#fff;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer}.battle-btn{width:100%;border:0;border-radius:13px;padding:14px;margin-top:10px;background:#111827;color:#fff;font-weight:950;font-size:17px;cursor:pointer}.battle-btn:disabled{opacity:.45}.cooldown{margin-top:8px;text-align:center;color:#b45309;font-weight:800}.winner{margin-top:15px;padding:18px;text-align:center;border-radius:16px;background:linear-gradient(135deg,#fef3c7,#dcfce7);border:2px solid #f59e0b}.winner-name{font-size:27px;font-weight:1000}
-.weekly-row{display:flex;justify-content:space-between;gap:10px;padding:10px;border-radius:12px;background:#f8fafc;margin-top:7px;font-weight:800}.archive-row{padding:9px 0;border-bottom:1px solid #e2e8f0;font-weight:750}.history-row{padding:9px;border-radius:10px;background:#f8fafc;margin-top:6px;font-size:13px}.achievement{display:flex;gap:12px;padding:12px;border:2px solid #e2e8f0;border-radius:14px;margin-top:8px;background:#fff}.achievement-icon{font-size:28px}.achievement h3{margin:0;font-size:16px}.achievement p{margin:2px 0 0;font-size:13px;color:#64748b;font-weight:650}.progress{height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:7px}.progress>span{display:block;height:100%;background:#22c55e}
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.58);display:flex;align-items:center;justify-content:center;padding:15px;z-index:100}.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;padding:20px}.modal-card h2{margin-top:0}.modal-actions{display:grid;gap:9px;margin-top:14px}.modal-actions button{border:0;border-radius:12px;padding:13px;font-weight:900;cursor:pointer}.danger{background:#fee2e2;color:#991b1b}.neutral{background:#e2e8f0}.success{background:#dcfce7;color:#166534}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 16px;border-radius:12px;font-weight:800;z-index:200}.confetti{position:fixed;inset:0;pointer-events:none;z-index:150;overflow:hidden}.confetti span{position:absolute;top:-20px;width:9px;height:16px;animation:fall 1.8s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
-@media(max-width:560px){body{padding:9px 7px 30px}.input-group{flex-direction:column}.primary{width:100%}.item-card{padding:9px}.rank{min-width:24px;font-size:15px}.photo{width:48px;height:48px;flex-basis:48px}.item-name{font-size:15px}.points{font-size:20px;min-width:28px}.action-btn{width:31px;height:31px}.battle-grid{grid-template-columns:1fr 30px 1fr}.player-name{font-size:16px}}
+
+/* =========================================================
+   LOCAL MONTSERRAT
+   Put Montserrat-VariableFont_wght.woff2 beside this file.
+   ========================================================= */
+
+@font-face{
+  font-family:"Montserrat";
+  src:url("Montserrat-VariableFont_wght.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root{
+  --bg:#08111f;
+  --panel:rgba(255,255,255,.94);
+  --panel2:rgba(255,255,255,.86);
+  --text:#101828;
+  --muted:#667085;
+
+  --blue:#2563eb;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#f97316;
+  --purple:#7c3aed;
+  --gold:#d4a017;
+
+  --shadow:0 12px 35px rgba(0,0,0,.16);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  min-height:100%;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    linear-gradient(
+      rgba(8,17,31,.12),
+      rgba(8,17,31,.12)
+    ),
+    url("background.png");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  padding:
+    max(12px,env(safe-area-inset-top))
+    12px
+    max(20px,env(safe-area-inset-bottom));
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
+}
+
+.hidden{
+  display:none !important;
+}
+
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header{
+  background:var(--panel);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  border-radius:26px;
+  padding:22px 18px;
+
+  box-shadow:var(--shadow);
+
+  text-align:center;
+  margin-bottom:12px;
+}
+
+h1{
+  margin:0;
+
+  font-family:"Montserrat",sans-serif;
+  font-weight:900;
+
+  font-size:
+    clamp(32px,8vw,48px);
+
+  letter-spacing:-1.5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #16a34a,
+      #7c3aed
+    );
+
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+}
+
+.header-sub{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-weight:750;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav{
+  display:grid;
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:7px;
+
+  background:var(--panel);
+  padding:7px;
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+  margin-bottom:12px;
+}
+
+.nav button{
+  border:0;
+  border-radius:13px;
+
+  padding:11px 7px;
+
+  background:transparent;
+  color:#475467;
+
+  font-weight:850;
+}
+
+.nav button.active{
+  background:#101828;
+  color:white;
+}
+
+
+/* =========================================================
+   MAIN CARDS
+   ========================================================= */
+
+.card{
+  background:var(--panel);
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  border-radius:20px;
+
+  box-shadow:var(--shadow);
+
+  padding:15px;
+
+  margin-bottom:12px;
+}
+
+.card-title{
+  margin:0 0 4px;
+
+  font-family:"Montserrat",sans-serif;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+.card-sub{
+  margin:0 0 13px;
+
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-row{
+  display:flex;
+  gap:8px;
+}
+
+.search{
+  flex:1;
+  min-width:0;
+
+  padding:13px 15px;
+
+  border:
+    2px solid #d0d5dd;
+
+  border-radius:14px;
+
+  outline:none;
+  background:white;
+}
+
+.search:focus{
+  border-color:var(--blue);
+}
+
+.button{
+  border:0;
+  border-radius:13px;
+
+  padding:12px 15px;
+
+  font-weight:850;
+}
+
+.blue{
+  background:var(--blue);
+  color:white;
+}
+
+.green{
+  background:var(--green);
+  color:white;
+}
+
+.red{
+  background:var(--red);
+  color:white;
+}
+
+.gray{
+  background:#e4e7ec;
+  color:#344054;
+}
+
+.purple{
+  background:var(--purple);
+  color:white;
+}
+
+.orange{
+  background:var(--orange);
+  color:white;
+}
+
+
+/* =========================================================
+   ADD
+   ========================================================= */
+
+.add-row{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.add-input{
+  flex:1;
+  min-width:0;
+
+  padding:13px 15px;
+
+  border:
+    2px solid #d0d5dd;
+
+  border-radius:14px;
+  outline:none;
+}
+
+
+/* =========================================================
+   LEADERBOARD
+   ========================================================= */
+
+.leaderboard{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:8px;
+
+  padding:10px;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.95);
+
+  border:2px solid transparent;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.08);
+
+  transition:
+    transform .15s ease;
+}
+
+.item:active{
+  transform:scale(.99);
+}
+
+.item-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+  flex:1;
+}
+
+.rank-number{
+  width:32px;
+  text-align:center;
+  font-weight:950;
+}
+
+.item-photo{
+  width:53px;
+  height:53px;
+
+  flex:0 0 53px;
+
+  border-radius:13px;
+
+  background:#eef2f6;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  border:2px dashed #98a2b3;
+}
+
+.item-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.item-info{
+  min-width:0;
+  cursor:pointer;
+}
+
+.item-name{
+  font-size:16px;
+  font-weight:900;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.item-detail{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.item-right{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.points{
+  min-width:42px;
+  text-align:right;
+
+  font-size:22px;
+  font-weight:950;
+}
+
+.action-group{
+  display:flex;
+  gap:3px;
+}
+
+.small-button{
+  width:32px;
+  height:32px;
+
+  border:0;
+  border-radius:9px;
+
+  color:white;
+  font-weight:950;
+}
+
+.plus{
+  background:#2563eb;
+}
+
+.minus{
+  background:#ef4444;
+}
+
+.profile-button{
+  background:#667085;
+}
+
+.delete-button{
+  background:#d0d5dd;
+  color:#344054;
+}
+
+
+/* =========================================================
+   RANK DECORATIONS
+   ========================================================= */
+
+.platinum{
+  border-color:#98a2b3;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.99),
+      rgba(226,232,240,.96),
+      rgba(255,255,255,.99)
+    );
+
+  box-shadow:
+    0 0 16px rgba(255,255,255,.9),
+    0 7px 24px rgba(71,85,105,.2);
+}
+
+.gold{
+  border-color:#d4a017;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffbea,
+      #f8d66d,
+      #fff8d6
+    );
+
+  box-shadow:
+    0 0 14px rgba(212,160,23,.35);
+}
+
+.silver{
+  border-color:#98a2b3;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #e2e8f0,
+      #f8fafc
+    );
+}
+
+.bronze{
+  border-color:#a85b22;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #eab58b,
+      #fff7ed
+    );
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-hero{
+  text-align:center;
+}
+
+.profile-big-photo{
+  width:125px;
+  height:125px;
+
+  margin:4px auto 10px;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  background:#eef2f6;
+
+  border:3px dashed #98a2b3;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.profile-big-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile-name{
+  font-family:"Montserrat",sans-serif;
+  font-weight:900;
+  font-size:28px;
+}
+
+.profile-rank{
+  color:var(--muted);
+  font-weight:750;
+  margin-top:3px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+  margin-top:15px;
+}
+
+.stat{
+  background:#f2f4f7;
+  border-radius:15px;
+  padding:12px;
+  text-align:center;
+}
+
+.stat-number{
+  display:block;
+  font-size:21px;
+  font-weight:950;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:750;
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+.achievement-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.achievement{
+  border-radius:16px;
+  padding:13px;
+
+  background:#f8fafc;
+
+  border:2px solid #e4e7ec;
+}
+
+.achievement.unlocked{
+  border-color:#d4a017;
+  background:#fffbea;
+}
+
+.achievement-title{
+  font-weight:900;
+}
+
+.achievement-description{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:650;
+}
+
+.progress-bar{
+  height:9px;
+  background:#e4e7ec;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.progress-fill{
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #7c3aed
+    );
+}
+
+
+/* =========================================================
+   WEEKLY
+   ========================================================= */
+
+.weekly-box{
+  text-align:center;
+}
+
+.weekly-winner{
+  padding:16px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffbea,
+      #ffffff
+    );
+
+  border:2px solid #e6c44f;
+
+  font-weight:900;
+}
+
+.archive-row{
+  padding:11px;
+
+  border-bottom:
+    1px solid #eaecf0;
+}
+
+.archive-row:last-child{
+  border-bottom:0;
+}
+
+
+/* =========================================================
+   COLOSSEUM
+   ========================================================= */
+
+.colosseum-card{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(20,20,30,.97),
+      rgba(64,35,20,.96)
+    );
+
+  color:white;
+}
+
+.colosseum-card .card-sub{
+  color:#d0d5dd;
+}
+
+.colosseum-button{
+  width:100%;
+
+  min-height:125px;
+
+  border:0;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  color:white;
+
+  font-family:"Montserrat",sans-serif;
+  font-weight:900;
+
+  font-size:20px;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,.35),
+      rgba(0,0,0,.55)
+    ),
+    url("background.png");
+
+  background-size:cover;
+  background-position:center;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+  transition:
+    transform .25s ease;
+}
+
+.colosseum-button:active{
+  transform:scale(.98);
+}
+
+.cooldown{
+  text-align:center;
+  margin-top:10px;
+  font-size:12px;
+  color:#d0d5dd;
+  font-weight:750;
+}
+
+.battle-picker{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.player-box{
+  min-height:130px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fafc,
+      #e2e8f0
+    );
+
+  color:#101828;
+
+  padding:12px;
+
+  text-align:center;
+
+  position:relative;
+
+  border:3px solid #cbd5e1;
+}
+
+.player-label{
+  font-family:"Montserrat",sans-serif;
+  font-size:13px;
+  font-weight:900;
+}
+
+.player-name{
+  margin-top:12px;
+  font-weight:950;
+  font-size:17px;
+}
+
+.player-remove{
+  position:absolute;
+  right:7px;
+  top:7px;
+
+  width:27px;
+  height:27px;
+
+  border:0;
+  border-radius:50%;
+
+  background:#ef4444;
+  color:white;
+
+  font-weight:950;
+}
+
+.ready-button{
+  width:100%;
+  margin-top:12px;
+
+  border:0;
+  border-radius:15px;
+
+  padding:15px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #dc2626,
+      #f97316
+    );
+
+  color:white;
+
+  font-family:"Montserrat",sans-serif;
+  font-weight:900;
+
+  font-size:17px;
+}
+
+.battle-search{
+  margin-top:12px;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings-grid{
+  display:grid;
+  gap:9px;
+}
+
+.settings-button{
+  width:100%;
+  text-align:left;
+
+  border:0;
+  border-radius:15px;
+
+  padding:15px;
+
+  background:#f2f4f7;
+
+  color:#101828;
+
+  font-weight:850;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:15px;
+
+  background:
+    rgba(3,7,18,.58);
+
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(650px,100%);
+  max-height:92vh;
+  overflow:auto;
+
+  background:
+    rgba(255,255,255,.98);
+
+  border-radius:25px;
+
+  padding:18px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.3);
+
+  animation:
+    modalIn .22s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:translateY(18px) scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.modal-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:22px;
+  font-weight:900;
+}
+
+.close{
+  width:36px;
+  height:36px;
+
+  border:0;
+  border-radius:50%;
+
+  background:#e4e7ec;
+
+  font-size:22px;
+}
+
+
+/* =========================================================
+   BATTLE ANIMATION
+   ========================================================= */
+
+.battle-screen{
+  text-align:center;
+}
+
+.battle-versus{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin:20px 0;
+}
+
+.battle-player{
+  padding:18px 8px;
+
+  border-radius:18px;
+
+  background:#f2f4f7;
+
+  font-weight:950;
+
+  transition:
+    transform .5s ease,
+    opacity .5s ease;
+}
+
+.vs{
+  font-family:"Montserrat",sans-serif;
+  font-weight:950;
+  color:#dc2626;
+}
+
+.battle-player.winner{
+  transform:scale(1.08);
+  background:#fff3b0;
+  box-shadow:
+    0 0 30px rgba(250,204,21,.7);
+}
+
+.battle-player.loser{
+  opacity:.45;
+  transform:scale(.94);
+}
+
+.result{
+  font-family:"Montserrat",sans-serif;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  margin-top:15px;
+}
+
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+
+.confetti-piece{
+  position:fixed;
+
+  top:-20px;
+
+  width:9px;
+  height:16px;
+
+  z-index:999;
+
+  pointer-events:none;
+
+  animation:
+    confettiFall 2.4s linear forwards;
+}
+
+@keyframes confettiFall{
+
+  0%{
+    transform:
+      translateY(-20px)
+      rotate(0deg);
+  }
+
+  100%{
+    transform:
+      translateY(105vh)
+      rotate(720deg);
+  }
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+  position:fixed;
+
+  left:50%;
+  bottom:25px;
+
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
+  opacity:0;
+
+  background:#101828;
+  color:white;
+
+  padding:12px 17px;
+
+  border-radius:14px;
+
+  font-weight:800;
+  font-size:13px;
+
+  z-index:1000;
+
+  pointer-events:none;
+
+  transition:
+    .25s ease;
+}
+
+.toast.show{
+  opacity:1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:650px){
+
+  .nav{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .search-row{
+    flex-wrap:wrap;
+  }
+
+  .search{
+    flex-basis:100%;
+  }
+
+  .add-row{
+    flex-direction:column;
+  }
+
+  .battle-picker{
+    grid-template-columns:1fr;
+  }
+
+  .item{
+    padding:8px;
+  }
+
+  .rank-number{
+    width:26px;
+  }
+
+  .item-photo{
+    width:47px;
+    height:47px;
+    flex-basis:47px;
+  }
+
+  .points{
+    font-size:19px;
+    min-width:32px;
+  }
+
+  .small-button{
+    width:29px;
+    height:29px;
+  }
+
+  .stat-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
+
+
 <body>
-<div class="container">
-<header><h1>Softoy Ranking</h1><p id="itemCount">0 / 150 items tracked</p></header>
-<div class="toolbar"><button class="tool-btn" id="weeklyBtn">🏆 Weekly</button><button class="tool-btn" id="colosseumBtn">🏟️ Colosseum</button><button class="tool-btn" id="settingsBtn">⚙️ Settings</button></div>
-<section id="weeklyPanel" class="panel hidden"><h2 class="section-title">🏆 Current Weekly Competition</h2><div id="weekDates" class="small"></div><div id="weeklyList"></div><h3>📚 Weekly Archive</h3><div id="archiveList"></div><h3>🏅 Achievement Progress</h3><div id="achievementList"></div></section>
-<section id="colosseumPanel" class="event-card hidden"><div class="event-hero"><h2>The Colosseum Is Back!</h2><p>Choose two Softoys. The winner earns 2–8 points.</p></div><div class="event-body"><div class="small" id="eventStatus"></div><div class="search-row"><input id="battleSearch" type="search" placeholder="Search Softoys..."></div><div id="battleSearchResults" class="search-results"></div><div class="battle-grid"><div class="player-box"><div class="player-label">P1</div><div id="p1Name" class="player-name">—</div><button id="p1Remove" class="player-remove hidden">✕ Remove</button></div><div class="vs">VS</div><div class="player-box"><div class="player-label">P2</div><div id="p2Name" class="player-name">—</div><button id="p2Remove" class="player-remove hidden">✕ Remove</button></div></div><button id="readyBtn" class="battle-btn" disabled>Ready?</button><button id="callBtn" class="battle-btn">📞 Call the Colosseum</button><div id="cooldownText" class="cooldown hidden"></div><div id="battleResult" class="winner hidden"></div></div></section>
-<section class="panel"><form id="itemForm"><div class="input-group"><input id="itemName" type="text" maxlength="30" placeholder="Enter new Softoy name..." autocomplete="off"><button class="primary" type="submit">Add Softoy</button></div></form></section>
-<div id="leaderboard" class="leaderboard"></div>
+
+<div class="app">
+
+<header>
+
+<h1>Softoy Ranking</h1>
+
+<p class="header-sub">
+Rank your Softoys • Track achievements • Enter the Colosseum
+</p>
+
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+
+<nav class="nav">
+
+<button class="nav-btn active" data-page="ranking">
+  🏆 Ranking
+</button>
+
+<button class="nav-btn" data-page="weekly">
+  📅 Weekly
+</button>
+
+<button class="nav-btn" data-page="colosseum">
+  🏟️ Colosseum
+</button>
+
+<button class="nav-btn" data-page="achievements">
+  🎖️ Achievements
+</button>
+
+</nav>
+
+
+<!-- =====================================================
+     RANKING PAGE
+     ===================================================== -->
+
+<section id="page-ranking" class="page">
+
+<div class="card">
+
+<h2 class="card-title">
+Softoys
+</h2>
+
+<p class="card-sub">
+Search a Softoy to add points, deduct points or edit its profile.
+</p>
+
+
+<div class="search-row">
+
+<input
+id="mainSearch"
+class="search"
+type="search"
+placeholder="🔎 Search Softoys by name..."
+autocomplete="off"
+>
+
+<button
+id="clearSearch"
+class="button gray"
+>
+Clear
+</button>
+
 </div>
-<input id="photoInput" type="file" accept="image/*" hidden>
-<div id="settingsModal" class="modal hidden"><div class="modal-card"><h2>⚙️ Settings & Data</h2><p class="small">Automatic saving is always on. Data is stored locally on this device/browser. Export a backup regularly.</p><div class="modal-actions"><button id="exportBtn" class="success">⬇️ Export Backup</button><button id="importBtn" class="neutral">⬆️ Import Backup</button><button id="historyBtn" class="neutral">↩️ Transaction History</button><button id="closeSettings" class="neutral">Close</button><button id="resetBtn" class="danger">⚠️ Reset All Data</button></div><input id="backupInput" type="file" accept="application/json" hidden><div id="historyPanel" class="hidden" style="margin-top:14px"></div></div></div>
-<div id="confetti" class="confetti"></div><div id="toast" class="toast hidden"></div>
+
+
+<div class="add-row">
+
+<input
+id="newName"
+class="add-input"
+maxlength="30"
+placeholder="Enter a new Softoy..."
+autocomplete="off"
+>
+
+<button
+id="addSoftoy"
+class="button green"
+>
++ Add Softoy
+</button>
+
+</div>
+
+</div>
+
+
+<div
+id="leaderboard"
+class="leaderboard"
+></div>
+
+
+<div class="card">
+
+<button
+id="manualSave"
+class="button green"
+style="width:100%"
+>
+💾 Save Progress
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     WEEKLY PAGE
+     ===================================================== -->
+
+<section
+id="page-weekly"
+class="page hidden"
+>
+
+<div class="card">
+
+<h2 class="card-title">
+📅 Current Weekly Competition
+</h2>
+
+<p class="card-sub">
+The weekly competition automatically rolls over every Monday at 00:00.
+</p>
+
+<div
+id="weeklyCurrent"
+class="weekly-box"
+></div>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="card-title">
+📚 Weekly Archive
+</h2>
+
+<div id="weeklyArchive"></div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     COLOSSEUM PAGE
+     ===================================================== -->
+
+<section
+id="page-colosseum"
+class="page hidden"
+>
+
+<div class="card colosseum-card">
+
+<h2 class="card-title">
+🏟️ The Colosseum
+</h2>
+
+<p class="card-sub">
+Battle two Softoys in a 50/50 match. The winner receives 2–8 points.
+</p>
+
+
+<button
+id="eventButton"
+class="colosseum-button"
+>
+🏟️ The Colosseum Is Back!
+</button>
+
+
+<div
+id="cooldownText"
+class="cooldown"
+>
+</div>
+
+</div>
+
+
+<div
+id="battlePanel"
+class="card hidden"
+>
+
+<h2 class="card-title">
+🏟️ The Colosseum Battle
+</h2>
+
+<p class="card-sub">
+Choose P1 and P2. Search for a Softoy and tap its name.
+</p>
+
+
+<div class="battle-picker">
+
+<div class="player-box">
+
+<div class="player-label">
+P1
+</div>
+
+<div
+id="p1Name"
+class="player-name"
+>
+Not selected
+</div>
+
+<button
+id="p1Remove"
+class="player-remove hidden"
+>
+×
+</button>
+
+</div>
+
+
+<div class="player-box">
+
+<div class="player-label">
+P2
+</div>
+
+<div
+id="p2Name"
+class="player-name"
+>
+Not selected
+</div>
+
+<button
+id="p2Remove"
+class="player-remove hidden"
+>
+×
+</button>
+
+</div>
+
+</div>
+
+
+<div class="battle-search">
+
+<input
+id="battleSearch"
+class="search"
+type="search"
+placeholder="🔎 Search Softoy for P1 or P2..."
+autocomplete="off"
+>
+
+</div>
+
+
+<div
+id="battleCandidates"
+class="leaderboard"
+style="margin-top:9px"
+></div>
+
+
+<button
+id="readyButton"
+class="ready-button"
+>
+Ready?
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ACHIEVEMENTS
+     ===================================================== -->
+
+<section
+id="page-achievements"
+class="page hidden"
+>
+
+<div class="card">
+
+<h2 class="card-title">
+🎖️ Achievement Gallery
+</h2>
+
+<p class="card-sub">
+Work toward achievements and track your progress.
+</p>
+
+<div
+id="achievementList"
+class="achievement-list"
+></div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SETTINGS
+     ===================================================== -->
+
+<div class="card">
+
+<h2 class="card-title">
+⚙️ Settings & Data
+</h2>
+
+<div class="settings-grid">
+
+<button
+id="exportBackup"
+class="settings-button"
+>
+📦 Export Backup
+</button>
+
+<button
+id="importBackup"
+class="settings-button"
+>
+📥 Import Backup
+</button>
+
+<button
+id="showHistory"
+class="settings-button"
+>
+↩️ Transaction History
+</button>
+
+<button
+id="resetData"
+class="settings-button"
+>
+⚠️ Reset All Data
+</button>
+
+</div>
+
+<input
+id="backupFile"
+type="file"
+accept=".json,application/json"
+hidden
+>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PROFILE MODAL
+     ===================================================== -->
+
+<div
+id="profileModal"
+class="modal"
+>
+
+<div class="modal-card">
+
+<div class="modal-head">
+
+<div class="modal-title">
+Softoy Profile
+</div>
+
+<button
+class="close"
+data-close="profileModal"
+>
+×
+</button>
+
+</div>
+
+
+<div class="profile-hero">
+
+<div
+id="profilePhoto"
+class="profile-big-photo"
+>
+</div>
+
+<div
+id="profileName"
+class="profile-name"
+>
+</div>
+
+<div
+id="profileRank"
+class="profile-rank"
+>
+</div>
+
+</div>
+
+
+<div class="stat-grid">
+
+<div class="stat">
+<span
+id="profilePoints"
+class="stat-number"
+>0</span>
+<span class="stat-label">Points</span>
+</div>
+
+<div class="stat">
+<span
+id="profileWins"
+class="stat-number"
+>0</span>
+<span class="stat-label">Colosseum Wins</span>
+</div>
+
+<div class="stat">
+<span
+id="profileStreak"
+class="stat-number"
+>0</span>
+<span class="stat-label">Win Streak</span>
+</div>
+
+</div>
+
+
+<div
+style="display:flex;gap:8px;margin-top:14px"
+>
+
+<button
+id="editProfile"
+class="button blue"
+style="flex:1"
+>
+✏️ Edit Name
+</button>
+
+<button
+id="changeProfilePhoto"
+class="button green"
+style="flex:1"
+>
+📷 Change Photo
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BATTLE RESULT MODAL
+     ===================================================== -->
+
+<div
+id="battleResultModal"
+class="modal"
+>
+
+<div class="modal-card battle-screen">
+
+<div class="modal-head">
+
+<div class="modal-title">
+🏟️ Colosseum Battle
+</div>
+
+<button
+class="close"
+data-close="battleResultModal"
+>
+×
+</button>
+
+</div>
+
+
+<div class="battle-versus">
+
+<div
+id="battleP1"
+class="battle-player"
+>
+P1
+</div>
+
+<div class="vs">
+VS
+</div>
+
+<div
+id="battleP2"
+class="battle-player"
+>
+P2
+</div>
+
+</div>
+
+
+<div
+id="battleResult"
+class="result"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HISTORY MODAL
+     ===================================================== -->
+
+<div
+id="historyModal"
+class="modal"
+>
+
+<div class="modal-card">
+
+<div class="modal-head">
+
+<div class="modal-title">
+↩️ Transaction History
+</div>
+
+<button
+class="close"
+data-close="historyModal"
+>
+×
+</button>
+
+</div>
+
+<div
+id="historyList"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+     ===================================================== -->
+
+<div
+id="toast"
+class="toast"
+>
+Saved
+</div>
+
+
 <script>
-(function(){"use strict";
-const KEY="softoy_ranking_final_v1",MAX=150,COOLDOWN=6*60*60*1000;
-let data={items:[],history:[],weekly:{weekKey:"",snapshot:[],archive:[]},colosseum:{p1:null,p2:null,available:false,source:null,cooldownUntil:0,lastEventDay:"",wins:{},eventDays:{year:0,days:[]}}};let photoItemId=null,battleRunning=false;
-const $=id=>document.getElementById(id), form=$("itemForm"),input=$("itemName"),leaderboard=$("leaderboard"),photoInput=$("photoInput");
-function uid(){return"softoy_"+Date.now()+"_"+Math.floor(Math.random()*1e6)}function now(){return Date.now()}function dayKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function weekKey(d=new Date()){let x=new Date(d),day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);x.setHours(0,0,0,0);return dayKey(x)}function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
-function toast(m){let t=$("toast");t.textContent=m;t.classList.remove("hidden");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.add("hidden"),2400)}
-function normalize(){if(!Array.isArray(data.items))data.items=[];if(!Array.isArray(data.history))data.history=[];if(!data.weekly)data.weekly={};if(!Array.isArray(data.weekly.snapshot))data.weekly.snapshot=[];if(!Array.isArray(data.weekly.archive))data.weekly.archive=[];if(!data.colosseum||Array.isArray(data.colosseum))data.colosseum={};data.colosseum.wins=data.colosseum.wins||{};data.colosseum.eventDays=data.colosseum.eventDays||{year:0,days:[]};data.items.forEach(i=>{i.points=Number(i.points)||0;i.colWins=Number(i.colWins)||0;i.colStreak=Number(i.colStreak)||0;i.bestStreak=Number(i.bestStreak)||0;i.photo=i.photo||null})}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast("Storage is full. Export a backup and remove large photos if needed.")}}
-function load(){try{let r=localStorage.getItem(KEY);if(r)data=Object.assign(data,JSON.parse(r))}catch(e){}normalize();rollover();maybeEvent();save()}
-function log(type,description,details=""){data.history.unshift({id:uid(),time:now(),type,description,details});data.history=data.history.slice(0,300)}
-function sorted(){return data.items.slice().sort((a,b)=>b.points-a.points||a.name.localeCompare(b.name))}function tier(r){return r<=3?"tier-platinum":r<=10?"tier-gold":r<=25?"tier-silver":r<=50?"tier-bronze":""}
-function render(){let a=sorted();$("itemCount").textContent=data.items.length+" / "+MAX+" items tracked";leaderboard.replaceChildren();if(!a.length){let e=document.createElement("div");e.className="empty";e.textContent="Your leaderboard is empty. Add your first Softoy above!";leaderboard.appendChild(e);return}a.forEach((item,i)=>{let card=document.createElement("div");card.className="item-card "+tier(i+1);let left=document.createElement("div");left.className="left";let r=document.createElement("span");r.className="rank";r.textContent="#"+(i+1);let ph=document.createElement("div");ph.className="photo";if(item.photo){let im=document.createElement("img");im.src=item.photo;ph.appendChild(im)}else{let s=document.createElement("span");s.className="photo-placeholder";s.innerHTML="Add<br>Photo";ph.appendChild(s)}ph.onclick=()=>{photoItemId=item.id;photoInput.click()};let na=document.createElement("div");na.className="name-area";let n=document.createElement("span");n.className="item-name";n.textContent=item.name;let ed=document.createElement("button");ed.className="edit-btn";ed.textContent="✏️";ed.onclick=()=>{let nn=prompt("Enter a new name:",item.name);if(nn&&nn.trim()){let old=item.name;item.name=nn.trim().slice(0,30);log("rename","Renamed "+old+" to "+item.name);save();render();renderWeekly()}};na.append(n,ed);left.append(r,ph,na);let right=document.createElement("div");right.className="right";let pts=document.createElement("span");pts.className="points";pts.textContent=item.points;let acts=document.createElement("div");acts.className="actions";function ab(txt,cls,fn){let b=document.createElement("button");b.className="action-btn "+cls;b.textContent=txt;b.onclick=fn;return b}acts.append(ab("+","plus",()=>change(item,1)),ab("−","minus",()=>change(item,-1)),ab("🗑","delete",()=>del(item)));right.append(pts,acts);card.append(left,right);leaderboard.appendChild(card)})}
-function change(item,d){let old=item.points;item.points=Math.max(0,item.points+d);log("points",(d>0?"+":"")+d+" "+item.name,"From "+old+" to "+item.points);save();render();renderWeekly()}
-function del(item){if(!confirm("⚠️ Delete "+item.name+"?\n\nThis will remove the Softoy and its data, including its photo and Colosseum record."))return;data.items=data.items.filter(x=>x.id!==item.id);if(data.colosseum.p1===item.id)data.colosseum.p1=null;if(data.colosseum.p2===item.id)data.colosseum.p2=null;log("delete","Deleted "+item.name);save();render();renderBattle()}
-form.onsubmit=e=>{e.preventDefault();let n=input.value.trim();if(!n)return;if(data.items.length>=MAX)return alert("You can track up to 150 Softoys.");if(data.items.some(x=>x.name.toLowerCase()===n.toLowerCase()))return alert("That Softoy already exists.");data.items.push({id:uid(),name:n.slice(0,30),points:0,photo:null,colWins:0,colStreak:0,bestStreak:0});log("add","Added "+n);save();render();renderWeekly();input.value="";input.focus()};
-photoInput.onchange=()=>{let f=photoInput.files&&photoInput.files[0];if(!f||!photoItemId)return;if(f.size>5e6){alert("Please choose an image under 5 MB.");return}let rd=new FileReader();rd.onload=()=>{let i=data.items.find(x=>x.id===photoItemId);if(i){i.photo=rd.result;log("photo","Photo changed for "+i.name);save();render()}photoItemId=null;photoInput.value=""};rd.readAsDataURL(f)};
-function rollover(){let cur=weekKey(),old=data.weekly.weekKey;if(!old){data.weekly.weekKey=cur;data.weekly.snapshot=sorted().map(x=>({id:x.id,name:x.name,points:x.points}));return}if(old===cur)return;let snap=data.weekly.snapshot||[];if(snap.length){let w=snap.slice().sort((a,b)=>b.points-a.points)[0];if(w){data.weekly.archive.unshift({week:old,winner:w.name,points:w.points,finishedAt:now()});log("weekly","Weekly winner: "+w.name,w.points+" points")}}data.weekly.weekKey=cur;data.weekly.snapshot=sorted().map(x=>({id:x.id,name:x.name,points:x.points}))}
-function renderWeekly(){let s=new Date(),d=(s.getDay()+6)%7;s.setDate(s.getDate()-d);let e=new Date(s);e.setDate(e.getDate()+6);$("weekDates").textContent="Week: "+s.toLocaleDateString()+" – "+e.toLocaleDateString();let l=$("weeklyList");l.replaceChildren();sorted().slice(0,10).forEach((x,i)=>{let r=document.createElement("div");r.className="weekly-row";r.innerHTML="<span>#"+(i+1)+" "+esc(x.name)+"</span><strong>"+x.points+" pts</strong>";l.appendChild(r)});let ar=$("archiveList");ar.replaceChildren();(data.weekly.archive||[]).slice(0,12).forEach(a=>{let r=document.createElement("div");r.className="archive-row";r.textContent="🏆 "+a.week+" — "+a.winner+" ("+a.points+" pts)";ar.appendChild(r)});if(!data.weekly.archive.length)ar.textContent="No completed weeks yet.";let ach=$("achievementList");ach.replaceChildren();data.items.slice().sort((a,b)=>b.bestStreak-a.bestStreak).forEach(x=>{let p=Math.min(5,x.bestStreak),r=document.createElement("div");r.className="achievement";r.innerHTML='<div class="achievement-icon">🏟️</div><div style="flex:1"><h3>Undefeated — '+esc(x.name)+'</h3><p>Win 5 Colosseum battles in a row</p><div class="progress"><span style="width:'+(p*20)+'%"></span></div><p>🔥 '+p+' / 5</p></div>';ach.appendChild(r)})}
-function dayOfYear(d=new Date()){let s=new Date(d.getFullYear(),0,0);return Math.floor((d-s)/86400000)}
-function maybeEvent(){let c=data.colosseum,y=new Date().getFullYear();if(c.eventDays.year!==y){let set=new Set;let count=8+Math.floor(Math.random()*7);while(set.size<count)set.add(1+Math.floor(Math.random()*365));c.eventDays={year:y,days:[...set]};}if(now()<Number(c.cooldownUntil||0)||c.available||c.lastEventDay===dayKey())return;if(c.eventDays.days.includes(dayOfYear())||Math.random()<.035){c.available=true;c.source="event";c.lastEventDay=dayKey()}}
-function renderBattle(){let c=data.colosseum;$("p1Name").textContent=name(c.p1)||"—";$("p2Name").textContent=name(c.p2)||"—";$("p1Remove").classList.toggle("hidden",!c.p1);$("p2Remove").classList.toggle("hidden",!c.p2);$("readyBtn").disabled=!(c.available&&c.p1&&c.p2&&c.p1!==c.p2&&!battleRunning);let q=$("battleSearch").value.trim().toLowerCase(),res=$("battleSearchResults");res.replaceChildren();if(q)data.items.filter(x=>x.name.toLowerCase().includes(q)).slice(0,20).forEach(x=>{let b=document.createElement("button");b.className="search-chip";b.textContent=x.name;b.onclick=()=>select(x.id);res.appendChild(b)});let until=Number(c.cooldownUntil||0);if(until>now()){$("cooldownText").classList.remove("hidden");$("cooldownText").textContent="Cooldown: "+left(until)+" remaining";$("callBtn").disabled=true}else{$("cooldownText").classList.add("hidden");$("callBtn").disabled=false}$("eventStatus").textContent=c.available?(c.source==="summoned"?"Summoned for one battle. It is not consumed until the battle finishes.":"The Colosseum event is active today!"):until>now()?"The Colosseum is resting after the completed battle.":"The Colosseum is waiting for its next appearance."}
-function name(id){let x=data.items.find(i=>i.id===id);return x&&x.name}function select(id){let c=data.colosseum;if(c.p1===id||c.p2===id)return toast("That Softoy is already selected.");if(!c.p1)c.p1=id;else if(!c.p2)c.p2=id;else return toast("Remove a player first.");save();renderBattle()}
-$("p1Remove").onclick=()=>{data.colosseum.p1=null;save();renderBattle()};$("p2Remove").onclick=()=>{data.colosseum.p2=null;save();renderBattle()};$("battleSearch").oninput=renderBattle;
-function left(ts){let s=Math.max(0,Math.ceil((ts-now())/1000)),h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return h+"h "+String(m).padStart(2,"0")+"m "+String(s).padStart(2,"0")+"s"}
-$("readyBtn").onclick=()=>{if(battleRunning)return;let c=data.colosseum,p1=data.items.find(x=>x.id===c.p1),p2=data.items.find(x=>x.id===c.p2);if(!p1||!p2||p1.id===p2.id||!c.available)return;battleRunning=true;$("readyBtn").disabled=true;let box=$("battleResult");box.classList.remove("hidden");let seq=["⚔️ Entering the arena...","🥁 The crowd roars...","⚔️ P1 attacks!","⚔️ P2 responds!","🔥 Final round...","🏆 The winner is..."];let k=0,t=setInterval(()=>{box.innerHTML="<div>"+seq[Math.min(k,seq.length-1)]+"</div>";k++;if(k>=seq.length){clearInterval(t);let w=Math.random()<.5?p1:p2,l=w.id===p1.id?p2:p1,pts=2+Math.floor(Math.random()*7);w.points+=pts;w.colWins++;w.colStreak++;w.bestStreak=Math.max(w.bestStreak,w.colStreak);l.colStreak=0;c.available=false;c.source=null;c.cooldownUntil=now()+COOLDOWN;log("colosseum",w.name+" defeated "+l.name,"+"+pts+" points; streak "+w.colStreak);save();render();renderWeekly();renderBattle();box.innerHTML='<div>🏆 WINNER</div><div class="winner-name">'+esc(w.name)+'</div><div>+'+pts+' points</div><div>🔥 Colosseum streak: '+w.colStreak+'</div>';confetti();toast(w.name+" wins the Colosseum!");battleRunning=false}},650)};
-$("callBtn").onclick=()=>{let c=data.colosseum;if(Number(c.cooldownUntil)>now())return toast("The Colosseum is still on cooldown.");if(c.available)return toast("The Colosseum is already available.");c.available=true;c.source="summoned";c.p1=null;c.p2=null;log("colosseum","Called the Colosseum","One battle summoned manually");save();renderBattle();toast("The Colosseum has arrived!")};
-function confetti(){let b=$("confetti");b.replaceChildren();for(let i=0;i<70;i++){let s=document.createElement("span");s.style.left=Math.random()*100+"%";s.style.animationDelay=Math.random()*.5+"s";s.style.background=["#22c55e","#3b82f6","#f59e0b","#ef4444","#a855f7"][Math.floor(Math.random()*5)];b.appendChild(s)}setTimeout(()=>b.replaceChildren(),2400)}
-$("weeklyBtn").onclick=()=>{$("weeklyPanel").classList.toggle("hidden");if(!$('weeklyPanel').classList.contains('hidden'))renderWeekly()};$("colosseumBtn").onclick=()=>{$("colosseumPanel").classList.toggle("hidden");if(!$('colosseumPanel').classList.contains('hidden')){maybeEvent();renderBattle()}};
-$("settingsBtn").onclick=()=>$("settingsModal").classList.remove("hidden");$("closeSettings").onclick=()=>$("settingsModal").classList.add("hidden");$("settingsModal").onclick=e=>{if(e.target===$("settingsModal"))$("settingsModal").classList.add("hidden")};
-$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({app:"Softoy Ranking",version:1,exportedAt:now(),data})],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="Softoy-Ranking-Backup-"+dayKey()+".json";a.click();URL.revokeObjectURL(u);toast("Backup exported.")};
-$("importBtn").onclick=()=>$("backupInput").click();$("backupInput").onchange=()=>{let f=$("backupInput").files&&$("backupInput").files[0];if(!f)return;let r=new FileReader;r.onload=()=>{try{let o=JSON.parse(r.result);if(!o.data||!Array.isArray(o.data.items))throw 0;if(!confirm("Import this backup?\n\nYour current local data will be replaced."))return;data=o.data;normalize();save();render();renderWeekly();renderBattle();toast("Backup restored.")}catch(e){alert("That backup file is not valid.")}$("backupInput").value=""};r.readAsText(f)};
-$("historyBtn").onclick=()=>{let p=$("historyPanel");p.classList.toggle("hidden");p.replaceChildren();if(p.classList.contains("hidden"))return;let h=document.createElement("h3");h.textContent="↩️ Transaction History";p.appendChild(h);data.history.slice(0,80).forEach(x=>{let r=document.createElement("div");r.className="history-row";r.innerHTML="<strong>"+esc(x.description)+"</strong><br>"+new Date(x.time).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+" · "+esc(x.type)+(x.details?"<br>"+esc(x.details):"");p.appendChild(r)})};
-$("resetBtn").onclick=()=>{let p=prompt("Type RESET to permanently erase all Softoy data, photos, achievements, history and settings.");if(p!=="RESET")return toast("Reset cancelled.");localStorage.removeItem(KEY);location.reload()};
-setInterval(()=>{if(!$('colosseumPanel').classList.contains('hidden'))renderBattle();handleWeeklyRollover();maybeEvent();save()},1000);
-load();render();renderWeekly();renderBattle();if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+
+(function(){
+
+"use strict";
+
+
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+const STORAGE_KEY =
+  "softoy_ranking_complete_v1";
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let state = {
+
+  version:1,
+
+  items:[],
+
+  achievements:{},
+
+  transactions:[],
+
+  weekly:{
+
+    start:null,
+    winner:null,
+    archive:[]
+
+  },
+
+  settings:{
+
+    lastManualSave:null
+
+  },
+
+  colosseum:{
+
+    p1:null,
+    p2:null,
+
+    summonAvailable:false,
+
+    summonStarted:false,
+
+    cooldownUntil:0,
+
+    eventDate:null,
+
+    eventActive:false,
+
+    wins:{}
+
+  }
+
+};
+
+
+/* =========================================================
+   DOM SHORTCUT
+   ========================================================= */
+
+const $ =
+  id => document.getElementById(id);
+
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+
+function uid(){
+
+  return "id_" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .slice(2,9);
+
+}
+
+
+function now(){
+
+  return new Date();
+
+}
+
+
+function escapeHTML(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   SAVE / LOAD
+   ========================================================= */
+
+function save(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
+    );
+
+    return true;
+
+  }catch(error){
+
+    showToast(
+      "⚠️ Could not save data."
+    );
+
+    return false;
+
+  }
+
+}
+
+
+function load(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+    if(!raw)
+      return;
+
+    const saved =
+      JSON.parse(raw);
+
+    state = {
+
+      ...state,
+      ...saved,
+
+      settings:{
+        ...state.settings,
+        ...(saved.settings || {})
+      },
+
+      weekly:{
+        ...state.weekly,
+        ...(saved.weekly || {})
+      },
+
+      colosseum:{
+        ...state.colosseum,
+        ...(saved.colosseum || {})
+      }
+
+    };
+
+  }catch(error){
+
+    showToast(
+      "⚠️ Saved data could not be read."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTOSAVE
+   ========================================================= */
+
+function autosave(){
+
+  save();
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    $("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      1800
+    );
+
+}
+
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+function celebrationSound(){
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext)
+      return;
+
+    const ctx =
+      new AudioContext();
+
+    const notes =
+      [523.25,659.25,783.99,1046.5];
+
+    notes.forEach(
+      (frequency,index) => {
+
+        const oscillator =
+          ctx.createOscillator();
+
+        const gain =
+          ctx.createGain();
+
+        oscillator.frequency.value =
+          frequency;
+
+        oscillator.type =
+          "sine";
+
+        gain.gain.setValueAtTime(
+          .0001,
+          ctx.currentTime +
+            index*.11
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          .12,
+          ctx.currentTime +
+            index*.11 +
+            .03
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          .0001,
+          ctx.currentTime +
+            index*.11 +
+            .28
+        );
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+
+        oscillator.start(
+          ctx.currentTime +
+          index*.11
+        );
+
+        oscillator.stop(
+          ctx.currentTime +
+          index*.11 +
+          .3
+        );
+
+      }
+    );
+
+  }catch(error){}
+
+}
+
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+
+function confetti(){
+
+  const pieces = 70;
+
+  for(
+    let i=0;
+    i<pieces;
+    i++
+  ){
+
+    const piece =
+      document.createElement(
+        "div"
+      );
+
+    piece.className =
+      "confetti-piece";
+
+    piece.style.left =
+      Math.random()*100 +
+      "vw";
+
+    piece.style.animationDelay =
+      Math.random()*.7 +
+      "s";
+
+    piece.style.transform =
+      "rotate(" +
+      Math.random()*360 +
+      "deg)";
+
+    piece.style.background =
+      [
+        "#ef4444",
+        "#f97316",
+        "#facc15",
+        "#22c55e",
+        "#3b82f6",
+        "#a855f7"
+      ][
+        Math.floor(
+          Math.random()*6
+        )
+      ];
+
+    document.body.appendChild(
+      piece
+    );
+
+    setTimeout(
+      () => piece.remove(),
+      3200
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RANKING
+   ========================================================= */
+
+function sortedItems(){
+
+  return [...state.items]
+    .sort(
+      (a,b) =>
+        (b.points||0) -
+        (a.points||0)
+    );
+
+}
+
+
+function rankOf(item){
+
+  return (
+    sortedItems()
+      .findIndex(
+        x => x.id === item.id
+      )
+    + 1
+  );
+
+}
+
+
+function rankClass(rank){
+
+  if(rank <= 3)
+    return "platinum";
+
+  if(rank <= 10)
+    return "gold";
+
+  if(rank <= 25)
+    return "silver";
+
+  if(rank <= 50)
+    return "bronze";
+
+  return "";
+
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+   ========================================================= */
+
+function transaction(
+  description,
+  itemId,
+  points,
+  type="points"
+){
+
+  state.transactions.unshift({
+
+    id:uid(),
+
+    time:new Date().toISOString(),
+
+    description,
+
+    itemId,
+
+    points,
+
+    type,
+
+    undone:false
+
+  });
+
+  state.transactions =
+    state.transactions.slice(
+      0,
+      200
+    );
+
+}
+
+
+function undoTransaction(id){
+
+  const tx =
+    state.transactions.find(
+      x => x.id === id
+    );
+
+  if(!tx || tx.undone){
+
+    showToast(
+      "This transaction cannot be undone."
+    );
+
+    return;
+
+  }
+
+
+  /* Regular points */
+
+  if(tx.type === "points"){
+
+    const item =
+      state.items.find(
+        x => x.id === tx.itemId
+      );
+
+    if(item){
+
+      item.points =
+        Math.max(
+          0,
+          (item.points||0) -
+          tx.points
+        );
+
+    }
+
+  }
+
+
+  /* Colosseum */
+
+  if(tx.type === "colosseum"){
+
+    const winner =
+      state.items.find(
+        x => x.id === tx.itemId
+      );
+
+    if(winner){
+
+      winner.points =
+        Math.max(
+          0,
+          (winner.points||0) -
+          tx.points
+        );
+
+      winner.colosseumWins =
+        Math.max(
+          0,
+          (winner.colosseumWins||0)-1
+        );
+
+    }
+
+    state.colosseum.wins[
+      tx.itemId
+    ] =
+      Math.max(
+        0,
+        (state.colosseum.wins[
+          tx.itemId
+        ]||1)-1
+      );
+
+  }
+
+
+  tx.undone = true;
+
+  save();
+
+  renderAll();
+
+  showToast(
+    "↩️ Transaction reversed"
+  );
+
+}
+
+
+/* =========================================================
+   POINT CHANGES
+   ========================================================= */
+
+function changePoints(
+  item,
+  amount
+){
+
+  const oldRank =
+    rankOf(item);
+
+  item.points =
+    Math.max(
+      0,
+      (item.points||0) +
+      amount
+    );
+
+  transaction(
+    (amount >= 0 ? "+" : "") +
+    amount +
+    " " +
+    item.name,
+    item.id,
+    amount,
+    "points"
+  );
+
+  save();
+
+  renderAll();
+
+  const newRank =
+    rankOf(item);
+
+  if(
+    amount > 0 &&
+    newRank < oldRank
+  ){
+
+    celebrationSound();
+
+    showToast(
+      "🎉 " +
+      item.name +
+      " moved up!"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD SOFTOY
+   ========================================================= */
+
+$("addSoftoy")
+  .addEventListener(
+    "click",
+    addSoftoy
+  );
+
+
+$("newName")
+  .addEventListener(
+    "keydown",
+    event => {
+
+      if(
+        event.key === "Enter"
+      ){
+
+        addSoftoy();
+
+      }
+
+    }
+  );
+
+
+function addSoftoy(){
+
+  const input =
+    $("newName");
+
+  const name =
+    input.value.trim();
+
+  if(!name)
+    return;
+
+  if(
+    state.items.length >= 150
+  ){
+
+    alert(
+      "You can track up to 150 Softoys."
+    );
+
+    return;
+
+  }
+
+
+  const item = {
+
+    id:uid(),
+
+    name:name.slice(
+      0,
+      30
+    ),
+
+    points:0,
+
+    photo:null,
+
+    colosseumWins:0,
+
+    colosseumStreak:0
+
+  };
+
+
+  state.items.push(
+    item
+  );
+
+  save();
+
+  input.value =
+    "";
+
+  renderAll();
+
+  showToast(
+    "✓ Softoy added"
+  );
+
+}
+
+
+/* =========================================================
+   MAIN SEARCH
+   ========================================================= */
+
+$("mainSearch")
+  .addEventListener(
+    "input",
+    renderLeaderboard
+  );
+
+
+$("clearSearch")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("mainSearch").value =
+        "";
+
+      renderLeaderboard();
+
+    }
+  );
+
+
+/* =========================================================
+   LEADERBOARD
+   ========================================================= */
+
+function renderLeaderboard(){
+
+  const board =
+    $("leaderboard");
+
+  board.innerHTML =
+    "";
+
+  const query =
+    $("mainSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const all =
+    sortedItems();
+
+  const visible =
+    all.filter(
+      item =>
+        item.name
+          .toLowerCase()
+          .includes(query)
+    );
+
+
+  if(!visible.length){
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+    empty.className =
+      "card";
+
+    empty.textContent =
+      query
+        ? "No Softoys found."
+        : "Add your first Softoy above.";
+
+    board.appendChild(
+      empty
+    );
+
+    return;
+
+  }
+
+
+  visible.forEach(
+    item => {
+
+      const rank =
+        rankOf(item);
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+      row.className =
+        "item " +
+        rankClass(rank);
+
+
+      const left =
+        document.createElement(
+          "div"
+        );
+
+      left.className =
+        "item-left";
+
+
+      const rankElement =
+        document.createElement(
+          "div"
+        );
+
+      rankElement.className =
+        "rank-number";
+
+      rankElement.textContent =
+        "#" + rank;
+
+
+      const photo =
+        document.createElement(
+          "div"
+        );
+
+      photo.className =
+        "item-photo";
+
+
+      if(item.photo){
+
+        const image =
+          document.createElement(
+            "img"
+          );
+
+        image.src =
+          item.photo;
+
+        photo.appendChild(
+          image
+        );
+
+      }else{
+
+        photo.textContent =
+          "📷";
+
+      }
+
+
+      photo.addEventListener(
+        "click",
+        () => openProfile(item)
+      );
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+      info.className =
+        "item-info";
+
+
+      info.innerHTML =
+        `
+        <div class="item-name">
+          ${escapeHTML(item.name)}
+        </div>
+        <div class="item-detail">
+          ${item.points||0} points •
+          ${item.colosseumWins||0} Colosseum wins
+        </div>
+        `;
+
+
+      info.addEventListener(
+        "click",
+        () => openProfile(item)
+      );
+
+
+      left.append(
+        rankElement,
+        photo,
+        info
+      );
+
+
+      const right =
+        document.createElement(
+          "div"
+        );
+
+      right.className =
+        "item-right";
+
+
+      const points =
+        document.createElement(
+          "div"
+        );
+
+      points.className =
+        "points";
+
+      points.textContent =
+        item.points||0;
+
+
+      const actions =
+        document.createElement(
+          "div"
+        );
+
+      actions.className =
+        "action-group";
+
+
+      function actionButton(
+        text,
+        cls,
+        fn
+      ){
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "small-button " +
+          cls;
+
+        button.textContent =
+          text;
+
+        button.addEventListener(
+          "click",
+          fn
+        );
+
+        actions.appendChild(
+          button
+        );
+
+      }
+
+
+      actionButton(
+        "+",
+        "plus",
+        () =>
+          changePoints(
+            item,
+            1
+          )
+      );
+
+
+      actionButton(
+        "−",
+        "minus",
+        () =>
+          changePoints(
+            item,
+            -1
+          )
+      );
+
+
+      actionButton(
+        "✏",
+        "profile-button",
+        () =>
+          openProfile(item)
+      );
+
+
+      actionButton(
+        "🗑",
+        "delete-button",
+        () =>
+          deleteItem(item)
+      );
+
+
+      right.append(
+        points,
+        actions
+      );
+
+
+      row.append(
+        left,
+        right
+      );
+
+
+      board.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   DELETE
+   ========================================================= */
+
+function deleteItem(item){
+
+  const confirmed =
+    confirm(
+      "⚠️ Delete " +
+      item.name +
+      "?\n\n" +
+      "This will remove the Softoy and its data."
+    );
+
+  if(!confirmed)
+    return;
+
+
+  state.items =
+    state.items.filter(
+      x => x.id !== item.id
+    );
+
+  save();
+
+  renderAll();
+
+  showToast(
+    "Softoy deleted."
+  );
+
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+let profileId = null;
+
+let photoTarget = null;
+
+function openProfile(item){
+
+  profileId =
+    item.id;
+
+  const rank =
+    rankOf(item);
+
+  $("profileName")
+    .textContent =
+    item.name;
+
+  $("profileRank")
+    .textContent =
+    "#" +
+    rank;
+
+  $("profilePoints")
+    .textContent =
+    item.points||0;
+
+  $("profileWins")
+    .textContent =
+    item.colosseumWins||0;
+
+  $("profileStreak")
+    .textContent =
+    item.colosseumStreak||0;
+
+
+  const photo =
+    $("profilePhoto");
+
+  photo.innerHTML =
+    "";
+
+  if(item.photo){
+
+    const image =
+      document.createElement(
+        "img"
+      );
+
+    image.src =
+      item.photo;
+
+    photo.appendChild(
+      image
+    );
+
+  }else{
+
+    photo.textContent =
+      "📷";
+
+  }
+
+
+  $("profileModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+$("editProfile")
+  .addEventListener(
+    "click",
+    () => {
+
+      const item =
+        getProfileItem();
+
+      if(!item)
+        return;
+
+      const name =
+        prompt(
+          "Enter a new name:",
+          item.name
+        );
+
+      if(
+        name &&
+        name.trim()
+      ){
+
+        item.name =
+          name
+            .trim()
+            .slice(
+              0,
+              30
+            );
+
+        save();
+
+        renderAll();
+
+        openProfile(
+          item
+        );
+
+      }
+
+    }
+  );
+
+
+$("changeProfilePhoto")
+  .addEventListener(
+    "click",
+    () => {
+
+      photoTarget =
+        profileId;
+
+      const input =
+        document.createElement(
+          "input"
+        );
+
+      input.type =
+        "file";
+
+      input.accept =
+        "image/*";
+
+      input.onchange =
+        event => {
+
+          const file =
+            event.target.files[0];
+
+          if(!file)
+            return;
+
+          if(
+            file.size >
+            5*1024*1024
+          ){
+
+            alert(
+              "Please choose an image under 5 MB."
+            );
+
+            return;
+
+          }
+
+
+          const reader =
+            new FileReader();
+
+          reader.onload =
+            () => {
+
+              const item =
+                state.items.find(
+                  x =>
+                    x.id ===
+                    photoTarget
+                );
+
+              if(item){
+
+                item.photo =
+                  reader.result;
+
+                save();
+
+                renderAll();
+
+                openProfile(
+                  item
+                );
+
+              }
+
+            };
+
+          reader.readAsDataURL(
+            file
+          );
+
+        };
+
+      input.click();
+
+    }
+  );
+
+
+function getProfileItem(){
+
+  return state.items.find(
+    x =>
+      x.id === profileId
+  );
+
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+document
+  .querySelectorAll(
+    "[data-close]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          $(button.dataset.close)
+            .classList.remove(
+              "show"
+            );
+
+        }
+      );
+
+    }
+  );
+
+
+document
+  .querySelectorAll(
+    ".modal"
+  )
+  .forEach(
+    modal => {
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target === modal
+          ){
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+document
+  .querySelectorAll(
+    ".nav-btn"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const page =
+            button.dataset.page;
+
+
+          document
+            .querySelectorAll(
+              ".nav-btn"
+            )
+            .forEach(
+              x =>
+                x.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          document
+            .querySelectorAll(
+              ".page"
+            )
+            .forEach(
+              section => {
+
+                section.classList.add(
+                  "hidden"
+                );
+
+              }
+            );
+
+
+          $("page-" + page)
+            .classList.remove(
+              "hidden"
+            );
+
+
+          if(page === "weekly")
+            renderWeekly();
+
+          if(page === "colosseum")
+            renderColosseum();
+
+          if(page === "achievements")
+            renderAchievements();
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   WEEKLY SYSTEM
+   ========================================================= */
+
+function mondayStart(date){
+
+  const d =
+    new Date(date);
+
+  d.setHours(
+    0,0,0,0
+  );
+
+  const day =
+    d.getDay();
+
+  const difference =
+    day === 0
+      ? -6
+      : 1-day;
+
+  d.setDate(
+    d.getDate() +
+    difference
+  );
+
+  return d;
+
+}
+
+
+function weeklyCheck(){
+
+  const current =
+    mondayStart(
+      new Date()
+    );
+
+  const currentISO =
+    current.toISOString();
+
+
+  if(
+    !state.weekly.start
+  ){
+
+    state.weekly.start =
+      currentISO;
+
+    save();
+
+    return;
+
+  }
+
+
+  const savedStart =
+    new Date(
+      state.weekly.start
+    );
+
+
+  if(
+    savedStart.getTime() ===
+    current.getTime()
+  ){
+
+    return;
+
+  }
+
+
+  /* Finish previous week */
+
+  const previous =
+    sortedItems()[0];
+
+
+  if(previous){
+
+    state.weekly.winner = {
+
+      id:previous.id,
+
+      name:previous.name,
+
+      points:previous.points||0,
+
+      date:
+        new Date()
+          .toISOString()
+
+    };
+
+
+    state.weekly.archive.unshift(
+      state.weekly.winner
+    );
+
+    state.weekly.archive =
+      state.weekly.archive
+        .slice(0,30);
+
+  }
+
+
+  /* New week */
+
+  state.weekly.start =
+    currentISO;
+
+  state.weekly.winner =
+    null;
+
+
+  save();
+
+}
+
+
+function renderWeekly(){
+
+  weeklyCheck();
+
+  const current =
+    sortedItems();
+
+
+  const currentBox =
+    $("weeklyCurrent");
+
+
+  if(!current.length){
+
+    currentBox.innerHTML =
+      "<div class='weekly-winner'>" +
+      "No Softoys yet." +
+      "</div>";
+
+  }else{
+
+    const leader =
+      current[0];
+
+    currentBox.innerHTML =
+      `
+      <div class="weekly-winner">
+        🏆 Current Leader
+        <br><br>
+        <strong>
+          ${escapeHTML(leader.name)}
+        </strong>
+        <br>
+        ${leader.points||0} points
+      </div>
+      `;
+
+  }
+
+
+  const archive =
+    $("weeklyArchive");
+
+  archive.innerHTML =
+    "";
+
+
+  if(
+    !state.weekly.archive.length
+  ){
+
+    archive.textContent =
+      "No completed weeks yet.";
+
+    return;
+
+  }
+
+
+  state.weekly.archive
+    .forEach(
+      winner => {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+        row.className =
+          "archive-row";
+
+        row.innerHTML =
+          `
+          🏆
+          <strong>
+            ${escapeHTML(winner.name)}
+          </strong>
+          —
+          ${winner.points||0}
+          points
+          `;
+
+        archive.appendChild(
+          row
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+const achievementDefinitions = [
+
+  {
+    id:"undefeated",
+    icon:"🏟️",
+    name:"Undefeated",
+    description:
+      "Win 5 Colosseum battles in a row.",
+    goal:5,
+    value:item =>
+      Math.max(
+        0,
+        ...state.items.map(
+          x => x.colosseumStreak||0
+        )
+      )
+  },
+
+  {
+    id:"fourDigit",
+    icon:"👑",
+    name:"Four-Digit King",
+    description:
+      "Reach 1,000 points.",
+    goal:1000,
+    value:item =>
+      Math.max(
+        0,
+        ...state.items.map(
+          x => x.points||0
+        )
+      )
+  },
+
+  {
+    id:"firstWin",
+    icon:"🏆",
+    name:"First Victory",
+    description:
+      "Win your first Colosseum battle.",
+    goal:1,
+    value:item =>
+      Math.max(
+        0,
+        ...state.items.map(
+          x => x.colosseumWins||0
+        )
+      )
+  },
+
+  {
+    id:"tenWins",
+    icon:"🔥",
+    name:"Colosseum Veteran",
+    description:
+      "Win 10 Colosseum battles.",
+    goal:10,
+    value:item =>
+      state.items.reduce(
+        (sum,x) =>
+          sum +
+          (x.colosseumWins||0),
+        0
+      )
+  }
+
+];
+
+
+function renderAchievements(){
+
+  const list =
+    $("achievementList");
+
+  list.innerHTML =
+    "";
+
+
+  achievementDefinitions
+    .forEach(
+      achievement => {
+
+        const value =
+          Math.min(
+            achievement.goal,
+            achievement.value()
+          );
+
+        const percentage =
+          Math.min(
+            100,
+            value /
+            achievement.goal *
+            100
+          );
+
+        const unlocked =
+          value >=
+          achievement.goal;
+
+
+        const box =
+          document.createElement(
+            "div"
+          );
+
+        box.className =
+          "achievement " +
+          (
+            unlocked
+              ? "unlocked"
+              : ""
+          );
+
+
+        box.innerHTML =
+          `
+          <div class="achievement-title">
+            ${achievement.icon}
+            ${achievement.name}
+            ${unlocked ? " ✓" : ""}
+          </div>
+
+          <div class="achievement-description">
+            ${achievement.description}
+          </div>
+
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              style="width:${percentage}%"
+            ></div>
+          </div>
+
+          <div
+            style="
+              margin-top:5px;
+              font-size:11px;
+              font-weight:850;
+              color:#667085
+            "
+          >
+            ${value} / ${achievement.goal}
+          </div>
+          `;
+
+
+        list.appendChild(
+          box
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   COLOSSEUM EVENT DATES
+   =========================================================
+
+   The example dates are only examples.
+
+   A random date is generated for each month.
+   ========================================================= */
+
+function makeRandomEventDate(){
+
+  const nowDate =
+    new Date();
+
+  const year =
+    nowDate.getFullYear();
+
+  const month =
+    nowDate.getMonth();
+
+  const days =
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
+
+
+  const day =
+    1 +
+    Math.floor(
+      Math.random()*days
+    );
+
+
+  return new Date(
+    year,
+    month,
+    day
+  );
+
+}
+
+
+function dateKey(date){
+
+  return [
+    date.getFullYear(),
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0"),
+    String(
+      date.getDate()
+    ).padStart(2,"0")
+  ].join("-");
+
+}
+
+
+function checkEvent(){
+
+  const today =
+    new Date();
+
+  const key =
+    dateKey(today);
+
+
+  if(
+    state.colosseum.eventDate !==
+    key
+  ){
+
+    const randomDate =
+      makeRandomEventDate();
+
+    state.colosseum.eventDate =
+      dateKey(randomDate);
+
+    save();
+
+  }
+
+
+  state.colosseum.eventActive =
+    state.colosseum.eventDate ===
+    key;
+
+
+  if(
+    state.colosseum.eventActive
+  ){
+
+    state.colosseum.summonAvailable =
+      true;
+
+  }
+
+}
+
+
+/* =========================================================
+   COLOSSEUM COOLDOWN
+   ========================================================= */
+
+function cooldownActive(){
+
+  return Date.now() <
+    (
+      state.colosseum
+        .cooldownUntil||0
+    );
+
+}
+
+
+function cooldownText(){
+
+  if(!cooldownActive())
+    return "No active cooldown.";
+
+  const remaining =
+    state.colosseum.cooldownUntil -
+    Date.now();
+
+  const hours =
+    Math.floor(
+      remaining /
+      3600000
+    );
+
+  const minutes =
+    Math.floor(
+      remaining %
+      3600000 /
+      60000
+    );
+
+  const seconds =
+    Math.floor(
+      remaining %
+      60000 /
+      1000
+    );
+
+  return (
+    "⏱️ Call the Colosseum cooldown: " +
+    hours +
+    "h " +
+    minutes +
+    "m " +
+    seconds +
+    "s"
+  );
+
+}
+
+
+/* =========================================================
+   COLOSSEUM RENDER
+   ========================================================= */
+
+function renderColosseum(){
+
+  checkEvent();
+
+  $("cooldownText")
+    .textContent =
+    cooldownText();
+
+
+  const button =
+    $("eventButton");
+
+
+  if(
+    state.colosseum.eventActive
+  ){
+
+    button.textContent =
+      "🏟️ The Colosseum Is Back!";
+
+  }else{
+
+    button.textContent =
+      "📞 Call the Colosseum";
+
+  }
+
+
+  $("p1Name")
+    .textContent =
+    state.colosseum.p1
+      ? getItem(
+          state.colosseum.p1
+        )?.name || "Not selected"
+      : "Not selected";
+
+
+  $("p2Name")
+    .textContent =
+    state.colosseum.p2
+      ? getItem(
+          state.colosseum.p2
+        )?.name || "Not selected"
+      : "Not selected";
+
+
+  $("p1Remove")
+    .classList.toggle(
+      "hidden",
+      !state.colosseum.p1
+    );
+
+
+  $("p2Remove")
+    .classList.toggle(
+      "hidden",
+      !state.colosseum.p2
+    );
+
+
+  renderBattleCandidates();
+
+}
+
+
+function getItem(id){
+
+  return state.items.find(
+    x => x.id === id
+  );
+
+}
+
+
+/* =========================================================
+   OPEN COLOSSEUM
+   ========================================================= */
+
+$("eventButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      checkEvent();
+
+
+      if(
+        cooldownActive()
+      ){
+
+        showToast(
+          cooldownText()
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * Event:
+       * available automatically.
+       *
+       * Summoned:
+       * available once and consumed
+       * only when the battle completes.
+       */
+
+      if(
+        !state.colosseum.eventActive &&
+        !state.colosseum.summonAvailable
+      ){
+
+        state.colosseum.summonAvailable =
+          true;
+
+      }
+
+
+      state.colosseum.summonStarted =
+        true;
+
+
+      save();
+
+
+      $("battlePanel")
+        .classList.remove(
+          "hidden"
+        );
+
+
+      $("eventButton")
+        .classList.add(
+          "hidden"
+        );
+
+
+      renderColosseum();
+
+    }
+  );
+
+
+/* =========================================================
+   BATTLE SEARCH
+   ========================================================= */
+
+$("battleSearch")
+  .addEventListener(
+    "input",
+    renderBattleCandidates
+  );
+
+
+function renderBattleCandidates(){
+
+  const box =
+    $("battleCandidates");
+
+  box.innerHTML =
+    "";
+
+
+  const query =
+    $("battleSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const candidates =
+    sortedItems()
+      .filter(
+        item =>
+          item.name
+            .toLowerCase()
+            .includes(query)
+      );
+
+
+  candidates.forEach(
+    item => {
+
+      if(
+        item.id ===
+        state.colosseum.p1 ||
+        item.id ===
+        state.colosseum.p2
+      )
+        return;
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.className =
+        "settings-button";
+
+      button.textContent =
+        "＋ " +
+        item.name +
+        " — " +
+        (item.points||0) +
+        " points";
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          if(
+            !state.colosseum.p1
+          ){
+
+            state.colosseum.p1 =
+              item.id;
+
+          }else if(
+            !state.colosseum.p2
+          ){
+
+            state.colosseum.p2 =
+              item.id;
+
+          }else{
+
+            showToast(
+              "Both players are already selected."
+            );
+
+            return;
+
+          }
+
+
+          save();
+
+          renderColosseum();
+
+        }
+      );
+
+
+      box.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   REMOVE PLAYER
+   ========================================================= */
+
+$("p1Remove")
+  .addEventListener(
+    "click",
+    () => {
+
+      state.colosseum.p1 =
+        null;
+
+      save();
+
+      renderColosseum();
+
+    }
+  );
+
+
+$("p2Remove")
+  .addEventListener(
+    "click",
+    () => {
+
+      state.colosseum.p2 =
+        null;
+
+      save();
+
+      renderColosseum();
+
+    }
+  );
+
+
+/* =========================================================
+   READY
+   ========================================================= */
+
+$("readyButton")
+  .addEventListener(
+    "click",
+    startBattle
+  );
+
+
+function startBattle(){
+
+  const p1 =
+    getItem(
+      state.colosseum.p1
+    );
+
+  const p2 =
+    getItem(
+      state.colosseum.p2
+    );
+
+
+  if(!p1 || !p2){
+
+    showToast(
+      "Choose both P1 and P2 first."
+    );
+
+    return;
+
+  }
+
+
+  if(p1.id === p2.id){
+
+    showToast(
+      "A Softoy cannot battle itself."
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * 50/50
+   */
+
+  const winner =
+    Math.random() < .5
+      ? p1
+      : p2;
+
+  const loser =
+    winner.id === p1.id
+      ? p2
+      : p1;
+
+
+  const points =
+    2 +
+    Math.floor(
+      Math.random()*7
+    );
+
+
+  $("battleP1")
+    .textContent =
+    p1.name;
+
+
+  $("battleP2")
+    .textContent =
+    p2.name;
+
+
+  $("battleP1")
+    .classList.remove(
+      "winner",
+      "loser"
+    );
+
+  $("battleP2")
+    .classList.remove(
+      "winner",
+      "loser"
+    );
+
+
+  $("battleResult")
+    .textContent =
+    "⚔️ The battle begins...";
+
+
+  $("battleResultModal")
+    .classList.add(
+      "show"
+    );
+
+
+  /*
+   * Dramatic sequence
+   */
+
+  setTimeout(
+    () => {
+
+      $("battleResult")
+        .textContent =
+        "⚔️ FIGHT!";
+
+    },
+    700
+  );
+
+
+  setTimeout(
+    () => {
+
+      const winnerBox =
+        winner.id === p1.id
+          ? $("battleP1")
+          : $("battleP2");
+
+      const loserBox =
+        loser.id === p1.id
+          ? $("battleP1")
+          : $("battleP2");
+
+
+      winnerBox
+        .classList.add(
+          "winner"
+        );
+
+      loserBox
+        .classList.add(
+          "loser"
+        );
+
+
+      $("battleResult")
+        .textContent =
+        "🏆 " +
+        winner.name +
+        " wins! +" +
+        points +
+        " points";
+
+
+      finishBattle(
+        winner,
+        points
+      );
+
+    },
+    1700
+  );
+
+}
+
+
+/* =========================================================
+   FINISH BATTLE
+   ========================================================= */
+
+function finishBattle(
+  winner,
+  points
+){
+
+  /*
+   * Award points.
+   */
+
+  winner.points =
+    (winner.points||0) +
+    points;
+
+
+  /*
+   * Increase streak.
+   */
+
+  winner.colosseumWins =
+    (winner.colosseumWins||0) +
+    1;
+
+  winner.colosseumStreak =
+    (winner.colosseumStreak||0) +
+    1;
+
+
+  /*
+   * Other Softoys do not inherit
+   * the streak.
+   *
+   * This preserves the individual
+   * winning streak.
+   */
+
+
+  state.colosseum.wins[
+    winner.id
+  ] =
+    (state.colosseum.wins[
+      winner.id
+    ]||0) +
+    1;
+
+
+  /*
+   * Strong transaction record.
+   */
+
+  transaction(
+    winner.name +
+    " won a Colosseum battle",
+    winner.id,
+    points,
+    "colosseum"
+  );
+
+
+  /*
+   * Summon is consumed ONLY here.
+   */
+
+  state.colosseum.summonAvailable =
+    false;
+
+  state.colosseum.summonStarted =
+    false;
+
+
+  /*
+   * Six-hour cooldown starts
+   * after completed battle.
+   */
+
+  state.colosseum.cooldownUntil =
+    Date.now() +
+    6*60*60*1000;
+
+
+  state.colosseum.p1 =
+    null;
+
+  state.colosseum.p2 =
+    null;
+
+
+  save();
+
+  renderAll();
+
+  confetti();
+
+  celebrationSound();
+
+
+  /*
+   * Undefeated
+   */
+
+  if(
+    winner.colosseumStreak >= 5
+  ){
+
+    showToast(
+      "🏆 Undefeated unlocked!"
+    );
+
+  }
+
+
+  setTimeout(
+    () => {
+
+      $("battleResultModal")
+        .classList.remove(
+          "show"
+        );
+
+      $("battlePanel")
+        .classList.add(
+          "hidden"
+        );
+
+      $("eventButton")
+        .classList.remove(
+          "hidden"
+        );
+
+      renderColosseum();
+
+    },
+    3000
+  );
+
+}
+
+
+/* =========================================================
+   BACKUP EXPORT
+   ========================================================= */
+
+$("exportBackup")
+  .addEventListener(
+    "click",
+    exportBackup
+  );
+
+
+function exportBackup(){
+
+  const backup = {
+
+    app:"Softoy Ranking",
+
+    version:state.version,
+
+    exportedAt:
+      new Date().toISOString(),
+
+    data:state
+
+  };
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+  link.href =
+    url;
+
+  link.download =
+    "Softoy-Ranking-Backup-" +
+    dateKey(new Date()) +
+    ".json";
+
+  link.click();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  showToast(
+    "📦 Backup exported."
+  );
+
+}
+
+
+/* =========================================================
+   BACKUP IMPORT
+   ========================================================= */
+
+$("importBackup")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("backupFile").click();
+
+    }
+  );
+
+
+$("backupFile")
+  .addEventListener(
+    "change",
+    event => {
+
+      const file =
+        event.target.files[0];
+
+      if(!file)
+        return;
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => {
+
+          try{
+
+            const backup =
+              JSON.parse(
+                reader.result
+              );
+
+
+            const imported =
+              backup.data;
+
+
+            if(
+              !imported ||
+              !Array.isArray(
+                imported.items
+              )
+            ){
+
+              throw new Error(
+                "Invalid backup"
+              );
+
+            }
+
+
+            const confirmed =
+              confirm(
+                "Restore this backup?\n\n" +
+                "Your current data will be replaced."
+              );
+
+
+            if(!confirmed)
+              return;
+
+
+            state = {
+
+              ...state,
+              ...imported,
+
+              settings:{
+                ...state.settings,
+                ...(imported.settings||{})
+              },
+
+              weekly:{
+                ...state.weekly,
+                ...(imported.weekly||{})
+              },
+
+              colosseum:{
+                ...state.colosseum,
+                ...(imported.colosseum||{})
+              }
+
+            };
+
+
+            save();
+
+            renderAll();
+
+            showToast(
+              "📥 Backup restored."
+            );
+
+
+          }catch(error){
+
+            alert(
+              "That file is not a valid Softoy Ranking backup."
+            );
+
+          }
+
+        };
+
+
+      reader.readAsText(
+        file
+      );
+
+
+      event.target.value =
+        "";
+
+    }
+  );
+
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+$("showHistory")
+  .addEventListener(
+    "click",
+    () => {
+
+      renderHistory();
+
+      $("historyModal")
+        .classList.add(
+          "show"
+        );
+
+    }
+  );
+
+
+function renderHistory(){
+
+  const list =
+    $("historyList");
+
+  list.innerHTML =
+    "";
+
+
+  if(
+    !state.transactions.length
+  ){
+
+    list.textContent =
+      "No transactions yet.";
+
+    return;
+
+  }
+
+
+  state.transactions
+    .forEach(
+      tx => {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+        row.className =
+          "archive-row";
+
+
+        const date =
+          new Date(
+            tx.time
+          );
+
+
+        row.innerHTML =
+          `
+          <strong>
+            ${escapeHTML(tx.description)}
+          </strong>
+          <br>
+          <small>
+            ${date.toLocaleString()}
+          </small>
+          <br>
+          <small>
+            ${
+              tx.undone
+                ? "↩️ Transaction reversed"
+                : (
+                    tx.type === "colosseum"
+                      ? "🏟️ Colosseum result"
+                      : "Achievement check: passed"
+                  )
+            }
+          </small>
+          `;
+
+
+        if(!tx.undone){
+
+          const undo =
+            document.createElement(
+              "button"
+            );
+
+          undo.className =
+            "button gray";
+
+          undo.style.marginTop =
+            "7px";
+
+          undo.textContent =
+            "↩️ Undo";
+
+
+          undo.onclick =
+            () =>
+              undoTransaction(
+                tx.id
+              );
+
+
+          row.appendChild(
+            undo
+          );
+
+        }
+
+
+        list.appendChild(
+          row
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+$("resetData")
+  .addEventListener(
+    "click",
+    () => {
+
+      const first =
+        prompt(
+          "This will permanently delete your Softoy data.\n\n" +
+          "Type RESET to continue."
+        );
+
+
+      if(first !== "RESET"){
+
+        showToast(
+          "Reset cancelled."
+        );
+
+        return;
+
+      }
+
+
+      const second =
+        confirm(
+          "⚠️ FINAL WARNING\n\n" +
+          "Delete all Softoys, points, photos, achievements, " +
+          "weekly records, transactions and Colosseum data?"
+        );
+
+
+      if(!second)
+        return;
+
+
+      localStorage.removeItem(
+        STORAGE_KEY
+      );
+
+
+      location.reload();
+
+    }
+  );
+
+
+/* =========================================================
+   MANUAL SAVE
+   ========================================================= */
+
+$("manualSave")
+  .addEventListener(
+    "click",
+    () => {
+
+      if(save()){
+
+        state.settings.lastManualSave =
+          new Date().toISOString();
+
+        save();
+
+        showToast(
+          "💾 Progress saved!"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   PERIODIC SAVE
+   ========================================================= */
+
+setInterval(
+  () => {
+
+    save();
+
+    weeklyCheck();
+
+    checkEvent();
+
+  },
+  30000
+);
+
+
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
+
+function renderAll(){
+
+  weeklyCheck();
+
+  checkEvent();
+
+  renderLeaderboard();
+
+  renderWeekly();
+
+  renderAchievements();
+
+  renderColosseum();
+
+}
+
+
+/* =========================================================
+   INITIALISE
+   ========================================================= */
+
+load();
+
+weeklyCheck();
+
+checkEvent();
+
+renderAll();
+
+
+/*
+ * Autosave whenever the page is hidden.
+ */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if(
+      document.visibilityState ===
+      "hidden"
+    ){
+
+      save();
+
+    }
+
+  }
+);
+
+
+/*
+ * Autosave before leaving.
+ */
+
+window.addEventListener(
+  "beforeunload",
+  save
+);
+
 })();
+
 </script>
+
 </body>
 </html>
