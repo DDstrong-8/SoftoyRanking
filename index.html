@@ -6,7 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<meta name="theme-color" content="#08111f">
+<meta name="theme-color" content="#0b1020">
 
 <link rel="manifest" href="manifest.json">
 
@@ -16,16 +16,11 @@
 
 /* =========================================================
    LOCAL MONTSERRAT
-   Keep this font file beside index.html
    ========================================================= */
 
-@font-face{
-  font-family:"Montserrat";
-  src:url("Montserrat-VariableFont_wght.woff2") format("woff2");
-  font-weight:100 900;
-  font-style:normal;
-  font-display:swap;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 
 /* =========================================================
@@ -34,7 +29,7 @@
 
 :root{
   --bg:#08111f;
-  --panel:rgba(255,255,255,.95);
+  --panel:rgba(255,255,255,.94);
   --text:#101828;
   --muted:#667085;
 
@@ -47,11 +42,6 @@
 
   --shadow:0 12px 35px rgba(0,0,0,.16);
 }
-
-
-/* =========================================================
-   GLOBAL
-   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -76,13 +66,12 @@ body{
   color:var(--text);
 
   /*
-   * IMPORTANT:
-   * background.png must be in the same folder
-   * as this HTML file.
+   * BACKGROUND IMAGE
+   * Make sure the file is named exactly:
+   * background.png
    */
-  background-color:var(--bg);
 
-  background-image:
+  background:
     linear-gradient(
       rgba(8,17,31,.12),
       rgba(8,17,31,.12)
@@ -90,7 +79,7 @@ body{
     url("./background.png");
 
   background-size:cover;
-  background-position:center center;
+  background-position:center;
   background-repeat:no-repeat;
   background-attachment:fixed;
 
@@ -133,18 +122,15 @@ button{
 
 header{
   background:var(--panel);
-
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
 
   border-radius:26px;
-
   padding:22px 18px;
 
   box-shadow:var(--shadow);
 
   text-align:center;
-
   margin-bottom:12px;
 }
 
@@ -168,16 +154,13 @@ h1{
     );
 
   color:transparent;
-
   background-clip:text;
   -webkit-background-clip:text;
 }
 
 .header-sub{
   margin:5px 0 0;
-
   color:var(--muted);
-
   font-weight:750;
 }
 
@@ -188,14 +171,11 @@ h1{
 
 .nav{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns:repeat(4,1fr);
 
   gap:7px;
 
   background:var(--panel);
-
   padding:7px;
 
   border-radius:18px;
@@ -207,13 +187,11 @@ h1{
 
 .nav button{
   border:0;
-
   border-radius:13px;
 
   padding:11px 7px;
 
   background:transparent;
-
   color:#475467;
 
   font-weight:850;
@@ -250,7 +228,6 @@ h1{
   font-family:"Montserrat",sans-serif;
 
   font-size:20px;
-
   font-weight:900;
 }
 
@@ -258,9 +235,7 @@ h1{
   margin:0 0 13px;
 
   color:var(--muted);
-
   font-size:13px;
-
   font-weight:650;
 }
 
@@ -276,7 +251,6 @@ h1{
 
 .search{
   flex:1;
-
   min-width:0;
 
   padding:13px 15px;
@@ -286,7 +260,6 @@ h1{
   border-radius:14px;
 
   outline:none;
-
   background:white;
 }
 
@@ -301,7 +274,6 @@ h1{
 
 .button{
   border:0;
-
   border-radius:13px;
 
   padding:12px 15px;
@@ -346,15 +318,12 @@ h1{
 
 .add-row{
   display:flex;
-
   gap:8px;
-
   margin-top:10px;
 }
 
 .add-input{
   flex:1;
-
   min-width:0;
 
   padding:13px 15px;
@@ -362,7 +331,6 @@ h1{
   border:2px solid #d0d5dd;
 
   border-radius:14px;
-
   outline:none;
 }
 
@@ -373,17 +341,13 @@ h1{
 
 .leaderboard{
   display:flex;
-
   flex-direction:column;
-
   gap:9px;
 }
 
 .item{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   gap:8px;
@@ -392,16 +356,14 @@ h1{
 
   border-radius:18px;
 
-  background:
-    rgba(255,255,255,.96);
+  background:rgba(255,255,255,.95);
 
   border:2px solid transparent;
 
   box-shadow:
     0 5px 18px rgba(0,0,0,.08);
 
-  transition:
-    transform .15s ease;
+  transition:transform .15s ease;
 }
 
 .item:active{
@@ -410,21 +372,16 @@ h1{
 
 .item-left{
   display:flex;
-
   align-items:center;
-
   gap:9px;
 
   min-width:0;
-
   flex:1;
 }
 
 .rank-number{
   width:32px;
-
   text-align:center;
-
   font-weight:950;
 }
 
@@ -439,9 +396,7 @@ h1{
   background:#eef2f6;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   overflow:hidden;
@@ -454,83 +409,66 @@ h1{
 .item-photo img{
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
 .item-info{
   min-width:0;
+  cursor:pointer;
 }
 
 .item-name{
   font-size:16px;
-
   font-weight:900;
 
   overflow:hidden;
-
   text-overflow:ellipsis;
-
   white-space:nowrap;
-
-  cursor:pointer;
 }
 
 .item-detail{
   color:var(--muted);
-
   font-size:11px;
-
   font-weight:700;
 }
 
 
 /* =========================================================
-   ACTIONS
+   RIGHT SIDE
    ========================================================= */
 
 .item-right{
   display:flex;
-
   align-items:center;
-
-  gap:6px;
+  gap:7px;
 }
 
 .points{
   min-width:42px;
-
   text-align:right;
 
   font-size:22px;
-
   font-weight:950;
 }
 
 .action-group{
   display:flex;
-
-  gap:3px;
-
-  flex-wrap:wrap;
-
-  justify-content:flex-end;
+  gap:4px;
 }
 
 .small-button{
-  min-width:32px;
-
-  height:32px;
-
-  padding:0 7px;
+  width:34px;
+  height:34px;
 
   border:0;
-
-  border-radius:9px;
+  border-radius:10px;
 
   color:white;
-
   font-weight:950;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .plus{
@@ -541,17 +479,18 @@ h1{
   background:#ef4444;
 }
 
+/*
+ * IMPORTANT PROFILE BUTTON
+ * This is the 👤 button.
+ */
+
 .profile-button{
   background:#667085;
-}
-
-.edit-button{
-  background:#7c3aed;
+  font-size:17px;
 }
 
 .delete-button{
   background:#d0d5dd;
-
   color:#344054;
 }
 
@@ -639,71 +578,54 @@ h1{
   border:3px dashed #98a2b3;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
-  font-size:35px;
+  font-size:42px;
 }
 
 .profile-big-photo img{
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
 .profile-name{
   font-family:"Montserrat",sans-serif;
-
   font-weight:900;
-
   font-size:28px;
 }
 
 .profile-rank{
   color:var(--muted);
-
   font-weight:750;
-
   margin-top:3px;
 }
 
 .stat-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
   gap:8px;
-
   margin-top:15px;
 }
 
 .stat{
   background:#f2f4f7;
-
   border-radius:15px;
-
   padding:12px;
-
   text-align:center;
 }
 
 .stat-number{
   display:block;
-
   font-size:21px;
-
   font-weight:950;
 }
 
 .stat-label{
   color:var(--muted);
-
   font-size:11px;
-
   font-weight:750;
 }
 
@@ -714,15 +636,12 @@ h1{
 
 .achievement-list{
   display:flex;
-
   flex-direction:column;
-
   gap:9px;
 }
 
 .achievement{
   border-radius:16px;
-
   padding:13px;
 
   background:#f8fafc;
@@ -732,7 +651,6 @@ h1{
 
 .achievement.unlocked{
   border-color:#d4a017;
-
   background:#fffbea;
 }
 
@@ -742,23 +660,16 @@ h1{
 
 .achievement-description{
   margin-top:3px;
-
   color:var(--muted);
-
   font-size:12px;
-
   font-weight:650;
 }
 
 .progress-bar{
   height:9px;
-
   background:#e4e7ec;
-
   border-radius:20px;
-
   overflow:hidden;
-
   margin-top:8px;
 }
 
@@ -802,8 +713,7 @@ h1{
 .archive-row{
   padding:11px;
 
-  border-bottom:
-    1px solid #eaecf0;
+  border-bottom:1px solid #eaecf0;
 }
 
 .archive-row:last-child{
@@ -844,7 +754,6 @@ h1{
   color:white;
 
   font-family:"Montserrat",sans-serif;
-
   font-weight:900;
 
   font-size:20px;
@@ -857,14 +766,12 @@ h1{
     url("./background.png");
 
   background-size:cover;
-
   background-position:center;
 
   box-shadow:
     0 10px 25px rgba(0,0,0,.25);
 
-  transition:
-    transform .25s ease;
+  transition:transform .25s ease;
 }
 
 .colosseum-button:active{
@@ -873,22 +780,15 @@ h1{
 
 .cooldown{
   text-align:center;
-
   margin-top:10px;
-
   font-size:12px;
-
   color:#d0d5dd;
-
   font-weight:750;
 }
 
 .battle-picker{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
@@ -917,37 +817,28 @@ h1{
 
 .player-label{
   font-family:"Montserrat",sans-serif;
-
   font-size:13px;
-
   font-weight:900;
 }
 
 .player-name{
   margin-top:12px;
-
   font-weight:950;
-
   font-size:17px;
 }
 
 .player-remove{
   position:absolute;
-
   right:7px;
-
   top:7px;
 
   width:27px;
-
   height:27px;
 
   border:0;
-
   border-radius:50%;
 
   background:#ef4444;
-
   color:white;
 
   font-weight:950;
@@ -955,11 +846,9 @@ h1{
 
 .ready-button{
   width:100%;
-
   margin-top:12px;
 
   border:0;
-
   border-radius:15px;
 
   padding:15px;
@@ -974,7 +863,6 @@ h1{
   color:white;
 
   font-family:"Montserrat",sans-serif;
-
   font-weight:900;
 
   font-size:17px;
@@ -991,17 +879,14 @@ h1{
 
 .settings-grid{
   display:grid;
-
   gap:9px;
 }
 
 .settings-button{
   width:100%;
-
   text-align:left;
 
   border:0;
-
   border-radius:15px;
 
   padding:15px;
@@ -1020,19 +905,16 @@ h1{
 
 .modal{
   position:fixed;
-
   inset:0;
 
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   padding:15px;
 
-  background:
-    rgba(3,7,18,.58);
+  background:rgba(3,7,18,.58);
 
   z-index:100;
 }
@@ -1043,13 +925,10 @@ h1{
 
 .modal-card{
   width:min(650px,100%);
-
   max-height:92vh;
-
   overflow:auto;
 
-  background:
-    rgba(255,255,255,.98);
+  background:rgba(255,255,255,.98);
 
   border-radius:25px;
 
@@ -1058,53 +937,39 @@ h1{
   box-shadow:
     0 25px 70px rgba(0,0,0,.3);
 
-  animation:
-    modalIn .22s ease;
+  animation:modalIn .22s ease;
 }
 
 @keyframes modalIn{
-
   from{
     opacity:0;
-
-    transform:
-      translateY(18px)
-      scale(.97);
+    transform:translateY(18px) scale(.97);
   }
 
   to{
     opacity:1;
-
     transform:none;
   }
-
 }
 
 .modal-head{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   gap:10px;
 }
 
 .modal-title{
   font-family:"Montserrat",sans-serif;
-
   font-size:22px;
-
   font-weight:900;
 }
 
 .close{
   width:36px;
-
   height:36px;
 
   border:0;
-
   border-radius:50%;
 
   background:#e4e7ec;
@@ -1123,9 +988,7 @@ h1{
 
 .battle-versus{
   display:grid;
-
-  grid-template-columns:
-    1fr auto 1fr;
+  grid-template-columns:1fr auto 1fr;
 
   align-items:center;
 
@@ -1150,9 +1013,7 @@ h1{
 
 .vs{
   font-family:"Montserrat",sans-serif;
-
   font-weight:950;
-
   color:#dc2626;
 }
 
@@ -1167,7 +1028,6 @@ h1{
 
 .battle-player.loser{
   opacity:.45;
-
   transform:scale(.94);
 }
 
@@ -1192,7 +1052,6 @@ h1{
   top:-20px;
 
   width:9px;
-
   height:16px;
 
   z-index:999;
@@ -1216,7 +1075,6 @@ h1{
       translateY(105vh)
       rotate(720deg);
   }
-
 }
 
 
@@ -1228,7 +1086,6 @@ h1{
   position:fixed;
 
   left:50%;
-
   bottom:25px;
 
   transform:
@@ -1238,7 +1095,6 @@ h1{
   opacity:0;
 
   background:#101828;
-
   color:white;
 
   padding:12px 17px;
@@ -1246,7 +1102,6 @@ h1{
   border-radius:14px;
 
   font-weight:800;
-
   font-size:13px;
 
   z-index:1000;
@@ -1269,11 +1124,10 @@ h1{
    RESPONSIVE
    ========================================================= */
 
-@media(max-width:700px){
+@media(max-width:650px){
 
   .nav{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .search-row{
@@ -1302,48 +1156,23 @@ h1{
 
   .item-photo{
     width:47px;
-
     height:47px;
-
     flex-basis:47px;
   }
 
   .points{
     font-size:19px;
-
     min-width:32px;
   }
 
   .small-button{
-    min-width:29px;
-
-    height:29px;
-
-    font-size:12px;
+    width:30px;
+    height:30px;
   }
 
   .stat-grid{
     grid-template-columns:1fr;
   }
-
-}
-
-@media(max-width:500px){
-
-  .item{
-    align-items:flex-start;
-  }
-
-  .item-right{
-    flex-direction:column;
-
-    align-items:flex-end;
-  }
-
-  .action-group{
-    max-width:150px;
-  }
-
 }
 
 </style>
@@ -1376,31 +1205,19 @@ Rank your Softoys • Track achievements • Enter the Colosseum
 
 <nav class="nav">
 
-<button
-  class="nav-btn active"
-  data-page="ranking"
->
+<button class="nav-btn active" data-page="ranking">
 🏆 Ranking
 </button>
 
-<button
-  class="nav-btn"
-  data-page="weekly"
->
+<button class="nav-btn" data-page="weekly">
 📅 Weekly
 </button>
 
-<button
-  class="nav-btn"
-  data-page="colosseum"
->
+<button class="nav-btn" data-page="colosseum">
 🏟️ Colosseum
 </button>
 
-<button
-  class="nav-btn"
-  data-page="achievements"
->
+<button class="nav-btn" data-page="achievements">
 🎖️ Achievements
 </button>
 
@@ -1411,10 +1228,7 @@ Rank your Softoys • Track achievements • Enter the Colosseum
      RANKING PAGE
      ===================================================== -->
 
-<section
-  id="page-ranking"
-  class="page"
->
+<section id="page-ranking" class="page">
 
 <div class="card">
 
@@ -1423,23 +1237,22 @@ Softoys
 </h2>
 
 <p class="card-sub">
-Search a Softoy to manage points or open its profile.
+Search a Softoy to add points, deduct points or open its profile.
 </p>
-
 
 <div class="search-row">
 
 <input
-  id="mainSearch"
-  class="search"
-  type="search"
-  placeholder="🔎 Search Softoys by name..."
-  autocomplete="off"
+id="mainSearch"
+class="search"
+type="search"
+placeholder="🔎 Search Softoys by name..."
+autocomplete="off"
 >
 
 <button
-  id="clearSearch"
-  class="button gray"
+id="clearSearch"
+class="button gray"
 >
 Clear
 </button>
@@ -1450,16 +1263,16 @@ Clear
 <div class="add-row">
 
 <input
-  id="newName"
-  class="add-input"
-  maxlength="30"
-  placeholder="Enter a new Softoy..."
-  autocomplete="off"
+id="newName"
+class="add-input"
+maxlength="30"
+placeholder="Enter a new Softoy..."
+autocomplete="off"
 >
 
 <button
-  id="addSoftoy"
-  class="button green"
+id="addSoftoy"
+class="button green"
 >
 + Add Softoy
 </button>
@@ -1470,17 +1283,17 @@ Clear
 
 
 <div
-  id="leaderboard"
-  class="leaderboard"
+id="leaderboard"
+class="leaderboard"
 ></div>
 
 
 <div class="card">
 
 <button
-  id="manualSave"
-  class="button green"
-  style="width:100%"
+id="manualSave"
+class="button green"
+style="width:100%"
 >
 💾 Save Progress
 </button>
@@ -1491,12 +1304,12 @@ Clear
 
 
 <!-- =====================================================
-     WEEKLY
+     WEEKLY PAGE
      ===================================================== -->
 
 <section
-  id="page-weekly"
-  class="page hidden"
+id="page-weekly"
+class="page hidden"
 >
 
 <div class="card">
@@ -1510,8 +1323,8 @@ The weekly competition automatically rolls over every Monday at 00:00.
 </p>
 
 <div
-  id="weeklyCurrent"
-  class="weekly-box"
+id="weeklyCurrent"
+class="weekly-box"
 ></div>
 
 </div>
@@ -1531,12 +1344,12 @@ The weekly competition automatically rolls over every Monday at 00:00.
 
 
 <!-- =====================================================
-     COLOSSEUM
+     COLOSSEUM PAGE
      ===================================================== -->
 
 <section
-  id="page-colosseum"
-  class="page hidden"
+id="page-colosseum"
+class="page hidden"
 >
 
 <div class="card colosseum-card">
@@ -1549,26 +1362,24 @@ The weekly competition automatically rolls over every Monday at 00:00.
 Battle two Softoys in a 50/50 match. The winner receives 2–8 points.
 </p>
 
-
 <button
-  id="eventButton"
-  class="colosseum-button"
+id="eventButton"
+class="colosseum-button"
 >
 🏟️ The Colosseum Is Back!
 </button>
 
-
 <div
-  id="cooldownText"
-  class="cooldown"
+id="cooldownText"
+class="cooldown"
 ></div>
 
 </div>
 
 
 <div
-  id="battlePanel"
-  class="card hidden"
+id="battlePanel"
+class="card hidden"
 >
 
 <h2 class="card-title">
@@ -1589,15 +1400,15 @@ P1
 </div>
 
 <div
-  id="p1Name"
-  class="player-name"
+id="p1Name"
+class="player-name"
 >
 Not selected
 </div>
 
 <button
-  id="p1Remove"
-  class="player-remove hidden"
+id="p1Remove"
+class="player-remove hidden"
 >
 ×
 </button>
@@ -1612,15 +1423,15 @@ P2
 </div>
 
 <div
-  id="p2Name"
-  class="player-name"
+id="p2Name"
+class="player-name"
 >
 Not selected
 </div>
 
 <button
-  id="p2Remove"
-  class="player-remove hidden"
+id="p2Remove"
+class="player-remove hidden"
 >
 ×
 </button>
@@ -1633,26 +1444,26 @@ Not selected
 <div class="battle-search">
 
 <input
-  id="battleSearch"
-  class="search"
-  type="search"
-  placeholder="🔎 Search Softoy for P1 or P2..."
-  autocomplete="off"
+id="battleSearch"
+class="search"
+type="search"
+placeholder="🔎 Search Softoy for P1 or P2..."
+autocomplete="off"
 >
 
 </div>
 
 
 <div
-  id="battleCandidates"
-  class="leaderboard"
-  style="margin-top:9px"
+id="battleCandidates"
+class="leaderboard"
+style="margin-top:9px"
 ></div>
 
 
 <button
-  id="readyButton"
-  class="ready-button"
+id="readyButton"
+class="ready-button"
 >
 Ready?
 </button>
@@ -1667,8 +1478,8 @@ Ready?
      ===================================================== -->
 
 <section
-  id="page-achievements"
-  class="page hidden"
+id="page-achievements"
+class="page hidden"
 >
 
 <div class="card">
@@ -1682,8 +1493,8 @@ Work toward achievements and track your progress.
 </p>
 
 <div
-  id="achievementList"
-  class="achievement-list"
+id="achievementList"
+class="achievement-list"
 ></div>
 
 </div>
@@ -1704,29 +1515,29 @@ Work toward achievements and track your progress.
 <div class="settings-grid">
 
 <button
-  id="exportBackup"
-  class="settings-button"
+id="exportBackup"
+class="settings-button"
 >
 📦 Export Backup
 </button>
 
 <button
-  id="importBackup"
-  class="settings-button"
+id="importBackup"
+class="settings-button"
 >
 📥 Import Backup
 </button>
 
 <button
-  id="showHistory"
-  class="settings-button"
+id="showHistory"
+class="settings-button"
 >
 ↩️ Transaction History
 </button>
 
 <button
-  id="resetData"
-  class="settings-button"
+id="resetData"
+class="settings-button"
 >
 ⚠️ Reset All Data
 </button>
@@ -1734,10 +1545,10 @@ Work toward achievements and track your progress.
 </div>
 
 <input
-  id="backupFile"
-  type="file"
-  accept=".json,application/json"
-  hidden
+id="backupFile"
+type="file"
+accept=".json,application/json"
+hidden
 >
 
 </div>
@@ -1751,8 +1562,8 @@ Work toward achievements and track your progress.
      ===================================================== -->
 
 <div
-  id="profileModal"
-  class="modal"
+id="profileModal"
+class="modal"
 >
 
 <div class="modal-card">
@@ -1764,8 +1575,8 @@ Work toward achievements and track your progress.
 </div>
 
 <button
-  class="close"
-  data-close="profileModal"
+class="close"
+data-close="profileModal"
 >
 ×
 </button>
@@ -1776,21 +1587,23 @@ Work toward achievements and track your progress.
 <div class="profile-hero">
 
 <div
-  id="profilePhoto"
-  class="profile-big-photo"
+id="profilePhoto"
+class="profile-big-photo"
 >
-📷
+👤
 </div>
 
 <div
-  id="profileName"
-  class="profile-name"
-></div>
+id="profileName"
+class="profile-name"
+>
+</div>
 
 <div
-  id="profileRank"
-  class="profile-rank"
-></div>
+id="profileRank"
+class="profile-rank"
+>
+</div>
 
 </div>
 
@@ -1800,8 +1613,8 @@ Work toward achievements and track your progress.
 <div class="stat">
 
 <span
-  id="profilePoints"
-  class="stat-number"
+id="profilePoints"
+class="stat-number"
 >
 0
 </span>
@@ -1816,8 +1629,8 @@ Points
 <div class="stat">
 
 <span
-  id="profileWins"
-  class="stat-number"
+id="profileWins"
+class="stat-number"
 >
 0
 </span>
@@ -1832,8 +1645,8 @@ Colosseum Wins
 <div class="stat">
 
 <span
-  id="profileStreak"
-  class="stat-number"
+id="profileStreak"
+class="stat-number"
 >
 0
 </span>
@@ -1848,24 +1661,25 @@ Win Streak
 
 
 <div
-  style="
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:14px;
-  "
+style="
+display:flex;
+gap:8px;
+margin-top:14px;
+"
 >
 
 <button
-  id="editProfile"
-  class="button blue"
+id="editProfile"
+class="button blue"
+style="flex:1"
 >
 ✏️ Edit Name
 </button>
 
 <button
-  id="changeProfilePhoto"
-  class="button green"
+id="changeProfilePhoto"
+class="button green"
+style="flex:1"
 >
 📷 Change Photo
 </button>
@@ -1882,8 +1696,8 @@ Win Streak
      ===================================================== -->
 
 <div
-  id="battleResultModal"
-  class="modal"
+id="battleResultModal"
+class="modal"
 >
 
 <div class="modal-card battle-screen">
@@ -1895,8 +1709,8 @@ Win Streak
 </div>
 
 <button
-  class="close"
-  data-close="battleResultModal"
+class="close"
+data-close="battleResultModal"
 >
 ×
 </button>
@@ -1907,8 +1721,8 @@ Win Streak
 <div class="battle-versus">
 
 <div
-  id="battleP1"
-  class="battle-player"
+id="battleP1"
+class="battle-player"
 >
 P1
 </div>
@@ -1918,8 +1732,8 @@ VS
 </div>
 
 <div
-  id="battleP2"
-  class="battle-player"
+id="battleP2"
+class="battle-player"
 >
 P2
 </div>
@@ -1928,9 +1742,10 @@ P2
 
 
 <div
-  id="battleResult"
-  class="result"
-></div>
+id="battleResult"
+class="result"
+>
+</div>
 
 </div>
 
@@ -1942,8 +1757,8 @@ P2
      ===================================================== -->
 
 <div
-  id="historyModal"
-  class="modal"
+id="historyModal"
+class="modal"
 >
 
 <div class="modal-card">
@@ -1955,8 +1770,8 @@ P2
 </div>
 
 <button
-  class="close"
-  data-close="historyModal"
+class="close"
+data-close="historyModal"
 >
 ×
 </button>
@@ -1975,8 +1790,8 @@ P2
      ===================================================== -->
 
 <div
-  id="toast"
-  class="toast"
+id="toast"
+class="toast"
 >
 Saved
 </div>
@@ -2075,6 +1890,15 @@ function escapeHTML(text){
 }
 
 
+function getItem(id){
+
+  return state.items.find(
+    x => x.id === id
+  );
+
+}
+
+
 /* =========================================================
    SAVE / LOAD
    ========================================================= */
@@ -2107,13 +1931,35 @@ function load(){
 
   try{
 
-    const raw =
+    /*
+     * First try the new storage key.
+     */
+
+    let raw =
       localStorage.getItem(
         STORAGE_KEY
       );
 
+
+    /*
+     * If this is an update from the
+     * previous version, also look for
+     * the old data.
+     */
+
+    if(!raw){
+
+      raw =
+        localStorage.getItem(
+          "softoy_ranking_complete_v1"
+        );
+
+    }
+
+
     if(!raw)
       return;
+
 
     const saved =
       JSON.parse(raw);
@@ -2123,6 +1969,8 @@ function load(){
 
       ...state,
       ...saved,
+
+      version:2,
 
       items:
         Array.isArray(saved.items)
@@ -2146,18 +1994,16 @@ function load(){
 
       colosseum:{
         ...state.colosseum,
-        ...(saved.colosseum || {}),
-
-        wins:{
-          ...state.colosseum.wins,
-          ...((saved.colosseum || {}).wins || {})
-        }
+        ...(saved.colosseum || {})
       }
 
     };
 
 
-    /* Make sure older Softoys receive missing fields. */
+    /*
+     * Make sure older Softoys have
+     * all required properties.
+     */
 
     state.items.forEach(item => {
 
@@ -2174,6 +2020,9 @@ function load(){
         item.photo = null;
 
     });
+
+
+    save();
 
   }catch(error){
 
@@ -2200,21 +2049,15 @@ function showToast(message){
   toast.textContent =
     message;
 
-  toast.classList.add(
-    "show"
-  );
+  toast.classList.add("show");
 
-  clearTimeout(
-    toastTimer
-  );
+  clearTimeout(toastTimer);
 
   toastTimer =
     setTimeout(
       () => {
 
-        toast.classList.remove(
-          "show"
-        );
+        toast.classList.remove("show");
 
       },
       1800
@@ -2243,6 +2086,7 @@ function celebrationSound(){
 
     const notes =
       [523.25,659.25,783.99,1046.5];
+
 
     notes.forEach(
       (frequency,index) => {
@@ -2280,7 +2124,6 @@ function celebrationSound(){
         );
 
         oscillator.connect(gain);
-
         gain.connect(ctx.destination);
 
         oscillator.start(
@@ -2317,9 +2160,7 @@ function confetti(){
   ){
 
     const piece =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     piece.className =
       "confetti-piece";
@@ -2331,11 +2172,6 @@ function confetti(){
     piece.style.animationDelay =
       Math.random()*.7 +
       "s";
-
-    piece.style.transform =
-      "rotate(" +
-      Math.random()*360 +
-      "deg)";
 
     piece.style.background =
       [
@@ -2351,9 +2187,7 @@ function confetti(){
         )
       ];
 
-    document.body.appendChild(
-      piece
-    );
+    document.body.appendChild(piece);
 
     setTimeout(
       () => piece.remove(),
@@ -2442,6 +2276,7 @@ function transaction(
 
   });
 
+
   state.transactions =
     state.transactions.slice(
       0,
@@ -2458,6 +2293,7 @@ function undoTransaction(id){
       x => x.id === id
     );
 
+
   if(!tx || tx.undone){
 
     showToast(
@@ -2472,16 +2308,9 @@ function undoTransaction(id){
   if(tx.type === "points"){
 
     const item =
-      state.items.find(
-        x => x.id === tx.itemId
-      );
+      getItem(tx.itemId);
 
     if(item){
-
-      /*
-       * Reverse the original amount.
-       * This correctly handles both +1 and -1.
-       */
 
       item.points =
         Math.max(
@@ -2498,9 +2327,7 @@ function undoTransaction(id){
   if(tx.type === "colosseum"){
 
     const winner =
-      state.items.find(
-        x => x.id === tx.itemId
-      );
+      getItem(tx.itemId);
 
     if(winner){
 
@@ -2517,13 +2344,8 @@ function undoTransaction(id){
           (winner.colosseumWins||0)-1
         );
 
-      winner.colosseumStreak =
-        Math.max(
-          0,
-          (winner.colosseumStreak||0)-1
-        );
-
     }
+
 
     state.colosseum.wins[
       tx.itemId
@@ -2563,12 +2385,14 @@ function changePoints(
   const oldRank =
     rankOf(item);
 
+
   item.points =
     Math.max(
       0,
       (item.points||0) +
       amount
     );
+
 
   transaction(
     (amount >= 0 ? "+" : "") +
@@ -2580,12 +2404,15 @@ function changePoints(
     "points"
   );
 
+
   save();
 
   renderAll();
 
+
   const newRank =
     rankOf(item);
+
 
   if(
     amount > 0 &&
@@ -2621,13 +2448,8 @@ $("newName")
     "keydown",
     event => {
 
-      if(
-        event.key === "Enter"
-      ){
-
+      if(event.key === "Enter")
         addSoftoy();
-
-      }
 
     }
   );
@@ -2641,42 +2463,20 @@ function addSoftoy(){
   const name =
     input.value.trim();
 
+
   if(!name){
 
-    showToast(
-      "Enter a Softoy name first."
-    );
+    input.focus();
 
     return;
 
   }
 
 
-  if(
-    state.items.length >= 150
-  ){
+  if(state.items.length >= 150){
 
     alert(
       "You can track up to 150 Softoys."
-    );
-
-    return;
-
-  }
-
-
-  const duplicate =
-    state.items.some(
-      item =>
-        item.name.toLowerCase() ===
-        name.toLowerCase()
-    );
-
-
-  if(duplicate){
-
-    showToast(
-      "That Softoy already exists."
     );
 
     return;
@@ -2688,10 +2488,7 @@ function addSoftoy(){
 
     id:uid(),
 
-    name:name.slice(
-      0,
-      30
-    ),
+    name:name.slice(0,30),
 
     points:0,
 
@@ -2704,21 +2501,16 @@ function addSoftoy(){
   };
 
 
-  state.items.push(
-    item
-  );
+  state.items.push(item);
 
   save();
 
-  input.value =
-    "";
+  input.value = "";
 
   renderAll();
 
   showToast(
-    "✓ " +
-    item.name +
-    " added!"
+    "✓ Softoy added — tap 👤 to open profile"
   );
 
 }
@@ -2740,8 +2532,7 @@ $("clearSearch")
     "click",
     () => {
 
-      $("mainSearch").value =
-        "";
+      $("mainSearch").value = "";
 
       renderLeaderboard();
 
@@ -2758,14 +2549,15 @@ function renderLeaderboard(){
   const board =
     $("leaderboard");
 
-  board.innerHTML =
-    "";
+  board.innerHTML = "";
+
 
   const query =
     $("mainSearch")
       .value
       .trim()
       .toLowerCase();
+
 
   const visible =
     sortedItems()
@@ -2780,350 +2572,246 @@ function renderLeaderboard(){
   if(!visible.length){
 
     const empty =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
-    empty.className =
-      "card";
+    empty.className = "card";
 
     empty.textContent =
       query
         ? "No Softoys found."
         : "Add your first Softoy above.";
 
-    board.appendChild(
-      empty
-    );
+    board.appendChild(empty);
 
     return;
 
   }
 
 
-  visible.forEach(
-    item => {
+  visible.forEach(item => {
 
-      const rank =
-        rankOf(item);
+    const rank =
+      rankOf(item);
 
-      const row =
-        document.createElement(
-          "div"
-        );
 
-      row.className =
-        "item " +
-        rankClass(rank);
+    const row =
+      document.createElement("div");
 
+    row.className =
+      "item " +
+      rankClass(rank);
 
-      /* LEFT */
 
-      const left =
-        document.createElement(
-          "div"
-        );
+    /* LEFT */
 
-      left.className =
-        "item-left";
+    const left =
+      document.createElement("div");
 
+    left.className =
+      "item-left";
 
-      const rankElement =
-        document.createElement(
-          "div"
-        );
 
-      rankElement.className =
-        "rank-number";
+    const rankElement =
+      document.createElement("div");
 
-      rankElement.textContent =
-        "#" + rank;
+    rankElement.className =
+      "rank-number";
 
+    rankElement.textContent =
+      "#" + rank;
 
-      const photo =
-        document.createElement(
-          "div"
-        );
 
-      photo.className =
-        "item-photo";
+    const photo =
+      document.createElement("div");
 
+    photo.className =
+      "item-photo";
 
-      if(item.photo){
 
-        const image =
-          document.createElement(
-            "img"
-          );
+    if(item.photo){
 
-        image.src =
-          item.photo;
+      const image =
+        document.createElement("img");
 
-        image.alt =
-          item.name;
+      image.src =
+        item.photo;
 
-        photo.appendChild(
-          image
-        );
+      image.alt =
+        item.name;
 
-      }else{
+      photo.appendChild(image);
 
-        photo.textContent =
-          "📷";
+    }else{
 
-      }
-
-
-      photo.addEventListener(
-        "click",
-        () => openProfile(item)
-      );
-
-
-      const info =
-        document.createElement(
-          "div"
-        );
-
-      info.className =
-        "item-info";
-
-
-      info.innerHTML =
-        `
-        <div class="item-name">
-          ${escapeHTML(item.name)}
-        </div>
-
-        <div class="item-detail">
-          ${item.points||0} points •
-          ${item.colosseumWins||0} Colosseum wins
-        </div>
-        `;
-
-
-      info
-        .querySelector(".item-name")
-        .addEventListener(
-          "click",
-          () => openProfile(item)
-        );
-
-
-      left.append(
-        rankElement,
-        photo,
-        info
-      );
-
-
-      /* RIGHT */
-
-      const right =
-        document.createElement(
-          "div"
-        );
-
-      right.className =
-        "item-right";
-
-
-      const points =
-        document.createElement(
-          "div"
-        );
-
-      points.className =
-        "points";
-
-      points.textContent =
-        item.points||0;
-
-
-      const actions =
-        document.createElement(
-          "div"
-        );
-
-      actions.className =
-        "action-group";
-
-
-      function actionButton(
-        text,
-        cls,
-        title,
-        fn
-      ){
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-        button.className =
-          "small-button " +
-          cls;
-
-        button.textContent =
-          text;
-
-        button.title =
-          title;
-
-        button.setAttribute(
-          "aria-label",
-          title
-        );
-
-        button.addEventListener(
-          "click",
-          fn
-        );
-
-        actions.appendChild(
-          button
-        );
-
-      }
-
-
-      actionButton(
-        "+",
-        "plus",
-        "Add 1 point",
-        () =>
-          changePoints(
-            item,
-            1
-          )
-      );
-
-
-      actionButton(
-        "−",
-        "minus",
-        "Remove 1 point",
-        () =>
-          changePoints(
-            item,
-            -1
-          )
-      );
-
-
-      /*
-       * THIS IS THE NEW CLEAR PROFILE BUTTON.
-       */
-
-      actionButton(
-        "👤",
-        "profile-button",
-        "Open Softoy Profile",
-        () =>
-          openProfile(item)
-      );
-
-
-      /*
-       * Pencil is now ONLY for editing the name.
-       */
-
-      actionButton(
-        "✏",
-        "edit-button",
-        "Edit Softoy Name",
-        () =>
-          editSoftoyName(item)
-      );
-
-
-      actionButton(
-        "🗑",
-        "delete-button",
-        "Delete Softoy",
-        () =>
-          deleteItem(item)
-      );
-
-
-      right.append(
-        points,
-        actions
-      );
-
-
-      row.append(
-        left,
-        right
-      );
-
-
-      board.appendChild(
-        row
-      );
+      photo.textContent =
+        "👤";
 
     }
-  );
-
-}
 
 
-/* =========================================================
-   EDIT NAME
-   ========================================================= */
-
-function editSoftoyName(item){
-
-  const name =
-    prompt(
-      "Enter a new name:",
-      item.name
-    );
-
-  if(
-    !name ||
-    !name.trim()
-  )
-    return;
-
-
-  const newName =
-    name
-      .trim()
-      .slice(0,30);
-
-
-  const duplicate =
-    state.items.some(
-      other =>
-        other.id !== item.id &&
-        other.name.toLowerCase() ===
-        newName.toLowerCase()
+    photo.addEventListener(
+      "click",
+      () => openProfile(item)
     );
 
 
-  if(duplicate){
+    const info =
+      document.createElement("div");
 
-    showToast(
-      "That Softoy name is already being used."
+    info.className =
+      "item-info";
+
+
+    info.innerHTML =
+      `
+      <div class="item-name">
+        ${escapeHTML(item.name)}
+      </div>
+
+      <div class="item-detail">
+        ${item.points||0} points •
+        ${item.colosseumWins||0} Colosseum wins
+      </div>
+      `;
+
+
+    info.addEventListener(
+      "click",
+      () => openProfile(item)
     );
 
-    return;
 
-  }
+    left.append(
+      rankElement,
+      photo,
+      info
+    );
 
 
-  item.name =
-    newName;
+    /* RIGHT */
 
-  save();
+    const right =
+      document.createElement("div");
 
-  renderAll();
+    right.className =
+      "item-right";
 
-  showToast(
-    "✓ Name updated"
-  );
+
+    const points =
+      document.createElement("div");
+
+    points.className =
+      "points";
+
+    points.textContent =
+      item.points||0;
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "action-group";
+
+
+    function actionButton(
+      text,
+      cls,
+      label,
+      fn
+    ){
+
+      const button =
+        document.createElement("button");
+
+      button.className =
+        "small-button " +
+        cls;
+
+      button.textContent =
+        text;
+
+      button.title =
+        label;
+
+      button.setAttribute(
+        "aria-label",
+        label
+      );
+
+      button.addEventListener(
+        "click",
+        fn
+      );
+
+      actions.appendChild(button);
+
+    }
+
+
+    actionButton(
+      "+",
+      "plus",
+      "Add 1 point",
+      () =>
+        changePoints(
+          item,
+          1
+        )
+    );
+
+
+    actionButton(
+      "−",
+      "minus",
+      "Remove 1 point",
+      () =>
+        changePoints(
+          item,
+          -1
+        )
+    );
+
+
+    /*
+     * THIS IS THE NEW PROFILE BUTTON.
+     *
+     * It opens the complete Softoy Profile.
+     */
+
+    actionButton(
+      "👤",
+      "profile-button",
+      "Open Softoy Profile",
+      () =>
+        openProfile(item)
+    );
+
+
+    actionButton(
+      "🗑",
+      "delete-button",
+      "Delete Softoy",
+      () =>
+        deleteItem(item)
+    );
+
+
+    right.append(
+      points,
+      actions
+    );
+
+
+    row.append(
+      left,
+      right
+    );
+
+
+    board.appendChild(row);
+
+  });
 
 }
 
@@ -3142,6 +2830,7 @@ function deleteItem(item){
       "This will remove the Softoy and its data."
     );
 
+
   if(!confirmed)
     return;
 
@@ -3152,15 +2841,10 @@ function deleteItem(item){
     );
 
 
-  if(
-    state.colosseum.p1 === item.id
-  )
+  if(state.colosseum.p1 === item.id)
     state.colosseum.p1 = null;
 
-
-  if(
-    state.colosseum.p2 === item.id
-  )
+  if(state.colosseum.p2 === item.id)
     state.colosseum.p2 = null;
 
 
@@ -3201,7 +2885,7 @@ function openProfile(item){
 
   $("profileRank")
     .textContent =
-    "Current Rank: #" +
+    "Ranking position #" +
     rank;
 
 
@@ -3223,16 +2907,14 @@ function openProfile(item){
   const photo =
     $("profilePhoto");
 
-  photo.innerHTML =
-    "";
+
+  photo.innerHTML = "";
 
 
   if(item.photo){
 
     const image =
-      document.createElement(
-        "img"
-      );
+      document.createElement("img");
 
     image.src =
       item.photo;
@@ -3240,28 +2922,24 @@ function openProfile(item){
     image.alt =
       item.name;
 
-    photo.appendChild(
-      image
-    );
+    photo.appendChild(image);
 
   }else{
 
     photo.textContent =
-      "📷";
+      "👤";
 
   }
 
 
   $("profileModal")
-    .classList.add(
-      "show"
-    );
+    .classList.add("show");
 
 }
 
 
 /* =========================================================
-   PROFILE EDIT
+   EDIT PROFILE NAME
    ========================================================= */
 
 $("editProfile")
@@ -3270,18 +2948,38 @@ $("editProfile")
     () => {
 
       const item =
-        getProfileItem();
+        getItem(profileId);
+
 
       if(!item)
         return;
 
-      editSoftoyName(item);
 
-      const updated =
-        getProfileItem();
+      const name =
+        prompt(
+          "Enter a new name:",
+          item.name
+        );
 
-      if(updated)
-        openProfile(updated);
+
+      if(
+        name &&
+        name.trim()
+      ){
+
+        item.name =
+          name
+            .trim()
+            .slice(0,30);
+
+
+        save();
+
+        renderAll();
+
+        openProfile(item);
+
+      }
 
     }
   );
@@ -3301,9 +2999,7 @@ $("changeProfilePhoto")
 
 
       const input =
-        document.createElement(
-          "input"
-        );
+        document.createElement("input");
 
       input.type =
         "file";
@@ -3318,14 +3014,12 @@ $("changeProfilePhoto")
           const file =
             event.target.files[0];
 
+
           if(!file)
             return;
 
 
-          if(
-            file.size >
-            5*1024*1024
-          ){
+          if(file.size > 5*1024*1024){
 
             alert(
               "Please choose an image under 5 MB."
@@ -3344,11 +3038,7 @@ $("changeProfilePhoto")
             () => {
 
               const item =
-                state.items.find(
-                  x =>
-                    x.id ===
-                    photoTarget
-                );
+                getItem(photoTarget);
 
 
               if(item){
@@ -3356,26 +3046,19 @@ $("changeProfilePhoto")
                 item.photo =
                   reader.result;
 
+
                 save();
 
                 renderAll();
 
-                openProfile(
-                  item
-                );
-
-                showToast(
-                  "📷 Profile photo updated!"
-                );
+                openProfile(item);
 
               }
 
             };
 
 
-          reader.readAsDataURL(
-            file
-          );
+          reader.readAsDataURL(file);
 
         };
 
@@ -3386,69 +3069,45 @@ $("changeProfilePhoto")
   );
 
 
-function getProfileItem(){
-
-  return state.items.find(
-    x =>
-      x.id === profileId
-  );
-
-}
-
-
 /* =========================================================
    MODALS
    ========================================================= */
 
 document
-  .querySelectorAll(
-    "[data-close]"
-  )
-  .forEach(
-    button => {
+  .querySelectorAll("[data-close]")
+  .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-          $(button.dataset.close)
-            .classList.remove(
-              "show"
-            );
+        $(button.dataset.close)
+          .classList.remove("show");
 
-        }
-      );
+      }
+    );
 
-    }
-  );
+  });
 
 
 document
-  .querySelectorAll(
-    ".modal"
-  )
-  .forEach(
-    modal => {
+  .querySelectorAll(".modal")
+  .forEach(modal => {
 
-      modal.addEventListener(
-        "click",
-        event => {
+    modal.addEventListener(
+      "click",
+      event => {
 
-          if(
-            event.target === modal
-          ){
+        if(event.target === modal){
 
-            modal.classList.remove(
-              "show"
-            );
-
-          }
+          modal.classList.remove("show");
 
         }
-      );
 
-    }
-  );
+      }
+    );
+
+  });
 
 
 /* =========================================================
@@ -3456,72 +3115,51 @@ document
    ========================================================= */
 
 document
-  .querySelectorAll(
-    ".nav-btn"
-  )
-  .forEach(
-    button => {
+  .querySelectorAll(".nav-btn")
+  .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-          const page =
-            button.dataset.page;
+        const page =
+          button.dataset.page;
 
 
-          document
-            .querySelectorAll(
-              ".nav-btn"
-            )
-            .forEach(
-              x =>
-                x.classList.remove(
-                  "active"
-                )
-            );
-
-
-          button.classList.add(
-            "active"
+        document
+          .querySelectorAll(".nav-btn")
+          .forEach(x =>
+            x.classList.remove("active")
           );
 
 
-          document
-            .querySelectorAll(
-              ".page"
-            )
-            .forEach(
-              section => {
-
-                section.classList.add(
-                  "hidden"
-                );
-
-              }
-            );
+        button.classList.add("active");
 
 
-          $("page-" + page)
-            .classList.remove(
-              "hidden"
-            );
+        document
+          .querySelectorAll(".page")
+          .forEach(section =>
+            section.classList.add("hidden")
+          );
 
 
-          if(page === "weekly")
-            renderWeekly();
+        $("page-" + page)
+          .classList.remove("hidden");
 
-          if(page === "colosseum")
-            renderColosseum();
 
-          if(page === "achievements")
-            renderAchievements();
+        if(page === "weekly")
+          renderWeekly();
 
-        }
-      );
+        if(page === "colosseum")
+          renderColosseum();
 
-    }
-  );
+        if(page === "achievements")
+          renderAchievements();
+
+      }
+    );
+
+  });
 
 
 /* =========================================================
@@ -3533,22 +3171,24 @@ function mondayStart(date){
   const d =
     new Date(date);
 
-  d.setHours(
-    0,0,0,0
-  );
+  d.setHours(0,0,0,0);
+
 
   const day =
     d.getDay();
+
 
   const difference =
     day === 0
       ? -6
       : 1-day;
 
+
   d.setDate(
     d.getDate() +
     difference
   );
+
 
   return d;
 
@@ -3558,17 +3198,14 @@ function mondayStart(date){
 function weeklyCheck(){
 
   const current =
-    mondayStart(
-      new Date()
-    );
+    mondayStart(new Date());
+
 
   const currentISO =
     current.toISOString();
 
 
-  if(
-    !state.weekly.start
-  ){
+  if(!state.weekly.start){
 
     state.weekly.start =
       currentISO;
@@ -3602,7 +3239,7 @@ function weeklyCheck(){
 
   if(previous){
 
-    state.weekly.winner = {
+    const winner = {
 
       id:previous.id,
 
@@ -3611,19 +3248,21 @@ function weeklyCheck(){
       points:previous.points||0,
 
       date:
-        new Date()
-          .toISOString()
+        new Date().toISOString()
 
     };
 
 
     state.weekly.archive.unshift(
-      state.weekly.winner
+      winner
     );
 
+
     state.weekly.archive =
-      state.weekly.archive
-        .slice(0,30);
+      state.weekly.archive.slice(
+        0,
+        30
+      );
 
   }
 
@@ -3656,14 +3295,17 @@ function renderWeekly(){
   if(!current.length){
 
     currentBox.innerHTML =
-      "<div class='weekly-winner'>" +
-      "No Softoys yet." +
-      "</div>";
+      `
+      <div class="weekly-winner">
+        No Softoys yet.
+      </div>
+      `;
 
   }else{
 
     const leader =
       current[0];
+
 
     currentBox.innerHTML =
       `
@@ -3690,13 +3332,11 @@ function renderWeekly(){
   const archive =
     $("weeklyArchive");
 
-  archive.innerHTML =
-    "";
+
+  archive.innerHTML = "";
 
 
-  if(
-    !state.weekly.archive.length
-  ){
+  if(!state.weekly.archive.length){
 
     archive.textContent =
       "No completed weeks yet.";
@@ -3707,34 +3347,30 @@ function renderWeekly(){
 
 
   state.weekly.archive
-    .forEach(
-      winner => {
+    .forEach(winner => {
 
-        const row =
-          document.createElement(
-            "div"
-          );
+      const row =
+        document.createElement("div");
 
-        row.className =
-          "archive-row";
+      row.className =
+        "archive-row";
 
-        row.innerHTML =
-          `
-          🏆
-          <strong>
-            ${escapeHTML(winner.name)}
-          </strong>
-          —
-          ${winner.points||0}
-          points
-          `;
 
-        archive.appendChild(
-          row
-        );
+      row.innerHTML =
+        `
+        🏆
+        <strong>
+          ${escapeHTML(winner.name)}
+        </strong>
+        —
+        ${winner.points||0}
+        points
+        `;
 
-      }
-    );
+
+      archive.appendChild(row);
+
+    });
 
 }
 
@@ -3767,6 +3403,7 @@ const achievementDefinitions = [
 
   },
 
+
   {
     id:"fourDigit",
 
@@ -3789,6 +3426,7 @@ const achievementDefinitions = [
 
   },
 
+
   {
     id:"firstWin",
 
@@ -3810,6 +3448,7 @@ const achievementDefinitions = [
       )
 
   },
+
 
   {
     id:"tenWins",
@@ -3841,98 +3480,91 @@ function renderAchievements(){
   const list =
     $("achievementList");
 
-  list.innerHTML =
-    "";
+
+  list.innerHTML = "";
 
 
   achievementDefinitions
-    .forEach(
-      achievement => {
+    .forEach(achievement => {
 
-        const value =
-          Math.min(
-            achievement.goal,
-            achievement.value()
-          );
-
-
-        const percentage =
-          Math.min(
-            100,
-            value /
-            achievement.goal *
-            100
-          );
-
-
-        const unlocked =
-          value >=
-          achievement.goal;
-
-
-        const box =
-          document.createElement(
-            "div"
-          );
-
-
-        box.className =
-          "achievement " +
-          (
-            unlocked
-              ? "unlocked"
-              : ""
-          );
-
-
-        box.innerHTML =
-          `
-          <div class="achievement-title">
-
-            ${achievement.icon}
-
-            ${achievement.name}
-
-            ${unlocked ? " ✓" : ""}
-
-          </div>
-
-          <div class="achievement-description">
-
-            ${achievement.description}
-
-          </div>
-
-          <div class="progress-bar">
-
-            <div
-              class="progress-fill"
-              style="width:${percentage}%"
-            ></div>
-
-          </div>
-
-          <div
-            style="
-              margin-top:5px;
-              font-size:11px;
-              font-weight:850;
-              color:#667085
-            "
-          >
-
-            ${value} / ${achievement.goal}
-
-          </div>
-          `;
-
-
-        list.appendChild(
-          box
+      const value =
+        Math.min(
+          achievement.goal,
+          achievement.value()
         );
 
-      }
-    );
+
+      const percentage =
+        Math.min(
+          100,
+          value /
+          achievement.goal *
+          100
+        );
+
+
+      const unlocked =
+        value >=
+        achievement.goal;
+
+
+      const box =
+        document.createElement("div");
+
+
+      box.className =
+        "achievement " +
+        (
+          unlocked
+            ? "unlocked"
+            : ""
+        );
+
+
+      box.innerHTML =
+        `
+        <div class="achievement-title">
+
+          ${achievement.icon}
+          ${achievement.name}
+
+          ${unlocked ? " ✓" : ""}
+
+        </div>
+
+        <div class="achievement-description">
+
+          ${achievement.description}
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            style="width:${percentage}%"
+          ></div>
+
+        </div>
+
+        <div
+          style="
+            margin-top:5px;
+            font-size:11px;
+            font-weight:850;
+            color:#667085
+          "
+        >
+
+          ${value} / ${achievement.goal}
+
+        </div>
+        `;
+
+
+      list.appendChild(box);
+
+    });
 
 }
 
@@ -3946,11 +3578,13 @@ function makeRandomEventDate(){
   const nowDate =
     new Date();
 
+
   const year =
     nowDate.getFullYear();
 
   const month =
     nowDate.getMonth();
+
 
   const days =
     new Date(
@@ -4000,21 +3634,22 @@ function checkEvent(){
   const today =
     new Date();
 
+
   const key =
     dateKey(today);
 
 
   if(
-    state.colosseum.eventDate !==
-    key &&
     !state.colosseum.eventDate
   ){
 
     const randomDate =
       makeRandomEventDate();
 
+
     state.colosseum.eventDate =
       dateKey(randomDate);
+
 
     save();
 
@@ -4022,8 +3657,7 @@ function checkEvent(){
 
 
   state.colosseum.eventActive =
-    state.colosseum.eventDate ===
-    key;
+    state.colosseum.eventDate === key;
 
 
   if(
@@ -4039,15 +3673,14 @@ function checkEvent(){
 
 
 /* =========================================================
-   COOLDOWN
+   COLOSSEUM COOLDOWN
    ========================================================= */
 
 function cooldownActive(){
 
   return Date.now() <
     (
-      state.colosseum
-        .cooldownUntil||0
+      state.colosseum.cooldownUntil||0
     );
 
 }
@@ -4118,9 +3751,7 @@ function renderColosseum(){
     $("eventButton");
 
 
-  if(
-    state.colosseum.eventActive
-  ){
+  if(state.colosseum.eventActive){
 
     button.textContent =
       "🏟️ The Colosseum Is Back!";
@@ -4138,7 +3769,8 @@ function renderColosseum(){
     state.colosseum.p1
       ? getItem(
           state.colosseum.p1
-        )?.name || "Not selected"
+        )?.name ||
+        "Not selected"
       : "Not selected";
 
 
@@ -4147,7 +3779,8 @@ function renderColosseum(){
     state.colosseum.p2
       ? getItem(
           state.colosseum.p2
-        )?.name || "Not selected"
+        )?.name ||
+        "Not selected"
       : "Not selected";
 
 
@@ -4170,15 +3803,6 @@ function renderColosseum(){
 }
 
 
-function getItem(id){
-
-  return state.items.find(
-    x => x.id === id
-  );
-
-}
-
-
 /* =========================================================
    OPEN COLOSSEUM
    ========================================================= */
@@ -4191,9 +3815,7 @@ $("eventButton")
       checkEvent();
 
 
-      if(
-        cooldownActive()
-      ){
+      if(cooldownActive()){
 
         showToast(
           cooldownText()
@@ -4223,15 +3845,11 @@ $("eventButton")
 
 
       $("battlePanel")
-        .classList.remove(
-          "hidden"
-        );
+        .classList.remove("hidden");
 
 
       $("eventButton")
-        .classList.add(
-          "hidden"
-        );
+        .classList.add("hidden");
 
 
       renderColosseum();
@@ -4256,8 +3874,8 @@ function renderBattleCandidates(){
   const box =
     $("battleCandidates");
 
-  box.innerHTML =
-    "";
+
+  box.innerHTML = "";
 
 
   const query =
@@ -4277,84 +3895,73 @@ function renderBattleCandidates(){
       );
 
 
-  candidates.forEach(
-    item => {
+  candidates.forEach(item => {
 
-      if(
-        item.id ===
-        state.colosseum.p1 ||
-        item.id ===
-        state.colosseum.p2
-      )
-        return;
+    if(
+      item.id === state.colosseum.p1 ||
+      item.id === state.colosseum.p2
+    )
+      return;
 
 
-      const button =
-        document.createElement(
-          "button"
-        );
-
-      button.className =
-        "settings-button";
+    const button =
+      document.createElement("button");
 
 
-      button.textContent =
-        "＋ " +
-        item.name +
-        " — " +
-        (item.points||0) +
-        " points";
+    button.className =
+      "settings-button";
 
 
-      button.addEventListener(
-        "click",
-        () => {
-
-          if(
-            !state.colosseum.p1
-          ){
-
-            state.colosseum.p1 =
-              item.id;
-
-          }else if(
-            !state.colosseum.p2
-          ){
-
-            state.colosseum.p2 =
-              item.id;
-
-          }else{
-
-            showToast(
-              "Both players are already selected."
-            );
-
-            return;
-
-          }
+    button.textContent =
+      "＋ " +
+      item.name +
+      " — " +
+      (item.points||0) +
+      " points";
 
 
-          save();
+    button.addEventListener(
+      "click",
+      () => {
 
-          renderColosseum();
+        if(!state.colosseum.p1){
+
+          state.colosseum.p1 =
+            item.id;
+
+        }else if(!state.colosseum.p2){
+
+          state.colosseum.p2 =
+            item.id;
+
+        }else{
+
+          showToast(
+            "Both players are already selected."
+          );
+
+          return;
 
         }
-      );
 
 
-      box.appendChild(
-        button
-      );
+        save();
 
-    }
-  );
+        renderColosseum();
+
+      }
+    );
+
+
+    box.appendChild(button);
+
+  });
 
 }
 
 
 /* =========================================================
-   REMOVE PLAYERS
+   REMOVE PLAYER
    ========================================================= */
 
 $("p1Remove")
@@ -4485,9 +4092,7 @@ function startBattle(){
 
 
   $("battleResultModal")
-    .classList.add(
-      "show"
-    );
+    .classList.add("show");
 
 
   setTimeout(
@@ -4518,15 +4123,11 @@ function startBattle(){
 
 
       winnerBox
-        .classList.add(
-          "winner"
-        );
+        .classList.add("winner");
 
 
       loserBox
-        .classList.add(
-          "loser"
-        );
+        .classList.add("loser");
 
 
       $("battleResult")
@@ -4600,6 +4201,10 @@ function finishBattle(
     false;
 
 
+  /*
+   * 6-hour cooldown.
+   */
+
   state.colosseum.cooldownUntil =
     Date.now() +
     6*60*60*1000;
@@ -4636,21 +4241,15 @@ function finishBattle(
     () => {
 
       $("battleResultModal")
-        .classList.remove(
-          "show"
-        );
+        .classList.remove("show");
 
 
       $("battlePanel")
-        .classList.add(
-          "hidden"
-        );
+        .classList.add("hidden");
 
 
       $("eventButton")
-        .classList.remove(
-          "hidden"
-        );
+        .classList.remove("hidden");
 
 
       renderColosseum();
@@ -4705,15 +4304,11 @@ function exportBackup(){
 
 
   const url =
-    URL.createObjectURL(
-      blob
-    );
+    URL.createObjectURL(blob);
 
 
   const link =
-    document.createElement(
-      "a"
-    );
+    document.createElement("a");
 
 
   link.href =
@@ -4729,9 +4324,7 @@ function exportBackup(){
   link.click();
 
 
-  URL.revokeObjectURL(
-    url
-  );
+  URL.revokeObjectURL(url);
 
 
   showToast(
@@ -4763,6 +4356,7 @@ $("backupFile")
 
       const file =
         event.target.files[0];
+
 
       if(!file)
         return;
@@ -4817,6 +4411,8 @@ $("backupFile")
               ...state,
               ...imported,
 
+              version:2,
+
               settings:{
                 ...state.settings,
                 ...(imported.settings||{})
@@ -4855,13 +4451,9 @@ $("backupFile")
         };
 
 
-      reader.readAsText(
-        file
-      );
+      reader.readAsText(file);
 
-
-      event.target.value =
-        "";
+      event.target.value = "";
 
     }
   );
@@ -4879,9 +4471,7 @@ $("showHistory")
       renderHistory();
 
       $("historyModal")
-        .classList.add(
-          "show"
-        );
+        .classList.add("show");
 
     }
   );
@@ -4892,13 +4482,11 @@ function renderHistory(){
   const list =
     $("historyList");
 
-  list.innerHTML =
-    "";
+
+  list.innerHTML = "";
 
 
-  if(
-    !state.transactions.length
-  ){
+  if(!state.transactions.length){
 
     list.textContent =
       "No transactions yet.";
@@ -4909,92 +4497,79 @@ function renderHistory(){
 
 
   state.transactions
-    .forEach(
-      tx => {
+    .forEach(tx => {
 
-        const row =
-          document.createElement(
-            "div"
-          );
-
-        row.className =
-          "archive-row";
+      const row =
+        document.createElement("div");
 
 
-        const date =
-          new Date(
-            tx.time
-          );
+      row.className =
+        "archive-row";
 
 
-        row.innerHTML =
-          `
-          <strong>
-            ${escapeHTML(tx.description)}
-          </strong>
-
-          <br>
-
-          <small>
-            ${date.toLocaleString()}
-          </small>
-
-          <br>
-
-          <small>
-            ${
-              tx.undone
-                ? "↩️ Transaction reversed"
-                : (
-                    tx.type === "colosseum"
-                      ? "🏟️ Colosseum result"
-                      : "📊 Point change"
-                  )
-            }
-          </small>
-          `;
+      const date =
+        new Date(tx.time);
 
 
-        if(!tx.undone){
+      row.innerHTML =
+        `
+        <strong>
+          ${escapeHTML(tx.description)}
+        </strong>
 
-          const undo =
-            document.createElement(
-              "button"
-            );
+        <br>
 
+        <small>
+          ${date.toLocaleString()}
+        </small>
 
-          undo.className =
-            "button gray";
+        <br>
 
-
-          undo.style.marginTop =
-            "7px";
-
-
-          undo.textContent =
-            "↩️ Undo";
-
-
-          undo.onclick =
-            () =>
-              undoTransaction(
-                tx.id
-              );
-
-
-          row.appendChild(
-            undo
-          );
-
-        }
+        <small>
+          ${
+            tx.undone
+              ? "↩️ Transaction reversed"
+              : (
+                  tx.type === "colosseum"
+                    ? "🏟️ Colosseum result"
+                    : "⭐ Point change"
+                )
+          }
+        </small>
+        `;
 
 
-        list.appendChild(
-          row
-        );
+      if(!tx.undone){
+
+        const undo =
+          document.createElement("button");
+
+
+        undo.className =
+          "button gray";
+
+
+        undo.style.marginTop =
+          "7px";
+
+
+        undo.textContent =
+          "↩️ Undo";
+
+
+        undo.onclick =
+          () =>
+            undoTransaction(tx.id);
+
+
+        row.appendChild(undo);
 
       }
-    );
+
+
+      list.appendChild(row);
+
+    });
 
 }
 
@@ -5043,6 +4618,11 @@ $("resetData")
       );
 
 
+      localStorage.removeItem(
+        "softoy_ranking_complete_v1"
+      );
+
+
       location.reload();
 
     }
@@ -5058,12 +4638,11 @@ $("manualSave")
     "click",
     () => {
 
+      state.settings.lastManualSave =
+        new Date().toISOString();
+
+
       if(save()){
-
-        state.settings.lastManualSave =
-          new Date().toISOString();
-
-        save();
 
         showToast(
           "💾 Progress saved!"
@@ -5088,21 +4667,7 @@ setInterval(
 
     checkEvent();
 
-    renderLeaderboard();
-
-    if(
-      !cooldownActive()
-    ){
-
-      const page =
-        document.querySelector(
-          ".nav-btn.active"
-        )?.dataset.page;
-
-      if(page === "colosseum")
-        renderColosseum();
-
-    }
+    renderColosseum();
 
   },
   30000
@@ -5144,7 +4709,7 @@ renderAll();
 
 
 /* =========================================================
-   SAVE WHEN APP IS HIDDEN
+   SAVE WHEN PAGE IS HIDDEN
    ========================================================= */
 
 document.addEventListener(
@@ -5172,42 +4737,6 @@ window.addEventListener(
   "beforeunload",
   save
 );
-
-
-/* =========================================================
-   BACKGROUND IMAGE CHECK
-   =========================================================
-
-   This does not replace the background.
-   It simply gives a useful notification if the
-   browser cannot load background.png.
-   ========================================================= */
-
-const backgroundTest =
-  new Image();
-
-backgroundTest.onload =
-  () => {
-
-    document.body.classList.add(
-      "background-loaded"
-    );
-
-  };
-
-backgroundTest.onerror =
-  () => {
-
-    console.warn(
-      "Softoy Ranking: background.png could not be found. " +
-      "Make sure background.png is in the same folder as index.html."
-    );
-
-  };
-
-backgroundTest.src =
-  "./background.png";
-
 
 })();
 
